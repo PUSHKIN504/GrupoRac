@@ -21,16 +21,16 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-user',
                         items: [
                             {
-                                label: 'Usuarios',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/uikit/departamento']
+                                label: 'Usuario',
+                                icon: 'pi pi-fw pi-user',
+                                routerLink: ['/app/uikit/usuario']
                             },
                             
-                            {
+                            /*{
                                 label: 'Roles',
                                 icon: 'pi pi-fw pi-times-circle',
                                 routerLink: ['/auth/error']
-                            },
+                            },*/
                         ]
                     },
                     
@@ -41,58 +41,53 @@ export class AppMenuComponent implements OnInit {
             {
                 items: [
                     {
-                        label: 'Generales',
-                        icon: 'pi pi-fw pi-user',
+                        label: 'General',
+                        icon: 'pi pi-fw pi-prime',
                         items: [
                             {
-                                label: 'Departamentos',
+                                label: 'Departamento',
                                 icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/auth/login']
+                                routerLink: ['/app/uikit/departamento']
                             },
                             {
                                 label: 'Ciudades',
                                 icon: 'pi pi-fw pi-globe',
-                                routerLink: ['/uikit/ciudad']
+                                routerLink: ['/app/uikit/ciudad']
                             },
                             {
                                 label: 'Cargos',
                                 icon: 'pi pi-fw pi-user',
-                                routerLink: ['/uikit/cargo']
+                                routerLink: ['/app/uikit/cargo']
                             },
                             {
                                 label: 'Clientes',
                                 icon: 'pi pi-fw pi-user',
-                                routerLink: ['/uikit/cliente']
+                                routerLink: ['/app/uikit/cliente']
                             },
                             {
                                 label: 'Estados Civiles',
                                 icon: 'pi pi-fw pi-user',
-                                routerLink: ['/uikit/estadocivil']
+                                routerLink: ['/app/uikit/estadocivil']
                             },
                             {
                                 label: 'Marcas',
                                 icon: 'pi pi-fw pi-user',
-                                routerLink: ['/uikit/marca']
+                                routerLink: ['/app/uikit/marca']
                             },
                             {
                                 label: 'Modelo',
                                 icon: 'pi pi-fw pi-user',
-                                routerLink: ['/uikit/modelo']
+                                routerLink: ['/app/uikit/modelo']
                             },
                             {
                                 label: 'Sede',
                                 icon: 'pi pi-fw pi-user',
-                                routerLink: ['/uikit/sede']
+                                routerLink: ['/app/uikit/sede']
                             },
                             {
                                 label: 'Vehiculo',
                                 icon: 'pi pi-fw pi-user',
-                                routerLink: ['/uikit/veh']
-                            },
-                            {
-                                label: 'Usuario',
-                                icon: 'pi pi-fw pi-user',
-                                routerLink: ['/uikit/usuario']
+                                routerLink: ['/app/uikit/veh']
                             },
                         ]
                     },
@@ -104,16 +99,16 @@ export class AppMenuComponent implements OnInit {
             {
                 items: [
                     {
-                        label: 'Ventas',
-                        icon: 'pi pi-fw pi-user',
+                        label: 'Factura',
+                        icon: 'pi pi-fw pi-car',
                         items: [
                             {
-                                label: 'Joyas',
+                                label: 'Factura',
                                 icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/auth/login']
+                                routerLink: ['/auth/error']
                             },
                             {
-                                label: 'Maquillajes',
+                                label: 'Detalle',
                                 icon: 'pi pi-fw pi-times-circle',
                                 routerLink: ['/auth/error']
                             },
