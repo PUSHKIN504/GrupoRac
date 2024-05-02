@@ -1,0 +1,42 @@
+<div class="card">
+    <h5>Vehículos</h5>
+    <div *ngIf="!loading; else loadingTemplate">
+        <div class="flex justify-content-between flex-column sm:flex-row">
+            <button (click)="clearFilter()" class="p-button-outlined mb-2" icon="pi pi-filter-slash">Clear</button>
+            <span class="p-input-icon-left mb-2">
+                <i class="pi pi-search"></i>
+                <input type="text" [(ngModel)]="globalFilter" (input)="applyFilter()" placeholder="Search Keyword" class="w-full"/>
+            </span>
+        </div>
+        <table class="p-datatable-gridlines">
+            <thead>
+                <tr>
+                    <th style="min-width: 12rem">Placa</th>
+                    <th style="min-width: 12rem">Modelo</th>
+                    <th style="min-width: 12rem">Sede</th>
+                    <th style="min-width: 12rem">Compañía</th>
+                    <th style="min-width: 12rem">Precio</th>
+                    <th style="min-width: 14rem">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vehiculo of vehiculo">
+                    <td>{{ vehiculo.veh_Placa }}</td>
+                    <td>{{ vehiculo.mod_Id }}</td>
+                    <td>{{ vehiculo.sed_Id }}</td>
+                    <td>{{ vehiculo.com_Id }}</td>
+                    <td>{{ vehiculo.com_Precio }}</td>
+                    <td>
+                        <button class="btn btn-secondary">Editar</button>
+                        <button class="btn btn-primary">Detalles</button>
+                        <button class="btn btn-danger">Eliminar</button>
+                    </td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+    <ng-template #loadingTemplate>
+        <div>Cargando datos de los vehículos. Por favor, espere.</div>
+    </ng-template>
+</div>
