@@ -87,7 +87,7 @@ a {
   top: 0;
   width: 100%;
   padding: 0 2rem;
-  background-color: var(--surface-card);
+  background-color: #000103 /*var(--surface-card)*/;
   transition: left 0.2s;
   display: flex;
   align-items: center;
