@@ -5,6 +5,10 @@ import {Router} from '@angular/router';
 import { Table } from 'primeng/table';
 import { Departamento } from 'src/app/Models/DepartamentoViewModel';
 import { ServiceService } from 'src/app/Service/service.service';
+import { MatExpansionPanel } from '@angular/material/expansion';
+
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
     templateUrl: './Departamentodemo.component.html',
     providers: [ConfirmationService, MessageService]
@@ -12,6 +16,9 @@ import { ServiceService } from 'src/app/Service/service.service';
 export class DepartamentoDemoComponent implements OnInit {
     departamento!:Departamento[];
    
+    newDepartamento: Departamento = new Departamento();
+    @ViewChild('panel') panel: MatExpansionPanel;
+    
 
     statuses: any[] = [];
 
@@ -29,8 +36,9 @@ export class DepartamentoDemoComponent implements OnInit {
     loading: boolean = false;
 
     @ViewChild('filter') filter!: ElementRef;
+    globalFilter: string;
 
-    constructor(private service: ServiceService, private router: Router
+    constructor(private service: ServiceService,private cdr: ChangeDetectorRef, private router: Router
     
     ) { }
   
@@ -42,9 +50,32 @@ export class DepartamentoDemoComponent implements OnInit {
         },error=>{
           console.log(error);
         });
-     }
+     }    
     
+     addDepartamento(): void {
+        this.service.addDepartamento(this.newDepartamento).subscribe(
+            departamento => {
+                this.departamento = [...this.departamento, departamento];
+                this.cdr.detectChanges(); // Forzar la detección de cambios
+                this.panel.close();
+                this.newDepartamento = new Departamento();
+                this.ngOnInit();
+            },
+            error => {
+                console.error('Error al agregar departamento:', error);
+            }
+        );
+    }
+      
     
+
+    togglePanel(): void {
+        this.panel.toggle(); // Alternar la apertura y cierre del panel
+      }
+
+      onPanelClose(): void {
+        this.newDepartamento = new Departamento();  // Resetear el formulario cuando el panel se cierra
+      }
       
 }
 

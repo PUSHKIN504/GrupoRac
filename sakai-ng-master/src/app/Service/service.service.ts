@@ -10,6 +10,7 @@ import { Modelo } from '../Models/ModeloViewModel';
 import { Sede } from '../Models/SedeViewModel';
 import { Vehiculo } from '../Models/VehiculoViewModel';
 import { Usuario } from '../Models/UsuarioViewModel';
+import { Observable } from 'rxjs';
 
 
 
@@ -19,16 +20,23 @@ import { Usuario } from '../Models/UsuarioViewModel';
   providedIn: 'root'
 })
 export class ServiceService {
+  private baseUrl = 'https://localhost:44320/API/Departamento';
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
+  // Método para obtener todos los departamentos
+  getDepartamentos(): Observable<Departamento[]> {
+    return this.http.get<Departamento[]>(`${this.baseUrl}/List`);
+  }
 
-  url = 'https://localhost:44320/API/Departamento/List'
-
-  getDepartamentos(){
-    return this.http.get<Departamento[]>(this.url)
+  // Método para agregar un nuevo departamento
+  addDepartamento(departamento: Departamento): Observable<Departamento> {
+    return this.http.post<Departamento>(`${this.baseUrl}/Insert`, departamento);
   }
 }
+
+
+
 
 @Injectable({
   providedIn: 'root'

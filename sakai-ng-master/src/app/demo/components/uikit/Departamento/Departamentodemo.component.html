@@ -1,3 +1,24 @@
+<!-- Botón para alternar el estado del panel de expansión -->
+<button mat-raised-button color="warn" (click)="togglePanel()">Crear</button>
+<mat-accordion>
+    <mat-expansion-panel #panel style="margin-top: 10px;  margin-bottom: 10px">
+      <form (ngSubmit)="addDepartamento()" class="form-container" style="margin-top: 30px;">
+        <mat-form-field appearance="outline" class="example-full-width"style="margin-right: 10px; width: 450px;">
+          <mat-label>Código</mat-label>
+          <input matInput [(ngModel)]="newDepartamento.dep_Id" name="id">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="example-full-width" style="margin-right: 10px; width: 450px; ">
+          <mat-label>Departamento</mat-label>
+          <input matInput [(ngModel)]="newDepartamento.dep_Descripcion" name="descripcion" required >
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="submit-button">Agregar</button>
+      </form>
+    </mat-expansion-panel>
+</mat-accordion>
+
+
+
+
 <div class="card">
     <h5>Departamento</h5>
     <div *ngIf="!loading; else loadingTemplate">
