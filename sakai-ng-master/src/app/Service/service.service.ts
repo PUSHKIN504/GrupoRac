@@ -51,6 +51,11 @@ export class ServiceCiu {
   getCiudad(){
     return this.http.get<Ciudad[]>(this.urlC)
   }
+  
+  GenerateInvoicePDF(invoiceno:any){
+    return this.http.get('https://localhost:44320/API/Departamento/generatepdf?InvoiceNo='+invoiceno,{observe:'response',responseType:'blob'});
+    
+  }
 }
 @Injectable({
   providedIn: 'root'
@@ -173,3 +178,4 @@ export class ServiceUsuario {
     return this.http.get<Usuario[]>(this.urlC)
   }
 }
+

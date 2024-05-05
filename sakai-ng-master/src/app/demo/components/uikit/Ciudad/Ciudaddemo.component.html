@@ -21,9 +21,71 @@
                         <button pButton pRipple type="button" >Editar</button>
                         <button class="btn btn-primary">Detalles</button>
                         <button class="btn btn-danger">Eliminar</button>
+                        <button class="btn btn-success" (click)="PreviewInvoice(ciudad.ciu_Id)">Print</button> 
                 </td>
                 <!-- Add more table cells as per your Ciudad model -->
             </tr>
         </ng-template>
     </p-table>
 </div>
+
+
+<p-dialog header="Preview Invoice : {{invoiceno}}" [(visible)]="display" [modal]="true" [style]="{width: '50vw'}">
+    <ng-template pTemplate="content">
+        <div class="modal-header">
+            <h4 class="modal-title">Preview Invoice : <b>{{invoiceno}}</b></h4>
+        </div>
+        <div class="modal-body">
+            <iframe [src]="pdfurl" style="width: 100%; height: 500px; border: none;"></iframe>
+        </div>
+        <div class="modal-footer">
+            <button type="button" pButton label="Close" (click)="display = false" class="ui-button-danger"></button>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<!-- <p-dialog header="Preview Invoice : {{invoiceno}}" [(visible)]="display" [modal]="true" [style]="{width: '50vw'}">
+    <ng-template pTemplate="content">
+        <div class="modal-header">
+            <h4 class="modal-title">Preview Invoice : <b>{{invoiceno}}</b></h4>
+        </div>
+        <div class="modal-body">
+            <div [innerHTML]="pdfurl"></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" pButton label="Close" (click)="display = false" class="ui-button-danger"></button>
+        </div>
+    </ng-template>
+</p-dialog> -->
+
+  
+
+<!-- 
+<p-dialog header="Preview Invoice : {{invoiceno}}" [(visible)]="display" [modal]="true" showEffect="fade" [style]="{width: '30vw'}" [breakpoints]="{'960px': '75vw'}">
+    <ng-template let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">golllllssss</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <ngx-extended-pdf-viewer [src]="pdfurl"></ngx-extended-pdf-viewer>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" (click)="d('Cross click')">Close</button>
+        </div>
+    </ng-template>
+</p-dialog> -->
+
+
+<!-- <ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Preview Invoice : <b>{{invoiceno}}</b></h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<ngx-extended-pdf-viewer [src]="pdfurl"></ngx-extended-pdf-viewer>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-danger" (click)="d('Cross click')">Close</button>
+	</div>
+</ng-template> -->
