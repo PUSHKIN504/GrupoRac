@@ -38,6 +38,10 @@ export class ServiceService {
   getDepartamentoById(id: string): Observable<Departamento> {
     return this.http.get<Departamento>(`${this.baseUrl}/Edit/${id}`);
   }
+
+  updateDepartamento(id: string, departamento: Departamento): Observable<Departamento> {
+    return this.http.put<Departamento>(`${this.baseUrl}/Edit/${id}`, departamento);
+  }
 }
 
 

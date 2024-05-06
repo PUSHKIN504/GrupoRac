@@ -15,7 +15,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
 import { ServiceCiu } from 'src/app/Service/service.service';
-import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+// import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
  // Importa el servicio ServiceCiu
 
 @NgModule({
@@ -34,7 +34,7 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     SidebarModule,
     RippleModule,
     ConfirmPopupModule,
-    NgxExtendedPdfViewerModule
+    // NgxExtendedPdfViewerModule
   ],
   declarations: [CompraDemoComponent],
 })

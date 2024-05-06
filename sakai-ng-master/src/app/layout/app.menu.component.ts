@@ -29,7 +29,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Roles',
                                 icon: 'pi pi-fw pi-folder',
-                                routerLink: ['/auth/error']
+                                routerLink: ['/app/uikit/rol']
                             },
                         ]
                     },
@@ -92,7 +92,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'graficos',
                                 icon: 'pi pi-fw pi-folder',
-                                routerLink: ['./utilities/icons']
+                                routerLink: ['/app/uikit/tree']
                             },
                         ]
                     },
