@@ -34,11 +34,11 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 //pendiente los parametros
                 var parameter = new DynamicParameters();
                 //parameter.Add("Dept_Id", item.Dep_Id);
-                //parameter.Add("Dept_Descripcion", item.Dep_Descripcion);
-                parameter.Add("Dept_Usua_Creacion", 1);
-                parameter.Add("Dept_Fecha_Creacion", DateTime.Now);
+                parameter.Add("@Mar_Descripcion", item.Mar_Descripcion);
+                parameter.Add("@Mar_Creacion", 1);
+                parameter.Add("@Mar_Fecha_Creacion", DateTime.Now);
 
-                var result = db.Execute(ScriptBaseDatos.Departamentos_Insetar,
+                var result = db.Execute("[Gral].[sp_marcas_insertar]",
                     parameter,
                     commandType: CommandType.StoredProcedure
                     );

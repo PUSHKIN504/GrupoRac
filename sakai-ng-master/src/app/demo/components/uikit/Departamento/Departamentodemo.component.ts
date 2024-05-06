@@ -78,7 +78,7 @@ export class DepartamentoDemoComponent implements OnInit {
         );
       }
       
-      editDepartamento(departamento: Departamento): void {
+    editDepartamento(departamento: Departamento): void {
         this.newDepartamento = { ...departamento };  // Clonar los datos para edición
         if (!this.panel.expanded) {
             this.panel.open();  // Asegurar que el panel se abra si está cerrado

@@ -1,3 +1,18 @@
+<button mat-raised-button color="warn" (click)="togglePanel('new')">Crear</button>
+<mat-accordion>
+    <mat-expansion-panel #panel style="margin-top: 10px;  margin-bottom: 10px">
+      <form (ngSubmit)="addDepartamento()" class="form-container" style="margin-top: 30px;">
+       
+        <mat-form-field appearance="outline" class="example-full-width" style="margin-right: 10px; width: 400px; ">
+          <mat-label>Marca</mat-label>
+          <input matInput [(ngModel)]="newMarca.mar_Descripcion" name="descripcion">
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="submit-button" style="margin-right: 10px;">Agregar</button>
+        <button mat-flat-button color="warn">Cancelar</button>
+      </form>
+    </mat-expansion-panel>
+</mat-accordion>
+
 <div class="card">
     <h5>Marcas</h5>
     <div *ngIf="!loading; else loadingTemplate">

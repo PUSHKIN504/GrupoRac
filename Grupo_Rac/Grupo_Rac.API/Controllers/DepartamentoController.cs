@@ -233,6 +233,21 @@ namespace Grupo_Rac.API.Controllers
             var list = _generalService.ListMarca();
             return Ok(list.Data);
         }
+
+        [HttpPost("InsertMarc")]
+        public IActionResult CreateMarca(MarcaViewModel item)
+        {
+            var model = _mapper.Map<tbMarcas>(item);
+            var modelo = new tbMarcas()
+            {
+                Mar_Descripcion = item.Mar_Descripcion,
+            };
+
+            var list = _generalService.ListMarca();
+            _generalService.InsertarMarca(modelo);
+            return Ok(list);
+
+        }
         #endregion
         #region Modelo
         [HttpGet("ListModelo")]

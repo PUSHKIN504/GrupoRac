@@ -1,6 +1,6 @@
 export class Marca{
-    Mar_Id?:Number;
-    Mar_Descripcion?:String;
+    mar_Id?:Number;
+    mar_Descripcion?:String;
     // dep_Descripcion?:String;
 
 }

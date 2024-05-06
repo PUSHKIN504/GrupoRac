@@ -200,6 +200,27 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             }
         }
 
+        public ServiceResult InsertarMarca(tbMarcas item)
+        {
+            var resul = new ServiceResult();
+            try
+            {
+                var lost = _marcaRepository.Insertar(item);
+                if (lost.CodeStatus > 0)
+                {
+                    return resul.Ok(lost);
+                }
+                else
+                {
+                    lost.MessageStatus = (lost.CodeStatus == 0) ? "401 error de consulta" : lost.MessageStatus;
+                    return resul.Error(lost);
+                }
+            }
+            catch (Exception ex)
+            {
+                return resul.Error(ex.Message);
+            }
+        }
         #endregion
 
         #region Modelo

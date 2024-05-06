@@ -120,11 +120,15 @@ export class ServiceMarca {
 
   constructor(private http:HttpClient) { }
 
+  private baseUrl = 'https://localhost:44320/API/Departamento';
 
   urlC = 'https://localhost:44320/API/Departamento/ListMarca'
 
   getMarca(){
     return this.http.get<Marca[]>(this.urlC)
+  }
+  addMarca(marca: Marca): Observable<Marca> {
+    return this.http.post<Marca>(`${this.baseUrl}/InsertMarc`, marca);
   }
 }
 @Injectable({
