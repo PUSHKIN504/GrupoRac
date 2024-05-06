@@ -103,9 +103,9 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-car',
                         items: [
                             {
-                                label: 'Factura',
+                                label: 'Factura Compra',
                                 icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/auth/error']
+                                routerLink: ['/app/uikit/comp']
                             },
                             {
                                 label: 'Detalle',

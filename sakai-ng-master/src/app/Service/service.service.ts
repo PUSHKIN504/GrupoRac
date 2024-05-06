@@ -11,6 +11,7 @@ import { Sede } from '../Models/SedeViewModel';
 import { Vehiculo } from '../Models/VehiculoViewModel';
 import { Usuario } from '../Models/UsuarioViewModel';
 import { Observable } from 'rxjs';
+import { Compra } from '../Models/CompViewModel';
 
 
 
@@ -179,3 +180,18 @@ export class ServiceUsuario {
   }
 }
 
+@Injectable({
+  providedIn: 'root'
+})
+
+export class ServiceComp {
+
+  constructor(private http:HttpClient) { }
+
+
+  urlC = 'https://localhost:44320/API/Departamento/ListUsua'
+
+  getCompras(){
+    return this.http.get<Compra[]>(this.urlC)
+  }
+}
