@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Grupo_Rac.Entities.Entity;
-
 #nullable disable
 
 namespace Grupo_Rac.DataAccess.Context
@@ -43,7 +42,7 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbCargos>(entity =>
             {
                 entity.HasKey(e => e.Crg_ID)
-                    .HasName("PK__tbCargos__E32B1FA9ADEF6B22");
+                    .HasName("PK__tbCargos__E32B1FA93ABC4800");
 
                 entity.ToTable("tbCargos", "Gral");
 
@@ -70,9 +69,13 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbCiudades>(entity =>
             {
                 entity.HasKey(e => e.Ciu_Id)
-                    .HasName("PK__tbCiudad__0BCBD86D63F93A58");
+                    .HasName("PK__tbCiudad__0BCBD86D1689887D");
 
                 entity.ToTable("tbCiudades", "Gral");
+
+                entity.Property(e => e.Ciu_Id)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Ciu_Descripcion)
                     .HasMaxLength(100)
@@ -81,6 +84,10 @@ namespace Grupo_Rac.DataAccess.Context
                 entity.Property(e => e.Ciu_Fecha_Creacion).HasColumnType("date");
 
                 entity.Property(e => e.Ciu_Fecha_Modifica).HasColumnType("date");
+
+                entity.Property(e => e.Dep_Id)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.Ciu_CreacionNavigation)
                     .WithMany(p => p.tbCiudadesCiu_CreacionNavigation)
@@ -100,9 +107,13 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbClientes>(entity =>
             {
                 entity.HasKey(e => e.Cli_Id)
-                    .HasName("PK__tbClient__83531C7AFA045406");
+                    .HasName("PK__tbClient__83531C7ACA0838AE");
 
                 entity.ToTable("tbClientes", "Gral");
+
+                entity.Property(e => e.Ciu_Id)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Cli_DNI)
                     .HasMaxLength(13)
@@ -138,7 +149,7 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbCompras>(entity =>
             {
                 entity.HasKey(e => e.Com_Id)
-                    .HasName("PK__tbCompra__D85628CCB40790D9");
+                    .HasName("PK__tbCompra__D85628CCA1457D77");
 
                 entity.ToTable("tbCompras", "Vent");
 
@@ -168,9 +179,13 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbDepartamento>(entity =>
             {
                 entity.HasKey(e => e.Dep_Id)
-                    .HasName("PK__tbDepart__0C2B452D7246B2C3");
+                    .HasName("PK__tbDepart__0C2B452D5DC1A65A");
 
                 entity.ToTable("tbDepartamento", "Gral");
+
+                entity.Property(e => e.Dep_Id)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Dep_Descripcion)
                     .HasMaxLength(100)
@@ -194,7 +209,7 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbEstadosCiviles>(entity =>
             {
                 entity.HasKey(e => e.Est_ID)
-                    .HasName("PK__tbEstado__345473DCA48E4C55");
+                    .HasName("PK__tbEstado__345473DCCA206A83");
 
                 entity.ToTable("tbEstadosCiviles", "Gral");
 
@@ -222,7 +237,7 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbMarcas>(entity =>
             {
                 entity.HasKey(e => e.Mar_Id)
-                    .HasName("PK__tbMarcas__4F38F12834D06BF5");
+                    .HasName("PK__tbMarcas__4F38F12827492996");
 
                 entity.ToTable("tbMarcas", "Gral");
 
@@ -248,7 +263,7 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbModelos>(entity =>
             {
                 entity.HasKey(e => e.Mod_Id)
-                    .HasName("PK__tbModelo__D5F2725B53C5C44B");
+                    .HasName("PK__tbModelo__D5F2725B0A0FE090");
 
                 entity.ToTable("tbModelos", "Gral");
 
@@ -280,7 +295,7 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbPantallas>(entity =>
             {
                 entity.HasKey(e => e.Ptl_Id)
-                    .HasName("PK__tbPantal__13B93AA9E90B8678");
+                    .HasName("PK__tbPantal__13B93AA9018930AA");
 
                 entity.ToTable("tbPantallas", "Acce");
 
@@ -310,7 +325,7 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbPantallas_PorRoles>(entity =>
             {
                 entity.HasKey(e => e.PaR_Id)
-                    .HasName("PK__tbPantal__585DC13CD071BDCD");
+                    .HasName("PK__tbPantal__585DC13C9F88FEEC");
 
                 entity.ToTable("tbPantallas_PorRoles", "Acce");
 
@@ -342,7 +357,7 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbRoles>(entity =>
             {
                 entity.HasKey(e => e.Rol_Id)
-                    .HasName("PK__tbRoles__795EBD49D6D92989");
+                    .HasName("PK__tbRoles__795EBD4912FA002F");
 
                 entity.ToTable("tbRoles", "Acce");
 
@@ -368,9 +383,13 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbSedes>(entity =>
             {
                 entity.HasKey(e => e.Sed_Id)
-                    .HasName("PK__tbSedes__FCECF53E32DDA472");
+                    .HasName("PK__tbSedes__FCECF53EE0139CCD");
 
                 entity.ToTable("tbSedes", "Gral");
+
+                entity.Property(e => e.Ciu_Id)
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Sed_Descripcion)
                     .HasMaxLength(100)
@@ -398,11 +417,21 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbUsuarios>(entity =>
             {
                 entity.HasKey(e => e.Usu_ID)
-                    .HasName("PK__tbUsuari__B6173FEB61162768");
+                    .HasName("PK__tbUsuari__B6173FEB4B74EAB0");
 
                 entity.ToTable("tbUsuarios", "Acce");
 
                 entity.Property(e => e.Usu_Apellido)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usu_Codigo)
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Usu_Contra).IsUnicode(false);
+
+                entity.Property(e => e.Usu_Correo)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
@@ -461,7 +490,7 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbVehiculos>(entity =>
             {
                 entity.HasKey(e => e.Veh_Placa)
-                    .HasName("PK__tbVehicu__0303BEDC3CB4F9D0");
+                    .HasName("PK__tbVehicu__0303BEDC04BDAEC6");
 
                 entity.ToTable("tbVehiculos", "Vent");
 
@@ -501,7 +530,7 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbVentasDetalle>(entity =>
             {
                 entity.HasKey(e => e.VeD_Id)
-                    .HasName("PK__tbVentas__9D96BDD953C769F1");
+                    .HasName("PK__tbVentas__9D96BDD935E6956E");
 
                 entity.ToTable("tbVentasDetalle", "Vent");
 
@@ -537,7 +566,7 @@ namespace Grupo_Rac.DataAccess.Context
             modelBuilder.Entity<tbVentasEnc>(entity =>
             {
                 entity.HasKey(e => e.VeE_Id)
-                    .HasName("PK__tbVentas__E55425E2AFBCDE22");
+                    .HasName("PK__tbVentas__E55425E21256B4B0");
 
                 entity.ToTable("tbVentasEnc", "Vent");
 

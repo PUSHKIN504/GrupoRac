@@ -26,11 +26,11 @@ export class AppMenuComponent implements OnInit {
                                 routerLink: ['/app/uikit/usuario']
                             },
                             
-                            /*{
+                            {
                                 label: 'Roles',
-                                icon: 'pi pi-fw pi-times-circle',
+                                icon: 'pi pi-fw pi-folder',
                                 routerLink: ['/auth/error']
-                            },*/
+                            },
                         ]
                     },
                     
@@ -42,52 +42,57 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     {
                         label: 'General',
-                        icon: 'pi pi-fw pi-prime',
+                        icon: 'pi pi-fw pi-cloud',
                         items: [
                             {
                                 label: 'Departamento',
-                                icon: 'pi pi-fw pi-sign-in',
+                                icon: 'pi pi-fw pi-folder',
                                 routerLink: ['/app/uikit/departamento']
                             },
                             {
                                 label: 'Ciudades',
-                                icon: 'pi pi-fw pi-globe',
+                                icon: 'pi pi-fw pi-folder',
                                 routerLink: ['/app/uikit/ciudad']
                             },
                             {
                                 label: 'Cargos',
-                                icon: 'pi pi-fw pi-user',
+                                icon: 'pi pi-fw pi-folder',
                                 routerLink: ['/app/uikit/cargo']
                             },
                             {
                                 label: 'Clientes',
-                                icon: 'pi pi-fw pi-user',
+                                icon: 'pi pi-fw pi-folder',
                                 routerLink: ['/app/uikit/cliente']
                             },
                             {
                                 label: 'Estados Civiles',
-                                icon: 'pi pi-fw pi-user',
+                                icon: 'pi pi-fw pi-folder',
                                 routerLink: ['/app/uikit/estadocivil']
                             },
                             {
                                 label: 'Marcas',
-                                icon: 'pi pi-fw pi-user',
+                                icon: 'pi pi-fw pi-folder',
                                 routerLink: ['/app/uikit/marca']
                             },
                             {
                                 label: 'Modelo',
-                                icon: 'pi pi-fw pi-user',
+                                icon: 'pi pi-fw pi-folder',
                                 routerLink: ['/app/uikit/modelo']
                             },
                             {
                                 label: 'Sede',
-                                icon: 'pi pi-fw pi-user',
+                                icon: 'pi pi-fw pi-folder',
                                 routerLink: ['/app/uikit/sede']
                             },
                             {
                                 label: 'Vehiculo',
-                                icon: 'pi pi-fw pi-user',
+                                icon: 'pi pi-fw pi-folder',
                                 routerLink: ['/app/uikit/veh']
+                            },
+                            {
+                                label: 'graficos',
+                                icon: 'pi pi-fw pi-folder',
+                                routerLink: ['./utilities/icons']
                             },
                         ]
                     },
@@ -103,19 +108,19 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-car',
                         items: [
                             {
+
                                 label: 'Factura Compra',
                                 icon: 'pi pi-fw pi-sign-in',
                                 routerLink: ['/app/uikit/comp']
+
                             },
                             {
                                 label: 'Detalle',
-                                icon: 'pi pi-fw pi-times-circle',
+                                icon: 'pi pi-fw pi-folder',
                                 routerLink: ['/auth/error']
                             },
                         ]
                     },
-                    
-                 
 
                 ]
             },

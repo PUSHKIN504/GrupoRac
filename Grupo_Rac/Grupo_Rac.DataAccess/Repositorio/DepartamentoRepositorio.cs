@@ -56,5 +56,53 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 return result;
             }
         }
+        public RequestStatus DeleteS(string id)
+        {
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("Dep_Id", id);
+
+                var result = db.Execute(ScriptBaseDatos.Departamentos_Eliminar,
+                    parameter,
+                    commandType: CommandType.StoredProcedure
+                    );
+                string mensaje = (result == 1) ? "Exito" : "Eroor";
+                return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
+            }
+        }
+
+        public IEnumerable<tbDepartamento> findS(string id)
+        {
+            string sql = ScriptBaseDatos.Departamentos_Detalle;
+            List<tbDepartamento> result = new List<tbDepartamento>();
+
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameters = new { Dep_Id = id };
+                result = db.Query<tbDepartamento>(sql, parameters, commandType: CommandType.StoredProcedure).ToList();
+
+                return result;
+
+            }
+        }
+        public RequestStatus Update(tbDepartamento item)
+        {
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("Dep_Id", item.Dep_Id);
+                parameter.Add("Dep_Descripcion", item.Dep_Descripcion);
+                parameter.Add("Dep_Modifica", 1);
+                parameter.Add("Dep_Fecha_Modifica", DateTime.Now);
+
+                var result = db.Execute(ScriptBaseDatos.Departamentos_Actualizar,
+                    parameter,
+                    commandType: CommandType.StoredProcedure
+                    );
+                string mensaje = (result == 1) ? "Exito" : "Eroor";
+                return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
+            }
+        }
     }
 }

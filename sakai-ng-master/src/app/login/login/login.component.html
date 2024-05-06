@@ -1,23 +1,24 @@
 <div class="login-container">
   <div class="header">
       <div class="icon-wrapper">
-          <img src="/src/assets/layout/images/themes/bootstrap4-dark-purple.svg" alt="Home Icon">
+          <img src="assets/layout/images/themes/logo.jpg" alt="Home Icon">
       </div>
   </div>
-  <div class="outer-card"> <!-- Cuadro exterior más grande y con sombra suave -->
-      <div class="login-card"> <!-- Cuadro interior donde se encuentra el lugar del botón -->
-          <h2>Grupo Rac</h2>
-          <div class="form-group">
-              <input type="email" id="email" name="email" placeholder="Usuario" required class="form-control">
-          </div>
-          <div class="form-group">
-              <input type="password" id="password" name="password" placeholder="Contraseña" required class="form-control">
-          </div>
-          <button (click)="onButtonClick()" class="login-button">Iniciar</button>
-          <div class="forgot-password">olvide mi Contraseña</div>
+  <div class="outer-card">
+    <div class="login-card">
+      <h2>Grupo Rac</h2>
+      <div class="form-group">
+        <input type="text"  name="usuario" placeholder="Usuario" required class="form-control" [(ngModel)]="usuario">
       </div>
-  </div>
+      <div class="form-group">
+        <input type="password"  name="password" placeholder="Contraseña" required class="form-control" [(ngModel)]="contrase">
+      </div>
+      <button (click)="onLogin()" class="login-button">Iniciar Sesión</button>
+      <div *ngIf="errorMessage">{{ errorMessage }}</div>
+      <div class="forgot-password">¿Olvidastes tu contraseña?</div>
+    </div>
 </div>
+
 
 
   <style>
@@ -33,18 +34,18 @@
 
 .header {
   background-color: #920808;
-  width: 30%;
-  height: 200px;
+  width: 40%;
+  height: 300px;
   border-radius: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 5px 20px 10px rgba(0, 0, 0, 0.05);
 }
 
 .icon-wrapper {
-  width: 90px;
-  height: 90px;
+  width: 150px;
+  height: 150px;
   background-color: white;
   border-radius: 50%;
   display: flex;
@@ -53,16 +54,18 @@
 }
 
 .icon-wrapper img {
-  width: 50%;
+  width: 100%;
+  border-radius: 30px;
 }
 
 .outer-card {
-  width: 320px;
+  width: 420px;
   background: white;
   padding: 20px;
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   margin-top: -50px; /* Ajustar según necesidad */
+  height: 500px;
 }
 
 .login-card {
@@ -70,12 +73,14 @@
   padding: 20px;
   border-radius: 15px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  height: 450px;
 }
 
 h2 {
   text-align: center;
   color: #333;
   margin-bottom: 20px;
+  font-size: 30px;
 }
 
 .form-group {
@@ -84,14 +89,15 @@ h2 {
 
 .form-control {
   width: 100%;
-  padding: 12px;
+  padding: 30px;
   border: 2px solid #ccc;
   border-radius: 25px;
+  font-size: 20px;
 }
 
 .login-button {
   width: 100%;
-  padding: 10px;
+  padding: 20px;
   border: none;
   background-color: #b90000;
   color: white;
@@ -105,12 +111,13 @@ h2 {
   margin-top: 20px;
   color: #ff0000;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 20px;
   cursor: pointer;
 }
 
 .forgot-password:hover {
   text-decoration: underline;
+  font-size: 20px;
 }
 
 

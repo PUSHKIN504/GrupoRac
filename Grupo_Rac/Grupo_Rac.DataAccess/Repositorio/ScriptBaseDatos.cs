@@ -11,6 +11,10 @@ namespace Grupo_Rac.DataAccess.Repositorio
         #region Departamento
         public static string Departamentos_Mostrar = "[Gral].[SP_Departamentos_Mostrar]";
         public static string Departamentos_Insetar = "[Gral].[SP_Departamentos_Insertar]";
+        public static string Departamentos_Detalle = "[Gral].[SP_Departamentos_Llenar]";
+        public static string Departamentos_Eliminar = "[Gral].[SP_Departamentos_Eliminar]";
+        public static string Departamentos_Actualizar = "[Gral].[SP_Departamentos_Actualizar]";
+
         #endregion
 
         #region Usuario
