@@ -11,6 +11,7 @@ import { Sede } from '../Models/SedeViewModel';
 import { Vehiculo } from '../Models/VehiculoViewModel';
 import { Usuario } from '../Models/UsuarioViewModel';
 import { Observable } from 'rxjs';
+import { Compra } from '../Models/CompViewModel';
 
 
 
@@ -54,6 +55,11 @@ export class ServiceCiu {
 
   getCiudad(){
     return this.http.get<Ciudad[]>(this.urlC)
+  }
+  
+  GenerateInvoicePDF(invoiceno:any){
+    return this.http.get('https://localhost:44320/API/Departamento/generatepdf?InvoiceNo='+invoiceno,{observe:'response',responseType:'blob'});
+    
   }
 }
 @Injectable({
@@ -179,6 +185,23 @@ export class ServiceUsuario {
   login(usuario: string, contraseña: string): Observable<any> {
     const url = `${this.baseUrl}/Login/${encodeURIComponent(usuario)},${encodeURIComponent(contraseña)}`;
     return this.http.get<any>(url);
+  }
+}
+
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class ServiceComp {
+
+  constructor(private http:HttpClient) { }
+
+
+  urlC = 'https://localhost:44320/API/Departamento/ListUsua'
+
+  getCompras(){
+    return this.http.get<Compra[]>(this.urlC)
   }
 }
 

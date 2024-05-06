@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CiudadDemoComponent } from './Ciudaddemo.component';
-import { CiudadRoutingModule } from './Ciudaddemo-routing.module';
+import { CompraDemoComponent } from './Compdemo.component';
+import { CompRoutingModule } from './Compdemo-routing.module';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -21,7 +21,7 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 @NgModule({
   imports: [
     CommonModule,
-    CiudadRoutingModule,
+    CompRoutingModule,
     ToastModule,
     DialogModule,
     FormsModule,
@@ -36,6 +36,6 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     ConfirmPopupModule,
     NgxExtendedPdfViewerModule
   ],
-  declarations: [CiudadDemoComponent],
+  declarations: [CompraDemoComponent],
 })
-export class CiudadDemoModule { }
+export class CompDemoModule { }

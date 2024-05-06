@@ -40,7 +40,8 @@ import { RouterModule } from '@angular/router';
         { path: 'veh', data: { breadcrumb: 'veh' }, loadChildren: () => import('./Vehiculo/Vehiculodemo.module').then(m => m.VehiculoDemoModule) },
         //Usuario
         { path: 'usuario', data: { breadcrumb: 'usuario' }, loadChildren: () => import('./Usuario/Usuariodemo.module').then(m => m.UsuarioDemoModule) },
-
+        //Compras
+        { path: 'comp', data: { breadcrumb: 'comp' }, loadChildren: () => import('./CompraFact/Compdemo.module').then(m => m.CompDemoModule) },
 
         { path: '**', redirectTo: '/notfound' }
     ])],
