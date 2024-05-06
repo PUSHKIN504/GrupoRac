@@ -1,5 +1,5 @@
 export class Departamento{
-    dep_Id?:String;
+    dep_Id?:string;
     dep_Descripcion?:String;
     
 }

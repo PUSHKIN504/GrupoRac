@@ -77,11 +77,7 @@ export class DepartamentoDemoComponent implements OnInit {
           }
         );
       }
-
-      /*editDepartamento(departamento: Departamento): void {
-        this.newDepartamento = { ...departamento };  // Clonar los datos para edición
-        this.togglePanel();  // Asegurar que el panel se abra si está cerrado
-      }*/
+      
       editDepartamento(departamento: Departamento): void {
         this.newDepartamento = { ...departamento };  // Clonar los datos para edición
         if (!this.panel.expanded) {
@@ -89,10 +85,6 @@ export class DepartamentoDemoComponent implements OnInit {
         }
     }
     
-      
-    /*togglePanel(): void {
-        this.panel.toggle(); // Alternar la apertura y cierre del panel
-      }*/
 
       // Método actualizado para manejar tanto abrir como limpiar datos
 togglePanel(action: string): void {
