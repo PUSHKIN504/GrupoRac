@@ -3,7 +3,7 @@ export class Usuario{
     Usu_Nombre?:String;
     Usu_Apellido?:String;
     Usu_Sexo?:String;
-    Sed_Descripcion?:String;
+    
     Usu_FechaNacimiento?:String;
     Usu_Telefono?:String;
     Usu_Usua?:String;
@@ -12,6 +12,10 @@ export class Usuario{
     Sed_Id?:Number;
     Crg_Id?:Number;
     Rol_Id?:Number;
-
-
+    Admin?:string;
+    Ptl_Descripcion?:string;
+    Rol_Descripcion?:string;
+    Crg_Descripcion?:string;
+    Sed_Descripcion?:String;
+    
 }

@@ -33,6 +33,10 @@ export class ServiceService {
   addDepartamento(departamento: Departamento): Observable<Departamento> {
     return this.http.post<Departamento>(`${this.baseUrl}/Insert`, departamento);
   }
+
+  getDepartamentoById(id: string): Observable<Departamento> {
+    return this.http.get<Departamento>(`${this.baseUrl}/Edit/${id}`);
+  }
 }
 
 
@@ -161,15 +165,20 @@ export class ServiceVeh {
 @Injectable({
   providedIn: 'root'
 })
-
 export class ServiceUsuario {
+  private baseUrl = 'https://localhost:44320/api/Usuario'; // Ajusta la base URL si es necesario
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
+  // Método para obtener usuarios (ya existente)
+  getUsuario() {
+    return this.http.get<Usuario[]>(`${this.baseUrl}/List`);
+  }
 
-  urlC = 'https://localhost:44320/API/Departamento/ListUsua'
-
-  getUsuario(){
-    return this.http.get<Usuario[]>(this.urlC)
+  // Método para iniciar sesión (nuevo método)
+  login(usuario: string, contraseña: string): Observable<any> {
+    const url = `${this.baseUrl}/Login/${encodeURIComponent(usuario)},${encodeURIComponent(contraseña)}`;
+    return this.http.get<any>(url);
   }
 }
+

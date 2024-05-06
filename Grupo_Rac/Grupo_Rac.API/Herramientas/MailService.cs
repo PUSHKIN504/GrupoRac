@@ -40,7 +40,7 @@ namespace Grupo_Rac.API.Herramientas
                     using (SmtpClient mailClient = new SmtpClient())
                     {
                         mailClient.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-                        mailClient.Authenticate("yordin32sanchez@gmail.com", "adqj xjhn pltr pgbq");
+                        mailClient.Authenticate("yordinsanchez466@gmail.com", "wwuv tukc rzve mwsv");
                         mailClient.Send(emailMessage);
                         mailClient.Disconnect(true);
                     }

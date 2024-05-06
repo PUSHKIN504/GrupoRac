@@ -13,6 +13,7 @@ namespace Grupo_Rac.API.Extensiones
         public MappingProfileExtensions()
         {
             CreateMap<DepartamentoViewModel, tbDepartamento>().ReverseMap();
+            CreateMap<UsuarioViewModel, tbUsuarios>().ReverseMap();
             CreateMap<RolViewModel, tbRoles>().ReverseMap();
         }
     }

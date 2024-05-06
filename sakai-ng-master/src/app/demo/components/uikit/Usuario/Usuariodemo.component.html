@@ -12,34 +12,22 @@
             <thead>
                 <tr>
                     <th style="min-width: 12rem">ID</th>
-                    <th style="min-width: 12rem">Nombre</th>
-                    <th style="min-width: 12rem">Apellido</th>
-                    <th style="min-width: 12rem">Sexo</th>
-                    <th style="min-width: 12rem">Sede</th>
-                    <th style="min-width: 12rem">Fecha de Nacimiento</th>
-                    <th style="min-width: 12rem">Teléfono</th>
                     <th style="min-width: 12rem">Usuario</th>
-                    <th style="min-width: 12rem">Contraseña</th>
-                    <th style="min-width: 12rem">Estado</th>
+                    <th style="min-width: 12rem">ES</th>
                     <th style="min-width: 12rem">Cargo</th>
                     <th style="min-width: 12rem">Rol</th>
+                    <th style="min-width: 12rem">Sede</th>
                     <th style="min-width: 14rem">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let usuario of usuario">
                     <td>{{ usuario.usu_ID }}</td>
-                    <td>{{ usuario.usu_Nombre }}</td>
-                    <td>{{ usuario.usu_Apellido }}</td>
-                    <td>{{ usuario.usu_Sexo }}</td>
-                    <td>{{ usuario.sed_Descripcion }}</td>
-                    <td>{{ usuario.usu_FechaNacimiento }}</td>
-                    <td>{{ usuario.usu_Telefono }}</td>
                     <td>{{ usuario.usu_Usua }}</td>
-                    <td>{{ usuario.usu_Contra }}</td>
-                    <td>{{ usuario.est_Id }}</td>
-                    <td>{{ usuario.crg_Id }}</td>
-                    <td>{{ usuario.rol_Id }}</td>
+                    <td>{{ usuario.admin }}</td>
+                    <td>{{ usuario.crg_Descripcion }}</td>
+                    <td>{{ usuario.rol_Descripcion }}</td>
+                    <td>{{ usuario.sed_Descripcion }}</td>
                     <td>
                         <button class="btn btn-secondary">Editar</button>
                         <button class="btn btn-primary">Detalles</button>

@@ -15,7 +15,7 @@ namespace Grupo_Rac.Entities.Entity
         }
 
         public string Ciu_Id { get; set; }
-        public string? Dep_Id { get; set; }
+        public string Dep_Id { get; set; }
         public string Ciu_Descripcion { get; set; }
         public int? Ciu_Creacion { get; set; }
         public int? Ciu_Modifica { get; set; }

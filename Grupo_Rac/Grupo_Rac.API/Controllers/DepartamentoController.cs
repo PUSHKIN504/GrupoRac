@@ -42,6 +42,46 @@ namespace Grupo_Rac.API.Controllers
             return Ok(list);
 
         }
+        [HttpGet("Edit/{id}")]
+        public IActionResult Edit(string id)
+        {
+            var modelo = _generalService.DetallesDepto(id);
+            return Json(modelo.Data);
+        }
+
+        [HttpPut("Edit/{id}")]
+        public IActionResult Edit(DepartamentoViewModel item)
+        {
+            var model = _mapper.Map<tbDepartamento>(item);
+            var modelo = new tbDepartamento()
+            {
+                Dep_Id = item.Dep_Id,
+                Dep_Descripcion = item.Dep_Descripcion,
+            };
+
+            var list = _generalService.ListDepto();
+            _generalService.ActualizarDepto(modelo);
+            return Ok(list);
+
+        }
+
+        [HttpDelete("Delete/{id}")]
+        public IActionResult Delete(string id)
+        {
+            var list = _generalService.ListDepto();
+            _generalService.EliminarDepto(id);
+            return Ok(list);
+
+        }
+
+        [HttpGet("Details/{id}")]
+        public IActionResult Details(string id)
+        {
+
+            var listado = _generalService.DetallesDepto(id);
+
+            return Ok(listado.Data);
+        }
 
         #region Ciudades
         [HttpGet("ListCiu")]

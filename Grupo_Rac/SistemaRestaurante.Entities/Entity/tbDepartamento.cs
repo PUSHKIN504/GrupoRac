@@ -17,7 +17,7 @@ namespace Grupo_Rac.Entities.Entity
         public string Dep_Descripcion { get; set; }
         public int? Dep_Creacion { get; set; }
         public int? Dep_Modifica { get; set; }
-        public DateTime Dep_Fecha_Creacion { get; set; }
+        public DateTime? Dep_Fecha_Creacion { get; set; }
         public DateTime? Dep_Fecha_Modifica { get; set; }
         public bool? Dep_Estado { get; set; }
 

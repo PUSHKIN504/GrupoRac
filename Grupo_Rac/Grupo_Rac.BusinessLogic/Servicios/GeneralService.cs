@@ -74,68 +74,67 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             }
         }
 
+        public ServiceResult ActualizarDepto(tbDepartamento item)
+        {
+            var resul = new ServiceResult();
+            try
+            {
+                var lost = _departamentoRepositorio.Update(item);
+                if (lost.CodeStatus > 0)
+                {
+                    return resul.Ok(lost);
+                }
+                else
+                {
+                    lost.MessageStatus = (lost.CodeStatus == 0) ? "401 error de consulta" : lost.MessageStatus;
+                    return resul.Error(lost);
+                }
+            }
+            catch (Exception ex)
+            {
+                return resul.Error(ex.Message);
+            }
+        }
 
 
-        //public ServiceResult ActualizarDepto(tbDepartamento item)
-        //{
-        //    var resul = new ServiceResult();
-        //    try
-        //    {
-        //        var lost = _departamentoRepositorio.Update(item);
-        //        if (lost.CodeStatus > 0)
-        //        {
-        //            return resul.Ok(lost);
-        //        }
-        //        else
-        //        {
-        //            lost.MessageStatus = (lost.CodeStatus == 0) ? "401 error de consulta" : lost.MessageStatus;
-        //            return resul.Error(lost);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return resul.Error(ex.Message);
-        //    }
-        //}
+        public ServiceResult EliminarDepto(string Dept_Id)
+        {
+            var resul = new ServiceResult();
+            try
+            {
+                var lost = _departamentoRepositorio.DeleteS(Dept_Id);
+                if (lost.CodeStatus > 0)
+                {
+                    return resul.Ok(lost);
+                }
+                else
+                {
+                    return resul.Error(lost);
+                }
+            }
+            catch (Exception ex)
+            {
+                return resul.Error(ex.Message);
+            }
+        }
 
 
-        //public ServiceResult EliminarDepto(string Dept_Id)
-        //{
-        //    var resul = new ServiceResult();
-        //    try
-        //    {
-        //        var lost = _departamentoRepositorio.DeleteS(Dept_Id);
-        //        if (lost.CodeStatus > 0)
-        //        {
-        //            return resul.Ok(lost);
-        //        }
-        //        else
-        //        {
-        //            return resul.Error(lost);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return resul.Error(ex.Message);
-        //    }
-        //}
+        public ServiceResult DetallesDepto(string Dept_Id)
+        {
+            var resul = new ServiceResult();
+            try
+            {
+                var lost = _departamentoRepositorio.findS(Dept_Id);
+                return resul.Ok(lost);
 
-
-        //public ServiceResult DetallesDepto(string Dept_Id)
-        //{
-        //    var resul = new ServiceResult();
-        //    try
-        //    {
-        //        var lost = _departamentoRepositorio.findS(Dept_Id);
-        //        return resul.Ok(lost);
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return resul.Error(ex.Message);
-        //    }
-        //}
+            }
+            catch (Exception ex)
+            {
+                return resul.Error(ex.Message);
+            }
+        }
         #endregion
+
         #region Ciudades
         public ServiceResult ListCiu()
         {
@@ -151,6 +150,7 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             }
         }
         #endregion
+
         #region cliente
         public ServiceResult ListCli()
         {
@@ -184,6 +184,7 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         }
 
         #endregion
+
         #region Marca
         public ServiceResult ListMarca()
         {
@@ -200,6 +201,7 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         }
 
         #endregion
+
         #region Modelo
         public ServiceResult ListModelo()
         {
@@ -216,6 +218,7 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         }
 
         #endregion
+
         #region Sede
         public ServiceResult ListSede()
         {
@@ -232,6 +235,7 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         }
 
         #endregion
+
         #region Usuario
         public ServiceResult ListUsuario()
         {
@@ -248,6 +252,7 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         }
 
         #endregion
+
         #region Vehiculo
         public ServiceResult ListVeh()
         {
@@ -264,6 +269,7 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         }
 
         #endregion
+
         #region Cargo
         public ServiceResult ListCargo()
         {

@@ -1,0 +1,97 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "GruporacContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": "",
+   "OutputContextPath": null,
+   "OutputPath": "Entity",
+   "ProjectRootNamespace": "Grupo_Rac.Entities",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 2,
+   "Tables": [
+      {
+         "Name": "[Acce].[tbPantallas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[tbPantallas_PorRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[tbRoles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Acce].[tbUsuarios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbCargos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbCiudades]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbClientes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbDepartamento]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbEstadosCiviles]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbMarcas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbModelos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbSedes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Vent].[tbCompras]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Vent].[tbVehiculos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Vent].[tbVentasDetalle]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Vent].[tbVentasEnc]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "vj2400.GrupoRac",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}
