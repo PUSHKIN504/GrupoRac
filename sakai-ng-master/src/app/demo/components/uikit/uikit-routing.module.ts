@@ -46,6 +46,10 @@ import { Breadcrumb } from 'primeng/breadcrumb';
         { path: 'rol', data: {Breadcrumb: 'rol'}, loadChildren: () => import('./rol/rol.module').then(m => m.RolModule)},
         //Compras
         { path: 'comp', data: { breadcrumb: 'comp' }, loadChildren: () => import('./CompraFact/Compdemo.module').then(m => m.CompDemoModule) },
+        //CreateFact
+        { path: 'compF', data: { breadcrumb: 'compF' }, loadChildren: () => import('./CreateFactComp/ComFdemo.module').then(m => m.ComFDemoModule) },
+
+
 
         { path: '**', redirectTo: '/notfound' }
     ])],

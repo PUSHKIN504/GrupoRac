@@ -1,45 +1,50 @@
-<div class="card" style="width: 1200px">
-    <h3>Listing Invoice</h3>
-    <div class="card-header">
-        <a class="btn btn-success" routerLink="createinvoice">Create New [+]</a>
-    </div>
-    <div class="card-body">
+<button mat-raised-button color="warn" (click)="create()">Crear</button>
+<mat-expansion-panel #panel style="margin-top: 10px; margin-bottom: 10px">
 
-        <!-- <table datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger" class="table table-bordered">
-            <thead class="bg-dark text-white">
-                <tr>
-                    <td>Invoice No</td>
-                    <td>Customer</td>
-                    <td>Remarks</td>
-                    <td>Total</td>
-                    <td>Tax</td>
-                    <td>NetTotal</td>
-                    <td>Action</td>
-                </tr>
-            </thead>
-            <tbody>
-<tr *ngFor="let item of compra">
-    <td>{{item.invoiceNo}}</td>
-    <td>{{item.customerName}}</td>
-    <td>{{item.remarks}}</td>
-    <td>{{item.total | currency}}</td>
-    <td>{{item.tax | currency}}</td>
-    <td>{{item.netTotal | currency}}</td>
-    <td style="width: 30%">
-<a class="btn btn-primary" (click)="Editinvoice(item.invoiceNo)">Edit</a> | 
-<a class="btn btn-danger" (click)="invoiceremove(item.invoiceNo)">Delete</a> |
-<a class="btn btn-success" (click)="PreviewInvoice(item.invoiceNo)">Print</a> |
-<a class="btn btn-success" (click)="DownloadInvoice(item.invoiceNo)">Download</a>
-    </td>
+<form [formGroup]="formfac"  class="form-container" style="margin-top: 30px;">
+    <mat-form-field appearance="outline" class="example-full-width" style="margin-right: 10px; width: 400px;">
+        <mat-label>DNI CLiente</mat-label>
+        <input matInput formControlName="dnicli">
+    </mat-form-field>
+    
+</form>
+<button mat-raised-button color="primary" (click)="agregarEnc()"  class="p-button-outlined" style="margin-right: 10px;">{{modalButtonLabel}}</button>
+<button mat-flat-button color="warn" (click)="cancelar()" >Cancelar</button>
+</mat-expansion-panel>
 
-</tr>
-            </tbody>
 
-        </table> -->
+       <p-table #dt  [value]="compra" [rows]="10" [paginator]="true" [responsive]="true" [autoLayout]="true" [globalFilterFields]="['com_Id']" sortField="representative.name">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Factura No</th>
+                <th>Cliente DNI</th>
+                <th>Fecha Compra</th>
+                <th>Estado</th>
+                
+                <th>Actiones</th>
+            </tr>
+        </ng-template>   
+        <ng-template pTemplate="body" let-compra>
+            <tr>
+                <td>{{compra.com_Id}}</td>
+                <td>{{compra.cli_DNI}}</td>
+                <td>{{compra.com_Fecha}}</td>
+                <td>{{compra.com_Estado}}</td>
+                <td>
+                        <button pButton pRipple type="button" >Editar</button>
+                        <button class="btn btn-primary">Detalles</button>
+                        <button class="btn btn-danger">Eliminar</button>
+                </td>
+                <!-- Add more table cells as per your Ciudad model -->
+            </tr>
+        </ng-template>
+            
 
-    </div>
+        </p-table> 
 
-</div>
+  
+
+
 
 <ng-template #content let-c="close" let-d="dismiss">
 	<div class="modal-header">

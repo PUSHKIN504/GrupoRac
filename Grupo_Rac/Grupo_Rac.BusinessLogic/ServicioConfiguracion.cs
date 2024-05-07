@@ -27,6 +27,7 @@ namespace Grupo_Rac.BusinessLogic
             service.AddScoped<UsuarioRepository>();
             service.AddScoped<CargoRepository>();
             service.AddScoped<VehiculoRepository>();
+            service.AddScoped<CompRepository>();
             GrupoRacContext.BuildConnectionString(conn);
 
         }
@@ -34,6 +35,7 @@ namespace Grupo_Rac.BusinessLogic
         {
             service.AddScoped<GeneralService>();
             service.AddScoped<AccesoService>();
+            service.AddScoped<VentaService>();
             //service.AddScoped<ServiciosAcceso>();
             //service.AddScoped<ServicioRestaurantes>();
         }

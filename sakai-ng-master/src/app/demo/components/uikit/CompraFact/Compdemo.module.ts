@@ -17,9 +17,16 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ServiceCiu } from 'src/app/Service/service.service';
 // import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
  // Importa el servicio ServiceCiu
-
+ import { MatExpansionModule } from '@angular/material/expansion';
+ import { MatFormFieldModule } from '@angular/material/form-field';
+ import { MatInputModule } from '@angular/material/input';
+ import { MatButtonModule } from '@angular/material/button';
+ import { ReactiveFormsModule } from '@angular/forms';
+ 
 @NgModule({
   imports: [
+		ReactiveFormsModule,
+
     CommonModule,
     CompRoutingModule,
     ToastModule,
@@ -34,6 +41,10 @@ import { ServiceCiu } from 'src/app/Service/service.service';
     SidebarModule,
     RippleModule,
     ConfirmPopupModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
     // NgxExtendedPdfViewerModule
   ],
   declarations: [CompraDemoComponent],

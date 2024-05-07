@@ -5,54 +5,67 @@ import {Router} from '@angular/router';
 import { Table } from 'primeng/table';
 import {Compra} from 'src/app/Models/CompViewModel'
 import { ServiceComp } from 'src/app/Service/service.service';
+import { MatExpansionPanel } from '@angular/material/expansion';
+import { ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
+    templateUrl: './ComFdemo.component.html',
 
-    templateUrl: './Compdemo.component.html',
     providers: [ConfirmationService, MessageService]
-
 })
-export class CompraDemoComponent implements OnInit {
-    compra!:Compra[];
-    modalButtonLabel: string = 'Guardar';
 
+
+export class ComFDemoComponent implements OnInit {
+    modalButtonLabel: string = 'Guardar';
+    comf!:Compra[];
+    @ViewChild('panel') panel: MatExpansionPanel;
+    @ViewChild('dt') dataTable!: Table;
+    newComF: Compra = new Compra();
+//Edit
+    valor: string = '';
+    modalTitle: string = 'Nuevo Registro';
+    formfac: FormGroup;
+    display: boolean = false;
+    codigo: string = '';
+    selectedMarc:any;
+//Edit--End
+//eliminar
+confirmacionVisible: boolean = false;
+MarcaAEliminar: Compra | null = null;
+//eliminar--end
     statuses: any[] = [];
     products: Product[] = [];
     rowGroupMetadata: any;
     activityValues: number[] = [0, 100];
     isExpanded: boolean = false;
-    formfac: FormGroup;
-
     idFrozen: boolean = false;
     loading: boolean = false;
     @ViewChild('filter') filter!: ElementRef;
-    @ViewChild('dt') dataTable!: Table;
-    constructor(private service: ServiceComp, private router: Router, private messageService: MessageService,
-        private fb:FormBuilder,
-    
-    ) { 
+
+    constructor(private service: ServiceComp, private router: Router, private cdr: ChangeDetectorRef,
+    private messageService: MessageService,
+    private fb:FormBuilder, 
+
+    ) {
         this.formfac = this.fb.group({
             dnicli: ['', Validators.required], // Define el control 'marca' con un valor inicial vacío o según lo necesites
             cliente: [''], // Define el control 'codigo' y cualquier otro control necesario
             
         });
-    }
-  
 
+    }
     ngOnInit(): void {
         this.service.getCompras().subscribe((data: any)=>{
             console.log(data);
-            this.compra = data;
+            this.comf = data;
         },error=>{
           console.log(error);
         });
      }
-    
-     create(){
-        this.router.navigate(['app/uikit/compF']);
 
-     }
+
      agregarEnc(){
         console.log(this.formfac.value)
         const compra : Compra = {
@@ -62,14 +75,10 @@ export class CompraDemoComponent implements OnInit {
         console.log(this.formfac + 'hola');
         this.service.addModelo(compra).subscribe({
         })
-        this.ngOnInit();
-
+        this.router.navigate(['app/uikit/comp']);
      }
      cancelar(){
         this.router.navigate(['app/uikit/comp']);
 
      }
-    
-      
 }
-

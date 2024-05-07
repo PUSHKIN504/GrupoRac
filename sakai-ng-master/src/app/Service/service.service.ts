@@ -222,10 +222,13 @@ export class ServiceComp {
   constructor(private http:HttpClient) { }
 
 
-  urlC = 'https://localhost:44320/API/Departamento/ListUsua'
+  urlC = 'https://localhost:44320/API/Compra/'
 
   getCompras(){
-    return this.http.get<Compra[]>(this.urlC)
+    return this.http.get<Compra[]>(this.urlC+'List')
+  }
+  addModelo(comp: Compra): Observable<Compra> {
+    return this.http.post<Compra>(`${this.urlC}Create`, comp);
   }
 }
 

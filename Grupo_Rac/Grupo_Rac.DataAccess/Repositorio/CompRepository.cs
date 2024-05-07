@@ -34,11 +34,11 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 //pendiente los parametros
                 var parameter = new DynamicParameters();
                 //parameter.Add("Dept_Id", item.Dep_Id);
-                //parameter.Add("Dept_Descripcion", item.Dep_Descripcion);
-                //parameter.Add("Dept_Usua_Creacion", 1);
-                //parameter.Add("Dept_Fecha_Creacion", DateTime.Now);
+                parameter.Add("@DNI", item.Cli_DNI);
+                parameter.Add("@UsuCrea", 1);
+                parameter.Add( "@fechaCrea", DateTime.Now);
 
-                var result = db.Execute(ScriptBaseDatos.Departamentos_Insetar,
+                var result = db.Execute("[Vent].[SP_FactCompra_Insertar]",
                     parameter,
                     commandType: CommandType.StoredProcedure
                     );
@@ -52,7 +52,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
             List<tbCompras> result = new List<tbCompras>();
             using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
             {
-                result = db.Query<tbCompras>("[Gral].[sp_cargo_listar]", commandType: CommandType.Text).ToList();
+                result = db.Query<tbCompras>("[Vent].[SP_Compras_listar]", commandType: CommandType.Text).ToList();
                 return result;
             }
         }
