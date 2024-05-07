@@ -1,8 +1,13 @@
 export class Modelo{
-    Mod_Id?:Number;
-    Mod_Descripcion?:String;
-    Mod_Ano?:Date;
-    Mar_Id?:Number;
+    mod_Id?:Number;
+    mod_Descripcion?:String;
+    mod_Ano?:Date;
+    mar_Id?:Number;
+    mar_Descripcion?:String;
+    mod_Fecha_Creacion?:Date;
+    mod_Modifica?:Number;
+    mod_Creacion?:Number;
+    mod_Fecha_Modifica?:Date;
 
     // dep_Descripcion?:String;
 

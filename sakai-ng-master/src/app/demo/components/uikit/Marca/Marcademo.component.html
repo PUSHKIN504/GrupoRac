@@ -1,17 +1,20 @@
 <button mat-raised-button color="warn" (click)="togglePanel('new')">Crear</button>
-<mat-accordion>
-    <mat-expansion-panel #panel style="margin-top: 10px;  margin-bottom: 10px">
-      <form (ngSubmit)="addDepartamento()" class="form-container" style="margin-top: 30px;">
-       
-        <mat-form-field appearance="outline" class="example-full-width" style="margin-right: 10px; width: 400px; ">
-          <mat-label>Marca</mat-label>
-          <input matInput [(ngModel)]="newMarca.mar_Descripcion" name="descripcion">
+<mat-expansion-panel #panel style="margin-top: 10px; margin-bottom: 10px">
+    <mat-panel-title>
+        {{modalTitle}}
+    </mat-panel-title>
+    <form [formGroup]="formMarcas" (ngSubmit)="addDepartamento()" class="form-container" style="margin-top: 30px;">
+        <mat-form-field appearance="outline" class="example-full-width" style="margin-right: 10px; width: 400px;">
+            <mat-label>Marca</mat-label>
+            <input matInput formControlName="marca">
         </mat-form-field>
-        <button mat-raised-button color="primary" class="submit-button" style="margin-right: 10px;">Agregar</button>
-        <button mat-flat-button color="warn">Cancelar</button>
-      </form>
-    </mat-expansion-panel>
-</mat-accordion>
+        
+    </form>
+    <button mat-raised-button color="primary" (click)="guardar()" class="p-button-outlined" style="margin-right: 10px;">{{modalButtonLabel}}</button>
+        <button mat-flat-button color="warn"  (click)="cancelar()">Cancelar</button>
+</mat-expansion-panel>
+
+
 
 <div class="card">
     <h5>Marcas</h5>
@@ -36,9 +39,9 @@
                     <td>{{ mar.mar_Id }}</td>
                     <td>{{ mar.mar_Descripcion }}</td>
                     <td>
-                        <button class="btn btn-secondary">Editar</button>
+                        <button pButton pRipple type="button" label="Editar" class="p-button-Info" (click)="editar(mar)"></button>
                         <button class="btn btn-primary">Detalles</button>
-                        <button class="btn btn-danger">Eliminar</button>
+                        <button pButton pRipple type="button" label="Eliminar" class="p-button-danger" (click)="confirmarEliminar(mar)" ></button>
                     </td>
                 </tr>
                 
@@ -49,3 +52,10 @@
         <div>Cargando datos de las marcas. Por favor, espere.</div>
     </ng-template>
 </div>
+<p-dialog header="Confirmar Eliminación" [(visible)]="confirmacionVisible" modal="true" [style]="{ width: '300px' }">
+    <p>¿Está seguro de que desea eliminar este registro?</p>
+    <p-footer>
+      <button pButton type="button" class="mr-2" label="Cancelar" (click)="cancelarEliminar()"></button>
+      <button pButton type="button" label="Confirmar" class="p-button-danger" (click)="eliminar()"></button>
+    </p-footer>
+  </p-dialog>

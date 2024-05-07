@@ -123,12 +123,18 @@ export class ServiceMarca {
   private baseUrl = 'https://localhost:44320/API/Departamento';
 
   urlC = 'https://localhost:44320/API/Departamento/ListMarca'
-
+  private urlcoso= "https://localhost:44320/API/Marca/";
   getMarca(){
     return this.http.get<Marca[]>(this.urlC)
   }
   addMarca(marca: Marca): Observable<Marca> {
     return this.http.post<Marca>(`${this.baseUrl}/InsertMarc`, marca);
+  }
+  eliminar(idDepartamento:Number):Observable<void>{
+    return this.http.delete<void>(`${this.urlcoso}Delete/${idDepartamento}`);
+  }
+  actualizar(modelo:Marca):Observable<Marca>{
+    return this.http.put<Marca>(`${this.urlcoso}EditMar`,modelo);
   }
 }
 @Injectable({
@@ -139,11 +145,21 @@ export class ServiceModelo {
 
   constructor(private http:HttpClient) { }
 
+  private urlcoso= "https://localhost:44320/API/Modelo/";
 
   urlC = 'https://localhost:44320/API/Departamento/ListModelo'
 
   getModelo(){
     return this.http.get<Modelo[]>(this.urlC)
+  }
+  addModelo(modelo: Modelo): Observable<Modelo> {
+    return this.http.post<Modelo>(`${this.urlcoso}/Create`, modelo);
+  }
+  eliminar(idDepartamento:Number):Observable<void>{
+    return this.http.delete<void>(`${this.urlcoso}Delete/${idDepartamento}`);
+  }
+  actualizar(modelo:Modelo):Observable<Modelo>{
+    return this.http.put<Modelo>(`${this.urlcoso}Edit`,modelo);
   }
 }
 @Injectable({

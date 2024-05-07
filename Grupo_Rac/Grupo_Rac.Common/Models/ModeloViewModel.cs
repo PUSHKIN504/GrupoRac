@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace Grupo_Rac.Common.Models
         public DateTime? Mod_Fecha_Creacion { get; set; }
         public DateTime? Mod_Fecha_Modifica { get; set; }
         public bool? Mod_Estado { get; set; }
+        [NotMapped]
+        public string? Mar_Descripcion { get; set; }
 
     }
 }

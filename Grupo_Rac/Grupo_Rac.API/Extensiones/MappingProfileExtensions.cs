@@ -16,6 +16,7 @@ namespace Grupo_Rac.API.Extensiones
             CreateMap<UsuarioViewModel, tbUsuarios>().ReverseMap();
             CreateMap<RolViewModel, tbRoles>().ReverseMap();
             CreateMap<MarcaViewModel, tbMarcas>();
+            CreateMap<ModeloViewModel, tbModelos>();
         }
     }
 }

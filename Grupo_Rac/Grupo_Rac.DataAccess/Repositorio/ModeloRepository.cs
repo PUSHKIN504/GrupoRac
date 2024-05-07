@@ -14,12 +14,41 @@ namespace Grupo_Rac.DataAccess.Repositorio
     {
         public RequestStatus Actualizar(tbModelos item)
         {
-            throw new NotImplementedException();
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@Mod_Id", item.Mod_Id);
+                parameter.Add("@Mar_Descripcion", item.Mar_Descripcion);
+
+                parameter.Add("@Mod_Descripcion", item.Mod_Descripcion);
+                parameter.Add("@Mod_Ano", item.Mod_Año);
+
+                parameter.Add("@Mod_Modifica", item.Mod_Modifica);
+                parameter.Add("@Mod_Fecha_Modifica", DateTime.Now);
+
+                var result = db.Execute("[Gral].[SP_Modelos_Actualizar]",
+                    parameter,
+                    commandType: CommandType.StoredProcedure
+                    );
+                string mensaje = (result == 1) ? "Exito" : "Error";
+                return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
+            }
         }
 
         public RequestStatus Eliminar(int? id)
         {
-            throw new NotImplementedException();
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parametro = new DynamicParameters();
+                parametro.Add("@Mod_Id", id);
+                var result = db.Execute("[Gral].[SP_Modelos_Eliminar]",
+                    parametro,
+                     commandType: CommandType.StoredProcedure
+                    );
+
+                string mensaje = (result == 1) ? "Exito" : "Error";
+                return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
+            }
         }
 
         public tbModelos find(int? id)
@@ -32,17 +61,19 @@ namespace Grupo_Rac.DataAccess.Repositorio
             using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
             {
                 //pendiente los parametros
-                var parameter = new DynamicParameters();
-                //parameter.Add("Dept_Id", item.Dep_Id);
-                //parameter.Add("Dept_Descripcion", item.Dep_Descripcion);
-                parameter.Add("Dept_Usua_Creacion", 1);
-                parameter.Add("Dept_Fecha_Creacion", DateTime.Now);
+                var parameter = new DynamicParameters(); 
+                parameter.Add("@Mar_Descripcion", item.Mar_Descripcion);
 
-                var result = db.Execute(ScriptBaseDatos.Departamentos_Insetar,
+                parameter.Add("@Mod_Descripcion", item.Mod_Descripcion);
+                parameter.Add("@Mod_Ano", item.Mod_Año);
+
+                parameter.Add("@Mod_Creacion", item.Mod_Creacion);
+                parameter.Add("@Mod_Fecha_Creacion", DateTime.Now);
+                var result = db.Execute("[Gral].[SP_Modelos_Insertar]",
                     parameter,
                     commandType: CommandType.StoredProcedure
                     );
-                string mensaje = (result == 1) ? "Exito" : "Eroor";
+                string mensaje = (result == 1) ? "Exito" : "Error";
                 return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
             }
         }

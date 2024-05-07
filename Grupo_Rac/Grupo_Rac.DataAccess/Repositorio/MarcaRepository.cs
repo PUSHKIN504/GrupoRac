@@ -14,12 +14,39 @@ namespace Grupo_Rac.DataAccess.Repositorio
     {
         public RequestStatus Actualizar(tbMarcas item)
         {
-            throw new NotImplementedException();
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameter = new DynamicParameters();
+                //parameter.Add("Dept_Id", item.Dep_Id);
+                parameter.Add("@Mar_Id", item.Mar_Id);
+
+                parameter.Add("@Mar_Descripcion", item.Mar_Descripcion);
+                parameter.Add("@Mar_Modifica", 1);
+                parameter.Add("@Mar_Fecha_Creacion", DateTime.Now);
+
+                var result = db.Execute("[Gral].[SP_Marcas_Actualizar]",
+                    parameter,
+                    commandType: CommandType.StoredProcedure
+                    );
+                string mensaje = (result == 1) ? "Exito" : "Error";
+                return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
+            }
         }
 
         public RequestStatus Eliminar(int? id)
         {
-            throw new NotImplementedException();
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parametro = new DynamicParameters();
+                parametro.Add("@Mar_Id", id);
+                var result = db.Execute("[Gral].[SP_Marcas_Eliminar]",
+                    parametro,
+                     commandType: CommandType.StoredProcedure
+                    );
+
+                string mensaje = (result == 1) ? "Exito" : "Error";
+                return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
+            }
         }
 
         public tbMarcas find(int? id)
@@ -42,7 +69,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
                     parameter,
                     commandType: CommandType.StoredProcedure
                     );
-                string mensaje = (result == 1) ? "Exito" : "Eroor";
+                string mensaje = (result == 1) ? "Exito" : "Error";
                 return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
             }
         }
