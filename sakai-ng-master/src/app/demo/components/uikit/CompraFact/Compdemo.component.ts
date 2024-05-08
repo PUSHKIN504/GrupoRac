@@ -6,6 +6,7 @@ import { Table } from 'primeng/table';
 import {Compra} from 'src/app/Models/CompViewModel'
 import { ServiceComp } from 'src/app/Service/service.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatExpansionPanel } from '@angular/material/expansion';
 
 @Component({
 
@@ -23,6 +24,8 @@ export class CompraDemoComponent implements OnInit {
     activityValues: number[] = [0, 100];
     isExpanded: boolean = false;
     formfac: FormGroup;
+    modalTitle: string = 'Nuevo Registro';
+    @ViewChild('panel') panel: MatExpansionPanel;
 
     idFrozen: boolean = false;
     loading: boolean = false;
@@ -38,7 +41,7 @@ export class CompraDemoComponent implements OnInit {
             
         });
     }
-  
+   
 
     ngOnInit(): void {
         this.service.getCompras().subscribe((data: any)=>{
@@ -48,11 +51,34 @@ export class CompraDemoComponent implements OnInit {
           console.log(error);
         });
      }
-    
-     create(){
-        this.router.navigate(['app/uikit/compF']);
 
-     }
+     togglePanel(action: string): void {
+        if (action === 'new') {
+            this.formfac.reset();
+            this.modalTitle= "Nuevo Registro";
+            this.modalButtonLabel = 'Guardar';
+            
+            if (!this.panel.expanded) {
+                this.panel.open();
+            }
+        } else {
+            this.panel.toggle();  // Solo alternar sin resetear datos
+        }
+        this.modalTitle = 'Nuevo Registro';
+
+    }
+    
+    guardar() {
+        if (this.formfac.invalid) {
+          return;
+        }
+        if (this.modalTitle === 'Nuevo Registro') {
+          this.agregarEnc();
+        } else {
+        //   this.actualizar();
+        }
+      }
+      
      agregarEnc(){
         console.log(this.formfac.value)
         const compra : Compra = {
