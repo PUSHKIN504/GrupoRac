@@ -3,7 +3,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
     selector: 'app-login',
-    templateUrl: './login.component.html',
+    templateUrl: './logindemo.component.html',
     styles: [`
         :host ::ng-deep .pi-eye,
         :host ::ng-deep .pi-eye-slash {
@@ -13,7 +13,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
         }
     `]
 })
-export class LoginComponent {
+export class LoginDemoComponent {
 
     valCheck: string[] = ['remember'];
 
