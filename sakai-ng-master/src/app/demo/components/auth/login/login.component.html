@@ -1,0 +1,150 @@
+<div class="wrapper">
+    <div class="login-card">
+      <div class="login-aside">
+        <div class="flex flex-column align-items-center">
+          <div class="icon-wrapper ">
+            <!-- <img src="assets/layout/images/themes/logo.jpg" alt="Home Icon" style="width: 100%;"> -->
+          </div>
+        </div>
+      </div>
+      <div class="login-aside-container">
+        <div class="login-container">
+          <div id="login-content" class="login-content d-none">
+            <div class="text-center mb-5">
+              <div class="text-900 text-3xl font-medium mb-3">¡Bienvenido!</div>
+              <span class="text-600 font-medium">Inicia sesión para continuar</span>
+            </div>
+            <div class="login-form">
+              <div class="flex flex-column mb-4">
+                <label for="name">Usuario</label>
+                <input type="text" pInputText id="name" placeholder="Usuario" [(ngModel)]="usuario" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !usuario}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !usuario">Name is required.</small>
+              </div>
+              <div class="flex flex-column mb-4" style="width: 100%;">
+                <label for="name">Contrasena</label>
+                <input type="password" pInputText id="name" placeholder="Contraseña" [(ngModel)]="contrasena" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !contrasena}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !contrasena">Name is required.</small>
+              </div>
+              <div _ngcontent-ng-c1839742986="" class="flex align-items-center justify-content-between mb-5 gap-5">
+                <div _ngcontent-ng-c1839742986="" class="flex align-items-center">
+                  <p-checkbox _ngcontent-ng-c1839742986="" id="rememberme1" styleclass="mr-2" class="p-element">
+                    <div data-pc-name="checkbox" data-pc-section="root" class="mr-2 p-checkbox p-component">
+                      <div class="p-hidden-accessible" data-pc-section="hiddenInputWrapper" data-p-hidden-accessible="true">
+                        <input type="checkbox" value="undefined" aria-checked="false" data-pc-section="hiddenInput">
+                      </div>
+                      <div class="p-checkbox-box" data-p-highlight="false" data-p-focused="false" data-pc-section="input">
+                        <!---->
+                      </div>
+                    </div>
+                    <!---->
+                  </p-checkbox>
+                  <label _ngcontent-ng-c1839742986="" for="rememberme1">Recuérdame</label>
+                </div>
+                <a _ngcontent-ng-c1839742986="" class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color);">
+                  ¿Olvidó su contraseña?
+                </a>
+              </div>
+              <div>
+                <button pButton label="Sign In" class="p-element w-full p-3 text-xl p-button p-component"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <style>
+      .d-none{
+        display: none;
+      }
+
+      .wrapper{
+        z-index: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ecf0f1;
+        height: 100%;
+      }
+  
+      .login-card{
+        z-index: 1;
+        width: 800px;
+        height: 500px;
+        display: flex;
+        position: relative;
+      }
+  
+      @keyframes unfoldAside {
+              from {
+                  transform: scaleY(0); 
+              }
+              to {
+                  transform: scaleY(1); 
+              }
+          }
+  
+      .login-aside {
+        z-index: 2;
+        background-color: #920808;
+        width: 35%;
+        border-radius: 10px;
+        box-shadow:rgba(0, 0, 0, 0.25) 10px 14px 28px,rgba(0, 0, 0, 0.22) 8px 10px 10px;
+        animation: unfoldAside 1s ease-out forwards; 
+        position: relative; 
+      }
+  
+      @keyframes unfoldAsideContainer {
+              from {
+                  transform: scaleX(0);
+              }
+              to {
+                  transform: scaleX(1);
+                  width: 65%;
+                  
+                }
+          }
+      .login-aside-container{
+        display: flex;
+        align-items: center;
+        width: 0%;
+        transform-origin: left; 
+        animation: unfoldAsideContainer 0.5s ease-out forwards;
+        animation-delay: 1.2s;
+        position: relative; 
+      }
+  
+    .login-container {
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 4;
+      transition: width 2s;
+      width: 100%;
+      height: 95%;
+      background: white;
+      border-top-right-radius: 15px;
+      border-bottom-right-radius: 15px;
+      box-shadow:rgba(0, 0, 0, 0.25) 10px 14px 28px,rgba(0, 0, 0, 0.22) 8px 10px 10px;
+      }
+
+      .login-content{
+        /* border-style: dotted;
+        border-color: #920808;
+        border-radius: 20px; */
+        padding-top: 14%;
+        padding-bottom: 14%;
+        padding-right: 20%;
+        padding-left: 20%;
+
+      }
+
+    .icon-wrapper {
+      width: 100px;
+    border-radius: 50%;
+  }
+  
+  
+    </style>

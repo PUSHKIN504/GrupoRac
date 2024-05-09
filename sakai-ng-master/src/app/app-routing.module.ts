@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
-import { LoginComponent } from './login/login.component';  // Asegúrate de que la ruta es correcta
+import { LoginComponent } from './demo/components/auth/login/login.component';
 
 const routes: Routes = [
     { 
