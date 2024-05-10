@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit{
 
       setTimeout(() => {
         this.renderer.removeClass(loginContent, 'd-none');
-      }, 1700);
+      }, 1300);
 
     }
 
