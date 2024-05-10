@@ -2,8 +2,15 @@
     <div class="login-card">
       <div class="login-aside">
         <div class="flex flex-column align-items-center">
-          <div class="icon-wrapper ">
-            <!-- <img src="assets/layout/images/themes/logo.jpg" alt="Home Icon" style="width: 100%;"> -->
+          <div class="icon-wrapper mt-3">
+            <img src="assets/layout/images/themes/logo.jpg" alt="Home Icon" id="logo">
+          </div>
+          <div class="sinopsis text-center">
+            <p>
+              Grupo Rac es tu socio confiable para la compra y venta de automóviles. Nos especializamos en ofrecer una experiencia segura y transparente, con un enfoque personalizado para ayudarte a encontrar el auto perfecto, ya sea un coche económico, un sedán familiar o un vehículo de lujo.
+            </p>
+            
+          
           </div>
         </div>
       </div>
@@ -18,34 +25,27 @@
               <div class="flex flex-column mb-4">
                 <label for="name">Usuario</label>
                 <input type="text" pInputText id="name" placeholder="Usuario" [(ngModel)]="usuario" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !usuario}"/>
-                <small class="ng-dirty ng-invalid" *ngIf="submitted && !usuario">Name is required.</small>
               </div>
               <div class="flex flex-column mb-4" style="width: 100%;">
-                <label for="name">Contrasena</label>
+                <label for="name">Contraseña</label>
                 <input type="password" pInputText id="name" placeholder="Contraseña" [(ngModel)]="contrasena" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !contrasena}"/>
-                <small class="ng-dirty ng-invalid" *ngIf="submitted && !contrasena">Name is required.</small>
               </div>
-              <div _ngcontent-ng-c1839742986="" class="flex align-items-center justify-content-between mb-5 gap-5">
-                <div _ngcontent-ng-c1839742986="" class="flex align-items-center">
-                  <p-checkbox _ngcontent-ng-c1839742986="" id="rememberme1" styleclass="mr-2" class="p-element">
-                    <div data-pc-name="checkbox" data-pc-section="root" class="mr-2 p-checkbox p-component">
-                      <div class="p-hidden-accessible" data-pc-section="hiddenInputWrapper" data-p-hidden-accessible="true">
-                        <input type="checkbox" value="undefined" aria-checked="false" data-pc-section="hiddenInput">
-                      </div>
-                      <div class="p-checkbox-box" data-p-highlight="false" data-p-focused="false" data-pc-section="input">
-                        <!---->
-                      </div>
-                    </div>
-                    <!---->
-                  </p-checkbox>
-                  <label _ngcontent-ng-c1839742986="" for="rememberme1">Recuérdame</label>
+              
+              <div _ngcontent-ng-c1839742986="" class="flex align-items-center justify-content-between mb-3 gap-5">
+                <div class="field-checkbox-1">
+                  <p-checkbox name="group1" value="New York" [(ngModel)]="rememberMe" id="rememberMe"></p-checkbox>
+                  <label for="rememberMe " class="p-1">Recuérdame</label>
                 </div>
-                <a _ngcontent-ng-c1839742986="" class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color);">
+                <a _ngcontent-ng-c1839742986="" class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: #920808;">
                   ¿Olvidó su contraseña?
                 </a>
               </div>
-              <div>
-                <button pButton label="Sign In" class="p-element w-full p-3 text-xl p-button p-component"></button>
+              <div class="flex flex-column mb-3" style="color: red;">
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !usuario">Usuario es requerido.</small>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !contrasena">Contraseña es requerida.</small>  
+              </div>
+               <div>
+                <button pButton (click)="onLogin()" label="Sign In" class="p-element w-full p-3 text-xl p-button p-component"></button>
               </div>
             </div>
           </div>
@@ -142,9 +142,17 @@
       }
 
     .icon-wrapper {
-      width: 100px;
-    border-radius: 50%;
-  }
-  
-  
+      width: 150px;
+      border-radius: 10px;
+    }
+    
+    #logo{
+      width: 100%;
+      border-radius: 10px;
+    }
+    .sinopsis{
+      padding: 20px;
+      color: #ecf0f1;
+      font-size: smaller;
+    }
     </style>

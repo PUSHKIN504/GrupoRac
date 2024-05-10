@@ -20,7 +20,10 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 export class LoginComponent implements OnInit{
   
     usuario: string = '';
+    
     contrasena: string = '';
+
+    rememberMe: boolean;
 
     submitted: boolean = false;
     
@@ -38,23 +41,28 @@ export class LoginComponent implements OnInit{
     }
 
     onLogin() {
-      this.userService.login(this.usuario, this.contrasena).subscribe({
-        next: (data) => {
-          if (data.length > 0) {
-            console.log('Login successful', data);
-            this.router.navigate(['/app/dashboard']);
-            // Redirecciona al usuario o realiza acciones post-login
-          } else {
-            // Maneja la respuesta vacía como credenciales incorrectas
-            this.errorMessage = 'Usuario o contraseña incorrectos';
-            console.error('Login failed: Incorrect credentials');
+      this.submitted = true;
+
+      if(this.contrasena?.trim() && this.usuario?.trim()){
+        this.userService.login(this.usuario, this.contrasena).subscribe({
+          next: (data) => {
+            if (data.length > 0) {
+              console.log('Login successful', data);
+              this.router.navigate(['/app/dashboard']);
+              // Redirecciona al usuario o realiza acciones post-login
+            } else {
+              // Maneja la respuesta vacía como credenciales incorrectas
+              this.errorMessage = 'Usuario o contraseña incorrectos';
+              console.error('Login failed: Incorrect credentials');
+            }
+          },
+          error: (error) => {
+            this.errorMessage = 'Error en la conexión con el servidor';
+            console.error('Login failed:', error);
           }
-        },
-        error: (error) => {
-          this.errorMessage = 'Error en la conexión con el servidor';
-          console.error('Login failed:', error);
-        }
-      });
+        });
+      }
+     
     }
   }
   
