@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CompraDemoComponent } from './Compdemo.component';
-import { CompRoutingModule } from './Compdemo-routing.module';
+import { CompraDemoComponent } from './compras.component';
+import { CompRoutingModule } from './compras-routing.module';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';

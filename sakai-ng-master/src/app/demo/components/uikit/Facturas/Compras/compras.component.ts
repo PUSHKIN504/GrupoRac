@@ -5,67 +5,80 @@ import {Router} from '@angular/router';
 import { Table } from 'primeng/table';
 import {Compra} from 'src/app/Models/CompViewModel'
 import { ServiceComp } from 'src/app/Service/service.service';
-import { MatExpansionPanel } from '@angular/material/expansion';
-import { ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { MatExpansionPanel } from '@angular/material/expansion';
 
 @Component({
-    templateUrl: './ComFdemo.component.html',
 
+    templateUrl: './compras.component.html',
     providers: [ConfirmationService, MessageService]
+
 })
-
-
-export class ComFDemoComponent implements OnInit {
+export class CompraDemoComponent implements OnInit {
+    compra!:Compra[];
     modalButtonLabel: string = 'Guardar';
-    comf!:Compra[];
-    @ViewChild('panel') panel: MatExpansionPanel;
-    @ViewChild('dt') dataTable!: Table;
-    newComF: Compra = new Compra();
-//Edit
-    valor: string = '';
-    modalTitle: string = 'Nuevo Registro';
-    formfac: FormGroup;
-    display: boolean = false;
-    codigo: string = '';
-    selectedMarc:any;
-//Edit--End
-//eliminar
-confirmacionVisible: boolean = false;
-MarcaAEliminar: Compra | null = null;
-//eliminar--end
+
     statuses: any[] = [];
     products: Product[] = [];
     rowGroupMetadata: any;
     activityValues: number[] = [0, 100];
     isExpanded: boolean = false;
+    formfac: FormGroup;
+    modalTitle: string = 'Nuevo Registro';
+    @ViewChild('panel') panel: MatExpansionPanel;
+
     idFrozen: boolean = false;
     loading: boolean = false;
     @ViewChild('filter') filter!: ElementRef;
-
-    constructor(private service: ServiceComp, private router: Router, private cdr: ChangeDetectorRef,
-    private messageService: MessageService,
-    private fb:FormBuilder, 
-
-    ) {
+    @ViewChild('dt') dataTable!: Table;
+    constructor(private service: ServiceComp, private router: Router, private messageService: MessageService,
+        private fb:FormBuilder,
+    
+    ) { 
         this.formfac = this.fb.group({
             dnicli: ['', Validators.required], // Define el control 'marca' con un valor inicial vacío o según lo necesites
             cliente: [''], // Define el control 'codigo' y cualquier otro control necesario
             
         });
-
     }
+   
+
     ngOnInit(): void {
         this.service.getCompras().subscribe((data: any)=>{
             console.log(data);
-            this.comf = data;
+            this.compra = data;
         },error=>{
           console.log(error);
         });
      }
 
+     togglePanel(action: string): void {
+        if (action === 'new') {
+            this.formfac.reset();
+            this.modalTitle= "Nuevo Registro";
+            this.modalButtonLabel = 'Guardar';
+            
+            if (!this.panel.expanded) {
+                this.panel.open();
+            }
+        } else {
+            this.panel.toggle();  // Solo alternar sin resetear datos
+        }
+        this.modalTitle = 'Nuevo Registro';
 
+    }
+    
+    guardar() {
+        if (this.formfac.invalid) {
+          return;
+        }
+        if (this.modalTitle === 'Nuevo Registro') {
+          this.agregarEnc();
+        } else {
+        //   this.actualizar();
+        }
+      }
+      
      agregarEnc(){
         console.log(this.formfac.value)
         const compra : Compra = {
@@ -75,10 +88,14 @@ MarcaAEliminar: Compra | null = null;
         console.log(this.formfac + 'hola');
         this.service.addModelo(compra).subscribe({
         })
-        this.router.navigate(['app/uikit/comp']);
+        this.ngOnInit();
+
      }
      cancelar(){
         this.router.navigate(['app/uikit/comp']);
 
      }
+    
+      
 }
+

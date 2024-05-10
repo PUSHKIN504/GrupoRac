@@ -43,9 +43,10 @@
               <div class="flex flex-column mb-3" style="color: red;">
                 <small class="ng-dirty ng-invalid" *ngIf="submitted && !usuario">Usuario es requerido.</small>
                 <small class="ng-dirty ng-invalid" *ngIf="submitted && !contrasena">Contraseña es requerida.</small>  
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && errorMessage">{{errorMessage}}</small>  
               </div>
                <div>
-                <button pButton (click)="onLogin()" label="Sign In" class="p-element w-full p-3 text-xl p-button p-component"></button>
+                <button pButton (click)="onLogin()" label="Iniciar Sesión" class="p-element w-full p-3 text-xl p-button p-component"></button>
               </div>
             </div>
           </div>

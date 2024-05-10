@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ComFDemoComponent } from './ComFdemo.component';
+import { CompraDemoComponent } from './compras.component';
 
 @NgModule({
 	imports: [RouterModule.forChild([
-		{ path: '', component: ComFDemoComponent }
+		{ path: '', component: CompraDemoComponent }
 	])],
 	exports: [RouterModule]
 })
