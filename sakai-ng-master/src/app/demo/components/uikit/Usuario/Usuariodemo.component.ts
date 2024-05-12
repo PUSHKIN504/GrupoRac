@@ -27,7 +27,8 @@ export class UsuarioDemoComponent implements OnInit {
     idFrozen: boolean = false;
 
     loading: boolean = false;
-
+    globalFilter: string;
+    @ViewChild('dt') dataTable!: Table; 
     @ViewChild('filter') filter!: ElementRef;
 
     constructor(private service: ServiceUsuario, private router: Router
@@ -43,6 +44,14 @@ export class UsuarioDemoComponent implements OnInit {
           console.log(error);
         });
      }
+
+     formatCurrency(value: number) {
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    onGlobalFilter(table: Table, event: Event) {
+        table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+    }
     
     
       

@@ -12,6 +12,95 @@ namespace Grupo_Rac.DataAccess.Repositorio
 {
     public class DepartamentoRepositorio : IRepositorio<tbDepartamento>
     {
+        public RequestStatus Insert(tbDepartamento item)
+        {
+            const string sql = "[Gral].[sp_Departamentos_insertar]";
+
+
+
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parametro = new DynamicParameters();
+                parametro.Add("@Dep_Id", item.Dep_Id);
+                parametro.Add("@Dep_Descripcion", item.Dep_Descripcion);
+                parametro.Add("@Dep_Creacion", item.Dep_Creacion);
+                parametro.Add("@Dep_Fecha_Creacion", item.Dep_Fecha_Creacion);
+
+
+                var result = db.Execute(sql, parametro, commandType: CommandType.StoredProcedure);
+                string mensaje = (result == 1) ? "Exito" : "Error";
+                return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
+            }
+        }
+
+        public IEnumerable<tbDepartamento> List()
+        {
+            const string sql = "Gral.sp_Departamentos_listar";
+
+            List<tbDepartamento> result = new List<tbDepartamento>();
+
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                result = db.Query<tbDepartamento>(sql, commandType: CommandType.Text).ToList();
+
+                return result;
+            }
+        }
+
+        public tbDepartamento Fill(string id)
+        {
+
+            tbDepartamento result = new tbDepartamento();
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("Dep_Id", id);
+                result = db.QueryFirst<tbDepartamento>(ScriptBaseDatos.Departamentollenar, parameter, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+
+        }
+
+        public RequestStatus Update(tbDepartamento item)
+        {
+            string sql = ScriptBaseDatos.DepartamentoActualizar;
+
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@Dep_Id", item.Dep_Id);
+                parameter.Add("@Dep_Descripcion", item.Dep_Descripcion);
+                parameter.Add("@Dep_Modifica", item.Dep_Modifica);
+                parameter.Add("@Dep_Fecha_Modifica", item.Dep_Fecha_Modifica);
+
+                var result = db.Execute(sql, parameter, commandType: CommandType.StoredProcedure);
+                string mensaje = (result == 1) ? "exito" : "error";
+                return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
+
+            }
+        }
+        public RequestStatus Delete(string Depa_Codigo)
+        {
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("Dep_Id", Depa_Codigo);
+
+                var result = db.QueryFirst(ScriptBaseDatos.DepartamentoEliminar, parameter, commandType: CommandType.StoredProcedure);
+                return new RequestStatus { CodeStatus = result.Resultado, MessageStatus = (result.Resultado == 1) ? "Exito" : "Error" };
+            }
+        }
+
+        IEnumerable<tbDepartamento> IRepositorio<tbDepartamento>.List()
+        {
+            throw new NotImplementedException();
+        }
+
+        public RequestStatus Insertar(tbDepartamento item)
+        {
+            throw new NotImplementedException();
+        }
+
         public RequestStatus Actualizar(tbDepartamento item)
         {
             throw new NotImplementedException();
@@ -25,84 +114,6 @@ namespace Grupo_Rac.DataAccess.Repositorio
         public tbDepartamento find(int? id)
         {
             throw new NotImplementedException();
-        }
-
-        public RequestStatus Insertar(tbDepartamento item)
-        {
-            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
-            {
-                //pendiente los parametros
-                var parameter = new DynamicParameters();
-                parameter.Add("Dept_Id", item.Dep_Id);
-                parameter.Add("Dept_Descripcion", item.Dep_Descripcion);
-                parameter.Add("Dept_Usua_Creacion", 1);
-                parameter.Add("Dept_Fecha_Creacion", DateTime.Now);
-
-                var result = db.Execute(ScriptBaseDatos.Departamentos_Insetar,
-                    parameter,
-                    commandType: CommandType.StoredProcedure
-                    );
-                string mensaje = (result == 1) ? "Exito" : "Eroor";
-                return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
-            }
-        }
-
-        public IEnumerable<tbDepartamento> List()
-        {
-            List<tbDepartamento> result = new List<tbDepartamento>();
-            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
-            {
-                result = db.Query<tbDepartamento>(ScriptBaseDatos.Departamentos_Mostrar, commandType: CommandType.Text).ToList();
-                return result;
-            }
-        }
-        public RequestStatus DeleteS(string id)
-        {
-            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
-            {
-                var parameter = new DynamicParameters();
-                parameter.Add("Dep_Id", id);
-
-                var result = db.Execute(ScriptBaseDatos.Departamentos_Eliminar,
-                    parameter,
-                    commandType: CommandType.StoredProcedure
-                    );
-                string mensaje = (result == 1) ? "Exito" : "Eroor";
-                return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
-            }
-        }
-
-        public IEnumerable<tbDepartamento> findS(string id)
-        {
-            string sql = ScriptBaseDatos.Departamentos_Detalle;
-            List<tbDepartamento> result = new List<tbDepartamento>();
-
-            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
-            {
-                var parameters = new { Dep_Id = id };
-                result = db.Query<tbDepartamento>(sql, parameters, commandType: CommandType.StoredProcedure).ToList();
-
-                return result;
-
-            }
-        }
-        public RequestStatus Update(tbDepartamento item)
-        {
-            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
-            {
-                var parameter = new DynamicParameters();
-                parameter.Add("Dep_Id", item.Dep_Id);
-                parameter.Add("Dep_Descripcion", item.Dep_Descripcion);
-                parameter.Add("Dep_Modifica", 1);
-                parameter.Add("Dep_Fecha_Modifica", DateTime.Now);
-
-                var result = db.Execute(ScriptBaseDatos.Departamentos_Actualizar,
-                    parameter,
-                    commandType: CommandType.StoredProcedure
-                    );
-                string mensaje = (result == 1) ? "Exito" : "Eroor";
-                return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
-            }
         }
     }
 }

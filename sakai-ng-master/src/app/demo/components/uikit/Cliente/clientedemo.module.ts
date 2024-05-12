@@ -14,6 +14,7 @@ import { RippleModule } from 'primeng/ripple';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
 	imports: [
 		CommonModule,
@@ -29,7 +30,8 @@ import { InputTextModule } from 'primeng/inputtext';
 		ConfirmDialogModule,
 		SidebarModule,
 		RippleModule,
-		ConfirmPopupModule
+		ConfirmPopupModule,
+		MatButtonModule
 	],
 	declarations: [ClienteDemoComponent]
 })

@@ -14,6 +14,15 @@ import { RippleModule } from 'primeng/ripple';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
+import { MatButtonModule } from '@angular/material/button';
+import { RatingModule } from 'primeng/rating';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { DropdownModule } from 'primeng/dropdown';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
 	imports: [
 		CommonModule,
@@ -29,7 +38,36 @@ import { InputTextModule } from 'primeng/inputtext';
 		ConfirmDialogModule,
 		SidebarModule,
 		RippleModule,
-		ConfirmPopupModule
+		ConfirmPopupModule,
+		MatButtonModule,
+		FormsModule,
+		ToastModule,
+		DialogModule,
+		FormsModule,
+		TooltipModule,
+		InputTextModule,
+		ButtonModule,
+		OverlayPanelModule,
+		TableModule,
+		ConfirmDialogModule,
+		SidebarModule,
+		RippleModule,
+		ConfirmPopupModule,
+		TableModule,
+		RatingModule,
+		ButtonModule,
+		InputTextModule,
+		ToggleButtonModule,
+		RippleModule,
+		MultiSelectModule,
+		DropdownModule,
+		ProgressBarModule,
+		ToastModule,
+		CommonModule,
+        MatExpansionModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
 	],
 	declarations: [CargoDemoComponent]
 })

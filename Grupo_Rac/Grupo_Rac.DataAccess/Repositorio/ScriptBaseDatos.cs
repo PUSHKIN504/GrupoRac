@@ -9,12 +9,10 @@ namespace Grupo_Rac.DataAccess.Repositorio
     public class ScriptBaseDatos
     {
         #region Departamento
-        public static string Departamentos_Mostrar = "[Gral].[SP_Departamentos_Mostrar]";
-        public static string Departamentos_Insetar = "[Gral].[SP_Departamentos_Insertar]";
-        public static string Departamentos_Detalle = "[Gral].[SP_Departamentos_Llenar]";
-        public static string Departamentos_Eliminar = "[Gral].[SP_Departamentos_Eliminar]";
-        public static string Departamentos_Actualizar = "[Gral].[SP_Departamentos_Actualizar]";
-
+        public static string DepartamentoListar = "Gral.sp_Departamentos_listar";
+        public static string Departamentollenar = "Gral.sp_Departamentos_buscar";
+        public static string DepartamentoActualizar = "Gral.sp_Departamentos_actualizar";
+        public static string DepartamentoEliminar = "Gral.sp_Departamentos_eliminar";
         #endregion
 
         #region Usuario
@@ -30,9 +28,69 @@ namespace Grupo_Rac.DataAccess.Repositorio
         public static string Usuario_Detalles = "[Acce].[SP_Usuarios_Detalles]";
         #endregion
 
-        #region Rol
-        public static string Roles_Mostrar = "[Acce].[SP_Rol_Mostrar]";
+        #region Roles
+
+        public static string RolesListar = "Acce.sp_Roles_listar";
+        public static string Rolesllenar = "Acce.sp_Roles_buscar";
+        public static string RolesActualizar = "Acce.sp_Roles_actualizar";
+        public static string RolesEliminar = "Acce.sp_Roles_eliminar";
 
         #endregion
+
+        #region RolesPorPantalla
+
+        public static string PantallasRolesListar = "[Acce].[sp_PantallasRoles_listar]";
+        public static string PantallasRolesllenar2 = "[Acce].[sp_Roles_buscar]";
+        public static string PantallasRolesllenar = "[Acce].[sp_PantallasPorRol2_buscar]";
+        public static string PantallasRolesActualizar = "[Acce].[sp_PantallasPorRoles_actualizar]";
+        public static string PantallasRolesEliminar = "[Acce].[sp_PantallasPorRoles_eliminar]";
+
+        #endregion
+
+        #region cargo
+        public static string CargosListar = "Gral.sp_Cargos_listar";
+        public static string Cargosllenar = "Gral.sp_Cargos_buscar";
+        public static string CargosActualizar = "Gral.sp_Cargos_actualizar";
+        public static string CargosEliminar = "Gral.sp_Cargos_eliminar";
+        #endregion
+
+        #region EstadoCivil
+        public static string EstadosCivilesListar = "Gral.sp_EstadosCiviles_listar";
+        public static string EstadosCivilesllenar = "Gral.sp_EstadosCiviles_buscar";
+        public static string EstadosCivilesActualizar = "Gral.sp_EstadosCiviles_actualizar";
+        public static string EstadosCivilesEliminar = "Gral.sp_EstadosCiviles_eliminar";
+
+        #endregion
+
+        #region Municipio
+        public static string MunicipioListar = "Gral.sp_Municipios_listar";
+        public static string Municipiollenar = "Gral.sp_Municipios_buscar";
+        public static string MunicipioActualizar = "Gral.sp_Municipios_actualizar";
+        public static string MunicipioEliminar = "Gral.sp_Municipios_eliminar";
+        #endregion
+
+        #region Marca
+        public static string MarcasListar = "Gral.sp_Marcas_listar";
+        public static string Marcasllenar = "Gral.sp_Marcas_buscar";
+        public static string MarcasActualizar = "Gral.sp_Marcas_actualizar";
+        public static string MarcasEliminar = "Gral.sp_Marcas_eliminar";
+        #endregion
+
+        #region Sede
+        public static string SucursalessListar = "Gral.sp_Sucursales_listar";
+        public static string Sucursalesllenar = "Gral.sp_Sucursales_buscar";
+        public static string SucursalesActualizar = "Gral.sp_Sucursales_actualizar";
+        public static string SucursalesEliminar = "Gral.sp_Sucursales_eliminar";
+
+        #endregion
+
+        #region Cliente
+        public static string ClientesListar = "Gral.sp_Clientes_listar";
+        public static string Clientesllenar = "Gral.sp_Clientes_buscar";
+        public static string ClientesActualizar = "Gral.sp_Clientes_actualizar";
+        public static string ClientesEliminar = "Gral.sp_Clientes_eliminar";
+        #endregion
+
+
     }
 }

@@ -10,7 +10,7 @@ namespace Grupo_Rac.Common.Models
     {
         public int Sed_Id { get; set; }
         public string Sed_Descripcion { get; set; }
-        public int? Ciu_Id { get; set; }
+        public string Ciu_Id { get; set; }
         public int? Sed_Creacion { get; set; }
         public int? Sed_Modifica { get; set; }
         public DateTime Sed_Fecha_Creacion { get; set; }

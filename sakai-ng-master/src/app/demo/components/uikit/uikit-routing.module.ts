@@ -17,20 +17,20 @@ import { Breadcrumb } from 'primeng/breadcrumb';
         { path: 'misc', data: { breadcrumb: 'Misc' }, loadChildren: () => import('./misc/miscdemo.module').then(m => m.MiscDemoModule) },
         { path: 'overlay', data: { breadcrumb: 'Overlay' }, loadChildren: () => import('./overlays/overlaysdemo.module').then(m => m.OverlaysDemoModule) },
         //departamento
-        { path: 'departamento', data: { breadcrumb: 'Departamento' }, loadChildren: () => import('./Departamento/Departamentodemo.module').then(m => m.DepartamentoDemoModule) },
+        //{ path: 'departamento', data: { breadcrumb: 'Departamento' }, loadChildren: () => import('./Departamento/Departamentodemo.module').then(m => m.DepartamentoDemoModule) },
         { path: 'panel', data: { breadcrumb: 'Panel' }, loadChildren: () => import('./panels/panelsdemo.module').then(m => m.PanelsDemoModule) },
         { path: 'table', data: { breadcrumb: 'Table' }, loadChildren: () => import('./table/tabledemo.module').then(m => m.TableDemoModule) },
         { path: 'tree', data: { breadcrumb: 'Tree' }, loadChildren: () => import('./tree/treedemo.module').then(m => m.TreeDemoModule) },
         { path: 'menu', data: { breadcrumb: 'Menu' }, loadChildren: () => import('./menus/menus.module').then(m => m.MenusModule) },
 
         //ciudad
-        { path: 'ciudad', data: { breadcrumb: 'Ciudad' }, loadChildren: () => import('./Ciudad/Ciudaddemo.module').then(m => m.CiudadDemoModule) },
+        //{ path: 'ciudad', data: { breadcrumb: 'Ciudad' }, loadChildren: () => import('./Ciudad/Ciudaddemo.module').then(m => m.CiudadDemoModule) },
         //cargo
         { path: 'cargo', data: { breadcrumb: 'Cargo' }, loadChildren: () => import('./Cargo/Cargodemo.module').then(m => m.CargoDemoModule) },
         //cliente
         { path: 'cliente', data: { breadcrumb: 'cliente' }, loadChildren: () => import('./Cliente/clientedemo.module').then(m => m.ClienteDemoModule) },
         //EstadoCivil
-        { path: 'estadocivil', data: { breadcrumb: 'estadocivil' }, loadChildren: () => import('./EstadoCivil/EstadoCivildemo.module').then(m => m.EstadoCivilDemoModule) },
+        //{ path: 'estadocivil', data: { breadcrumb: 'estadocivil' }, loadChildren: () => import('./EstadoCivil/EstadoCivildemo.module').then(m => m.EstadoCivilDemoModule) },
         //marcas
         { path: 'marca', data: { breadcrumb: 'marca' }, loadChildren: () => import('./Marca/Marcademo.module').then(m => m.MarcaDemoModule) },
         //Modelo

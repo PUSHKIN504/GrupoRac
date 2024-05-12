@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
 import {Departamento} from '../Models/DepartamentoViewModel';
-import {Ciudad} from '../Models/CiudadViewModel';
+//import {Ciudad} from '../Models/CiudadViewModel';
 import { HttpClient } from '@angular/common/http';
 import { Cargo } from '../Models/CargoViewModel';
 import { Cliente } from '../Models/ClienteViewModel';
-import { EstadoCivil } from '../Models/EstadoCivilViewModel';
+//import { EstadoCivil } from '../Models/EstadoCivilViewModel';
 import { Marca } from '../Models/MarcaViewModel';
 import { Modelo } from '../Models/ModeloViewModel';
 import { Sede } from '../Models/SedeViewModel';
 import { Vehiculo } from '../Models/VehiculoViewModel';
 import { Usuario } from '../Models/UsuarioViewModel';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Compra } from '../Models/CompViewModel';
+import { Fill, Rol } from '../Models/RolViewModel';
+import { BASE_URL } from './ulrsettings';
 
 
 
-
+//----------------------------------------------------DEPARTAMENTO
 
 @Injectable({
   providedIn: 'root'
@@ -38,23 +40,29 @@ export class ServiceService {
   getDepartamentoById(id: string): Observable<Departamento> {
     return this.http.get<Departamento>(`${this.baseUrl}/Edit/${id}`);
   }
+  //pendiente lo de detalle detalle/id
 
   updateDepartamento(id: string, departamento: Departamento): Observable<Departamento> {
     return this.http.put<Departamento>(`${this.baseUrl}/Edit/${id}`, departamento);
   }
+
+  deleteDepartamento(id: string): Observable<Departamento[]> {
+    return this.http.delete<Departamento[]>(`${this.baseUrl}/Delete/${id}`);
+  }
 }
 
 
+//-------------------------------------------MUNICIPIO
 
-
-@Injectable({
+/*@Injectable({
   providedIn: 'root'
 })
 export class ServiceCiu {
 
   constructor(private http:HttpClient) { }
 
-
+  baseURL = 'https://localhost:44320/API/Municipio'; // Base URL
+  
   urlC = 'https://localhost:44320/API/Departamento/ListCiu'
 
   getCiudad(){
@@ -65,7 +73,37 @@ export class ServiceCiu {
     return this.http.get('https://localhost:44320/API/Departamento/generatepdf?InvoiceNo='+invoiceno,{observe:'response',responseType:'blob'});
     
   }
-}
+
+  getMunicipios(): Observable<Ciudad[]> {
+    return this.http.get<Ciudad[]>(`${this.baseURL}/List`);
+  }
+
+  // Método para insertar un nuevo municipio
+  insertMunicipio(municipio: Ciudad): Observable<Ciudad> {
+    return this.http.post<Ciudad>(`${this.baseURL}/Insert`, municipio);
+  }
+
+  // Método para obtener detalles de un municipio específico
+  getMunicipioById(id: string): Observable<Ciudad> {
+    return this.http.get<Ciudad>(`${this.baseURL}/Details/${id}`);
+  }
+
+  // Método para obtener datos de un municipio para edición
+  getMunicipioForEdit(id: string): Observable<Ciudad> {
+    return this.http.get<Ciudad>(`${this.baseURL}/Edit/${id}`);
+    
+  }
+
+  // Método para actualizar un municipio
+  updateMunicipio(id: string, municipio: Ciudad): Observable<Ciudad> {
+    return this.http.put<Ciudad>(`${this.baseURL}/Edit/${id}`, municipio);
+  }
+
+  // Método para eliminar un municipio
+  
+}*/
+
+//---------------------------------------------Cargo
 @Injectable({
   providedIn: 'root'
 })
@@ -74,13 +112,47 @@ export class ServiceCargo {
 
   constructor(private http:HttpClient) { }
 
-
+  baseURL = 'https://localhost:44320/API/Cargo';
   urlC = 'https://localhost:44320/API/Departamento/ListCargo'
 
   getCargo(){
     return this.http.get<Cargo[]>(this.urlC)
   }
+
+   // Método para obtener todos los cargos
+   getCargos(): Observable<Cargo[]> {
+    return this.http.get<Cargo[]>(`${this.baseURL}/List`);
+  }
+
+  // Método para insertar un nuevo cargo
+  insertCargo(cargo: Cargo): Observable<Cargo> {
+    return this.http.post<Cargo>(`${this.baseURL}/Insert`, cargo);
+  }
+
+  // Método para obtener detalles de un cargo específico
+  getCargoById(id: string): Observable<Cargo> {
+    return this.http.get<Cargo>(`${this.baseURL}/Details/${id}`);
+  }
+
+  // Método para obtener cargo para edición
+  getCargoForEdit(id: string): Observable<Cargo> {
+    return this.http.get<Cargo>(`${this.baseURL}/Edit/${id}`);
+  }
+
+
+
+  // Método para actualizar un cargo
+  updateCargo(id: string, cargo: Cargo): Observable<Cargo> {
+    return this.http.put<Cargo>(`${this.baseURL}/Edit/${id}`, cargo);
+  }
+
+  // Método para eliminar un cargo
+  deleteCargo(id: string): Observable<any> {
+    return this.http.delete(`${this.baseURL}/Delete/${id}`);
+  }
 }
+
+//---------------------------------------------Cliente
 @Injectable({
   providedIn: 'root'
 })
@@ -97,7 +169,9 @@ export class ServiceCliente {
   }
 }
 
-@Injectable({
+//---------------------------------------------Estado civil
+
+/*@Injectable({
   providedIn: 'root'
 })
 
@@ -105,13 +179,46 @@ export class ServiceEstadoCivil {
 
   constructor(private http:HttpClient) { }
 
-
+  baseURL = 'https://localhost:44320/API/EstadoCivil'
   urlC = 'https://localhost:44320/API/Departamento/ListEstC'
 
   getEstadoCivil(){
     return this.http.get<EstadoCivil[]>(this.urlC)
   }
+
+  // Método para obtener todos los estados civiles
+  getEstadosCiviles(): Observable<EstadoCivil[]> {
+    return this.http.get<EstadoCivil[]>(`${this.baseURL}/List`);
+  }
+
+  // Método para insertar un nuevo estado civil
+  insertEstadoCivil(estadoCivil: EstadoCivil): Observable<EstadoCivil> {
+    return this.http.post<EstadoCivil>(`${this.baseURL}/Insert`, estadoCivil);
+  }
+
+  // Método para obtener detalles de un estado civil específico
+  getEstadoCivilById(id: string): Observable<EstadoCivil> {
+    return this.http.get<EstadoCivil>(`${this.baseURL}/Details/${id}`);
+  }
+
+  // Método para obtener estado civil para edición
+  getEstadoCivilForEdit(id: string): Observable<EstadoCivil> {
+    return this.http.get<EstadoCivil>(`${this.baseURL}/Edit/${id}`);
+  }
+
+  // Método para actualizar un estado civil
+  updateEstadoCivil(id: string, estadoCivil: EstadoCivil): Observable<EstadoCivil> {
+    return this.http.put<EstadoCivil>(`${this.baseURL}/Edit/${id}`, estadoCivil);
+  }
+
+  // Método para eliminar un estado civil
+  deleteEstadoCivil(id: string): Observable<any> {
+    return this.http.delete(`${this.baseURL}/Delete/${id}`);
+  }
 }
+*/
+
+//------------------------------------------------Marca
 @Injectable({
   providedIn: 'root'
 })
@@ -172,6 +279,8 @@ export class ServiceVeh {
     return this.http.get<Vehiculo[]>(this.urlC)
   }
 }
+
+//--------------------------------------pendiente
 @Injectable({
   providedIn: 'root'
 })
@@ -208,4 +317,6 @@ export class ServiceComp {
     return this.http.get<Compra[]>(this.urlC)
   }
 }
+
+
 

@@ -15,6 +15,12 @@ namespace Grupo_Rac.API.Extensiones
             CreateMap<DepartamentoViewModel, tbDepartamento>().ReverseMap();
             CreateMap<UsuarioViewModel, tbUsuarios>().ReverseMap();
             CreateMap<RolViewModel, tbRoles>().ReverseMap();
+            CreateMap<CargoViewModel, tbCargos>().ReverseMap();
+            CreateMap<EstadoCivilViewModel, tbEstadosCiviles>().ReverseMap();
+            CreateMap<CiudadViewModel, tbCiudades>().ReverseMap();
+            CreateMap<RolViewModel, tbRoles>().ReverseMap();
+            CreateMap<PantallaRolViewModel, tbPantallas_PorRoles>().ReverseMap();
+            CreateMap<MarcaViewModel, tbMarcas>().ReverseMap();
         }
     }
 }

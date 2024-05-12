@@ -14,7 +14,7 @@ import { RippleModule } from 'primeng/ripple';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
-import { ServiceCiu } from 'src/app/Service/service.service';
+//import { ServiceCiu } from 'src/app/Service/service.service';
 // import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
  // Importa el servicio ServiceCiu
 
