@@ -10,19 +10,21 @@ namespace Grupo_Rac.Entities.Entity
     {
         public tbEstadosCiviles()
         {
-            tbUsuarios = new HashSet<tbUsuarios>();
+            tbClientes = new HashSet<tbClientes>();
+            tbEmpleados = new HashSet<tbEmpleados>();
         }
 
         public int Est_ID { get; set; }
         public string Est_Descripcion { get; set; }
-        public int Est_UsuCre { get; set; }
+        public int? Est_UsuCre { get; set; }
         public int? Est_UsuModi { get; set; }
-        public DateTime Est_Fecha_Creacion { get; set; }
+        public DateTime? Est_Fecha_Creacion { get; set; }
         public DateTime? Est_Fecha_Modifica { get; set; }
-        public bool Est_Estado { get; set; }
+        public bool? Est_Estado { get; set; }
 
         public virtual tbUsuarios Est_UsuCreNavigation { get; set; }
         public virtual tbUsuarios Est_UsuModiNavigation { get; set; }
-        public virtual ICollection<tbUsuarios> tbUsuarios { get; set; }
+        public virtual ICollection<tbClientes> tbClientes { get; set; }
+        public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
     }
 }

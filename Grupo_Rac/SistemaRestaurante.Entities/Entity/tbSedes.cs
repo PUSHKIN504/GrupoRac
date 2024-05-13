@@ -10,7 +10,6 @@ namespace Grupo_Rac.Entities.Entity
     {
         public tbSedes()
         {
-            tbUsuarios = new HashSet<tbUsuarios>();
             tbVehiculos = new HashSet<tbVehiculos>();
             tbVentasEnc = new HashSet<tbVentasEnc>();
         }
@@ -27,7 +26,6 @@ namespace Grupo_Rac.Entities.Entity
         public virtual tbCiudades Ciu { get; set; }
         public virtual tbUsuarios Sed_CreacionNavigation { get; set; }
         public virtual tbUsuarios Sed_ModificaNavigation { get; set; }
-        public virtual ICollection<tbUsuarios> tbUsuarios { get; set; }
         public virtual ICollection<tbVehiculos> tbVehiculos { get; set; }
         public virtual ICollection<tbVentasEnc> tbVentasEnc { get; set; }
     }

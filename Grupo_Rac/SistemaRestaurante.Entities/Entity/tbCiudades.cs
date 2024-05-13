@@ -19,7 +19,7 @@ namespace Grupo_Rac.Entities.Entity
         public string Ciu_Descripcion { get; set; }
         public int? Ciu_Creacion { get; set; }
         public int? Ciu_Modifica { get; set; }
-        public DateTime Ciu_Fecha_Creacion { get; set; }
+        public DateTime? Ciu_Fecha_Creacion { get; set; }
         public DateTime? Ciu_Fecha_Modifica { get; set; }
         public bool? Ciu_Estado { get; set; }
 

@@ -19,7 +19,6 @@ namespace Grupo_Rac.Entities.Entity
         public int? PaR_Modifica { get; set; }
         public DateTime? PaR_FechaModificacion { get; set; }
         public bool? PaR_Estado { get; set; }
-
         [NotMapped]
         public string UsuarioCreacion { get; set; }
 
@@ -33,7 +32,5 @@ namespace Grupo_Rac.Entities.Entity
         public virtual tbUsuarios PaR_ModificaNavigation { get; set; }
         public virtual tbPantallas Ptl { get; set; }
         public virtual tbRoles Rol { get; set; }
-
-        //
     }
 }

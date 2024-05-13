@@ -26,6 +26,7 @@ namespace Grupo_Rac.Entities.Entity
         public string FechaModificacion { get; set; }
         [NotMapped]
         public string FechaCreacion { get; set; }
+
         public virtual tbUsuarios Rol_CreacionNavigation { get; set; }
         public virtual tbUsuarios Rol_ModificaNavigation { get; set; }
         public virtual ICollection<tbPantallas_PorRoles> tbPantallas_PorRoles { get; set; }
@@ -42,6 +43,5 @@ namespace Grupo_Rac.Entities.Entity
 
         [NotMapped]
         public List<int> PantallasID { get; set; }
-
     }
 }

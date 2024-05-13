@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Grupo_Rac.Entities.Entity;
+
 #nullable disable
 
 namespace Grupo_Rac.DataAccess.Context
@@ -23,6 +24,7 @@ namespace Grupo_Rac.DataAccess.Context
         public virtual DbSet<tbClientes> tbClientes { get; set; }
         public virtual DbSet<tbCompras> tbCompras { get; set; }
         public virtual DbSet<tbDepartamento> tbDepartamento { get; set; }
+        public virtual DbSet<tbEmpleados> tbEmpleados { get; set; }
         public virtual DbSet<tbEstadosCiviles> tbEstadosCiviles { get; set; }
         public virtual DbSet<tbMarcas> tbMarcas { get; set; }
         public virtual DbSet<tbModelos> tbModelos { get; set; }
@@ -57,7 +59,6 @@ namespace Grupo_Rac.DataAccess.Context
                 entity.HasOne(d => d.Crg_CreacionNavigation)
                     .WithMany(p => p.tbCargosCrg_CreacionNavigation)
                     .HasForeignKey(d => d.Crg_Creacion)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Crg_Creacion");
 
                 entity.HasOne(d => d.Crg_ModificaNavigation)
@@ -115,6 +116,10 @@ namespace Grupo_Rac.DataAccess.Context
                     .HasMaxLength(4)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Cli_Apellido)
+                    .HasMaxLength(60)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Cli_DNI)
                     .HasMaxLength(13)
                     .IsUnicode(false);
@@ -123,6 +128,8 @@ namespace Grupo_Rac.DataAccess.Context
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Cli_FechaNac).HasColumnType("datetime");
+
                 entity.Property(e => e.Cli_Fecha_Creacion).HasColumnType("date");
 
                 entity.Property(e => e.Cli_Fecha_Modifica).HasColumnType("date");
@@ -130,6 +137,11 @@ namespace Grupo_Rac.DataAccess.Context
                 entity.Property(e => e.Cli_Nombre)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Cli_Sexo)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
 
                 entity.HasOne(d => d.Ciu)
                     .WithMany(p => p.tbClientes)
@@ -144,6 +156,11 @@ namespace Grupo_Rac.DataAccess.Context
                     .WithMany(p => p.tbClientesCli_ModificaNavigation)
                     .HasForeignKey(d => d.Cli_Modifica)
                     .HasConstraintName("FK_Com_Modifica");
+
+                entity.HasOne(d => d.Est)
+                    .WithMany(p => p.tbClientes)
+                    .HasForeignKey(d => d.Est_ID)
+                    .HasConstraintName("FK_EstadosCiviles");
             });
 
             modelBuilder.Entity<tbCompras>(entity =>
@@ -163,7 +180,8 @@ namespace Grupo_Rac.DataAccess.Context
 
                 entity.HasOne(d => d.Cli)
                     .WithMany(p => p.tbCompras)
-                    .HasForeignKey(d => d.Cli_Id);
+                    .HasForeignKey(d => d.Cli_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
 
                 entity.HasOne(d => d.Com_CreacionNavigation)
                     .WithMany(p => p.tbComprasCom_CreacionNavigation)
@@ -206,6 +224,66 @@ namespace Grupo_Rac.DataAccess.Context
                     .HasConstraintName("FK_Dep_Modifica");
             });
 
+            modelBuilder.Entity<tbEmpleados>(entity =>
+            {
+                entity.HasKey(e => e.Empl_Id);
+
+                entity.ToTable("tbEmpleados", "Gral");
+
+                entity.Property(e => e.Empl_Apellido)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Empl_DNI)
+                    .HasMaxLength(13)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Empl_FechaCreacion).HasColumnType("datetime");
+
+                entity.Property(e => e.Empl_FechaModificacion).HasColumnType("datetime");
+
+                entity.Property(e => e.Empl_FechaNac).HasColumnType("datetime");
+
+                entity.Property(e => e.Empl_Nombre)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Empl_Sexo)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.Muni_Codigo)
+                    .IsRequired()
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.Carg)
+                    .WithMany(p => p.tbEmpleados)
+                    .HasForeignKey(d => d.Carg_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbEmpleados_tbCargos");
+
+                entity.HasOne(d => d.Empl_UsuarioCreacionNavigation)
+                    .WithMany(p => p.tbEmpleadosEmpl_UsuarioCreacionNavigation)
+                    .HasForeignKey(d => d.Empl_UsuarioCreacion)
+                    .HasConstraintName("FK_tbEmpleados_tbUsuarios_Creacion");
+
+                entity.HasOne(d => d.Empl_UsuarioModificacionNavigation)
+                    .WithMany(p => p.tbEmpleadosEmpl_UsuarioModificacionNavigation)
+                    .HasForeignKey(d => d.Empl_UsuarioModificacion)
+                    .HasConstraintName("FK_tbEmpleados_tbUsuarios_Modificacion");
+
+                entity.HasOne(d => d.Est)
+                    .WithMany(p => p.tbEmpleados)
+                    .HasForeignKey(d => d.Est_ID)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tbEmpleados_tbEstadosCiviles");
+            });
+
             modelBuilder.Entity<tbEstadosCiviles>(entity =>
             {
                 entity.HasKey(e => e.Est_ID)
@@ -214,7 +292,6 @@ namespace Grupo_Rac.DataAccess.Context
                 entity.ToTable("tbEstadosCiviles", "Gral");
 
                 entity.Property(e => e.Est_Descripcion)
-                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -225,7 +302,6 @@ namespace Grupo_Rac.DataAccess.Context
                 entity.HasOne(d => d.Est_UsuCreNavigation)
                     .WithMany(p => p.tbEstadosCivilesEst_UsuCreNavigation)
                     .HasForeignKey(d => d.Est_UsuCre)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Est_UsuCre");
 
                 entity.HasOne(d => d.Est_UsuModiNavigation)
@@ -421,10 +497,6 @@ namespace Grupo_Rac.DataAccess.Context
 
                 entity.ToTable("tbUsuarios", "Acce");
 
-                entity.Property(e => e.Usu_Apellido)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Usu_Codigo)
                     .HasMaxLength(60)
                     .IsUnicode(false);
@@ -439,43 +511,19 @@ namespace Grupo_Rac.DataAccess.Context
 
                 entity.Property(e => e.Usu_FechaModifica).HasColumnType("date");
 
-                entity.Property(e => e.Usu_FechaNacimiento).HasColumnType("datetime");
-
-                entity.Property(e => e.Usu_Nombre)
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Usu_Sexo)
-                    .HasMaxLength(1)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
-
-                entity.Property(e => e.Usu_Telefono)
-                    .HasMaxLength(8)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Usu_Usua)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.Crg)
+                entity.HasOne(d => d.Empl)
                     .WithMany(p => p.tbUsuarios)
-                    .HasForeignKey(d => d.Crg_Id)
-                    .HasConstraintName("FK_tbUsuarios_tbCargos_Crg_ID");
-
-                entity.HasOne(d => d.Est)
-                    .WithMany(p => p.tbUsuarios)
-                    .HasForeignKey(d => d.Est_Id)
-                    .HasConstraintName("FK_tbUsuarios_tbEstadosCiviles_Est_ID");
+                    .HasForeignKey(d => d.Empl_Id)
+                    .HasConstraintName("FK_Usuario_Empleado");
 
                 entity.HasOne(d => d.Rol)
                     .WithMany(p => p.tbUsuarios)
                     .HasForeignKey(d => d.Rol_Id)
                     .HasConstraintName("FK_tbUsuarios_tbrRoles_Rol_Id");
-
-                entity.HasOne(d => d.Sed)
-                    .WithMany(p => p.tbUsuarios)
-                    .HasForeignKey(d => d.Sed_Id);
 
                 entity.HasOne(d => d.Usu_UsuCreNavigation)
                     .WithMany(p => p.InverseUsu_UsuCreNavigation)
