@@ -230,6 +230,11 @@ namespace Grupo_Rac.DataAccess.Context
 
                 entity.ToTable("tbEmpleados", "Gral");
 
+                entity.Property(e => e.Ciu_Id)
+                    .IsRequired()
+                    .HasMaxLength(4)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Empl_Apellido)
                     .IsRequired()
                     .HasMaxLength(30)
@@ -256,16 +261,17 @@ namespace Grupo_Rac.DataAccess.Context
                     .IsUnicode(false)
                     .IsFixedLength(true);
 
-                entity.Property(e => e.Muni_Codigo)
-                    .IsRequired()
-                    .HasMaxLength(4)
-                    .IsUnicode(false);
-
                 entity.HasOne(d => d.Carg)
                     .WithMany(p => p.tbEmpleados)
                     .HasForeignKey(d => d.Carg_Id)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tbEmpleados_tbCargos");
+
+                entity.HasOne(d => d.Ciu)
+                    .WithMany(p => p.tbEmpleados)
+                    .HasForeignKey(d => d.Ciu_Id)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_tbEstadosCiviles_id");
 
                 entity.HasOne(d => d.Empl_UsuarioCreacionNavigation)
                     .WithMany(p => p.tbEmpleadosEmpl_UsuarioCreacionNavigation)
@@ -524,6 +530,11 @@ namespace Grupo_Rac.DataAccess.Context
                     .WithMany(p => p.tbUsuarios)
                     .HasForeignKey(d => d.Rol_Id)
                     .HasConstraintName("FK_tbUsuarios_tbrRoles_Rol_Id");
+
+                entity.HasOne(d => d.Sed)
+                    .WithMany(p => p.tbUsuarios)
+                    .HasForeignKey(d => d.Sed_Id)
+                    .HasConstraintName("fk_tbSedes_id_Sed_Id");
 
                 entity.HasOne(d => d.Usu_UsuCreNavigation)
                     .WithMany(p => p.InverseUsu_UsuCreNavigation)

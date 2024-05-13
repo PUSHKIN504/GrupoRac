@@ -11,6 +11,7 @@ namespace Grupo_Rac.Entities.Entity
         public tbCiudades()
         {
             tbClientes = new HashSet<tbClientes>();
+            tbEmpleados = new HashSet<tbEmpleados>();
             tbSedes = new HashSet<tbSedes>();
         }
 
@@ -27,6 +28,7 @@ namespace Grupo_Rac.Entities.Entity
         public virtual tbUsuarios Ciu_ModificaNavigation { get; set; }
         public virtual tbDepartamento Dep { get; set; }
         public virtual ICollection<tbClientes> tbClientes { get; set; }
+        public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
         public virtual ICollection<tbSedes> tbSedes { get; set; }
     }
 }

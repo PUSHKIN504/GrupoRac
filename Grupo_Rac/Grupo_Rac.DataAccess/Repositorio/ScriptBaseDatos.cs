@@ -91,6 +91,13 @@ namespace Grupo_Rac.DataAccess.Repositorio
         public static string ClientesEliminar = "Gral.sp_Clientes_eliminar";
         #endregion
 
+        #region Empleado
+        public static string EmpleadosListar = "Gral.sp_Empleados_listar";
+        public static string Empleadosllenar = "Gral.sp_Empleados_buscar";
+        public static string EmpleadosActualizar = "Gral.sp_Empleados_actualizar";
+        public static string EmpleadosEliminar = "Gral.sp_Empleados_eliminar";
+        #endregion
+
 
     }
 }

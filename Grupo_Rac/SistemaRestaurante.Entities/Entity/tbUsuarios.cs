@@ -60,6 +60,7 @@ namespace Grupo_Rac.Entities.Entity
         public string Usu_Correo { get; set; }
         public int? Rol_Id { get; set; }
         public int? Empl_Id { get; set; }
+        public int? Sed_Id { get; set; }
         public int? Usu_UsuCre { get; set; }
         public int? Usu_UsuModi { get; set; }
         public DateTime? Usu_FechaCreacion { get; set; }
@@ -68,6 +69,7 @@ namespace Grupo_Rac.Entities.Entity
 
         public virtual tbEmpleados Empl { get; set; }
         public virtual tbRoles Rol { get; set; }
+        public virtual tbSedes Sed { get; set; }
         public virtual tbUsuarios Usu_UsuCreNavigation { get; set; }
         public virtual tbUsuarios Usu_UsuModiNavigation { get; set; }
         public virtual ICollection<tbUsuarios> InverseUsu_UsuCreNavigation { get; set; }

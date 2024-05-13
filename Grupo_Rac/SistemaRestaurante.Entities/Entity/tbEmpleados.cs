@@ -18,7 +18,7 @@ namespace Grupo_Rac.Entities.Entity
         public string Empl_Apellido { get; set; }
         public string Empl_Sexo { get; set; }
         public DateTime Empl_FechaNac { get; set; }
-        public string Muni_Codigo { get; set; }
+        public string Ciu_Id { get; set; }
         public int Est_ID { get; set; }
         public int Carg_Id { get; set; }
         public int? Empl_UsuarioCreacion { get; set; }
@@ -29,6 +29,7 @@ namespace Grupo_Rac.Entities.Entity
         public string Empl_DNI { get; set; }
 
         public virtual tbCargos Carg { get; set; }
+        public virtual tbCiudades Ciu { get; set; }
         public virtual tbUsuarios Empl_UsuarioCreacionNavigation { get; set; }
         public virtual tbUsuarios Empl_UsuarioModificacionNavigation { get; set; }
         public virtual tbEstadosCiviles Est { get; set; }

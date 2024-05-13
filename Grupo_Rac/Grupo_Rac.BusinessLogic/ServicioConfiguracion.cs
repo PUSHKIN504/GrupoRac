@@ -28,6 +28,7 @@ namespace Grupo_Rac.BusinessLogic
             service.AddScoped<CargoRepository>();
             service.AddScoped<VehiculoRepository>();
             service.AddScoped<pantallaRolesRepository>();
+            service.AddScoped<EmpleadoRepository>();
             GrupoRacContext.BuildConnectionString(conn);
 
         }

@@ -7,7 +7,7 @@ import { Usuario, UsuarioEnviar,Fill } from 'src/app/Models/UsuarioViewModel';
 import { ServiceService } from 'src/app/Service/Usuario.service';
 import { FormGroup, FormControl,  Validators  } from '@angular/forms';
 import { MensajeViewModel } from 'src/app/Models/MensajeViewModel';
-//import { EmpleadoEnviar, dropEmpleado } from 'src/app/Models/EmpleadoViewModel';
+import { EmpleadoEnviar, dropEmpleado } from 'src/app/Models/EmpleadoViewModel';
 import { dropRol } from 'src/app/Models/RolViewModel';
 @Component({
   templateUrl: './Usuariodemo.component.html',
@@ -46,9 +46,7 @@ export class UsuarioDemoComponent {
   FechaCreacion: String = "";
   FechaModificacion: String = "";
   ID: String = "";
-  constructor(private service: ServiceService, private router: Router,     private messageService: MessageService
-  
-  ) { }
+  constructor(private service: ServiceService, private router: Router, private messageService: MessageService) { }
 
 
   ngOnInit(): void {
@@ -60,9 +58,10 @@ export class UsuarioDemoComponent {
       Role_Id: new FormControl('0', [Validators.required]),
     });
 
-    /*this.service.getDropDownEmpleado().subscribe((data: dropEmpleado[]) => {
+    this.service.getDropDownEmpleado().subscribe((data: dropEmpleado[]) => {
       this.empleados = data;
-    });*/
+    });
+    
     this.service.getDropDownRol().subscribe((data: dropRol[]) => {
       this.rol = data;
     });
@@ -92,7 +91,7 @@ detalles(codigo){
          this.Detalle_Usuario = data.usu_Usua,
          this.Detalle_Administrador = data.admin,
          this.Detalle_Rol = data.rol_Descripcion,
-         //this.Detalle_Empleado = data.empl_Nombre,
+         this.Detalle_Empleado = data.empl_Nombre,
          this.UsuarioCreacion = data.usuarioCreacion,
          this.UsuarioModificacion = data.usuarioModificacion
          this.FechaCreacion = data.fechaCreacion,
@@ -202,7 +201,7 @@ Fill(codigo) {
             Usua_Usuario: new FormControl(data.usu_Usua,Validators.required),
             Usua_Contraseña: new FormControl("x", Validators.required),
             Usua_Administrador: new FormControl(data.usu_Admin, [Validators.required]),
-            //Empl_Id: new FormControl(data.empl_Id, [Validators.required]),
+            Empl_Id: new FormControl(data.empl_Id, [Validators.required]),
             Role_Id: new FormControl(data.rol_Id, [Validators.required]),
           });
             this.ID = data.usu_ID;

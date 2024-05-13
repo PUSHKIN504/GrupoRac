@@ -73,7 +73,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Empleado',
                                 icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/app/uikit/charts']
+                                routerLink: ['/app/generales/Empleado']
                             },
                             {
                                 label: 'Estados Civiles',

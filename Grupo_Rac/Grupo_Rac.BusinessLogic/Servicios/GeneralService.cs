@@ -22,9 +22,10 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         private readonly UsuarioRepository _usuarioRepository;
         private readonly VehiculoRepository _vehiculoRepository;
         private readonly CargoRepository _cargoRepository;
+        private readonly EmpleadoRepository _empleadoRepository;
         public GeneralService(DepartamentoRepositorio departamentoRepositorio, CiudadReposity ciudadReposity, ClienteRepository clienteRepository, 
             EstadoCivilRepository estadoCivilRepository, MarcaRepository marcaRepository, ModeloRepository modeloRepository, SedeRepository sedeRepository,
-            UsuarioRepository usuarioRepository, VehiculoRepository vehiculoRepository, CargoRepository cargoRepository)
+            UsuarioRepository usuarioRepository, VehiculoRepository vehiculoRepository, CargoRepository cargoRepository, EmpleadoRepository empleadoRepository)
         {
             _departamentoRepositorio = departamentoRepositorio;
             _ciudadReposity = ciudadReposity;
@@ -36,6 +37,7 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             _usuarioRepository = usuarioRepository;
             _vehiculoRepository = vehiculoRepository;
             _cargoRepository = cargoRepository;
+            _empleadoRepository = empleadoRepository;
         }
 
         #region Departamento
@@ -785,6 +787,111 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         }
 
 
+        #endregion
+
+        #region Empleados
+        public ServiceResult ListadoEmpleado()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _empleadoRepository.List();
+                return result.Ok(list);
+            }
+
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+
+
+
+
+
+        public ServiceResult EditarEmpleado(tbEmpleados item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _empleadoRepository.Update(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error("Y existe un registro con ese nombre");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+        public ServiceResult EliminarEmpleado(string Empl_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _empleadoRepository.Delete(Empl_Id);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok($"La accion ha sido existosa", list);
+                }
+                else
+                {
+                    return result.Error("No se pudo realizar la accion");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+
+
+        public ServiceResult InsertarEmpleado(tbEmpleados item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _empleadoRepository.Insert(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+
+
+        public ServiceResult obterEmpleado(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _empleadoRepository.Fill(id);
+
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
         #endregion
 
     }

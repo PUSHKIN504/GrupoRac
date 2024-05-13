@@ -31,7 +31,7 @@ export class UsuarioEnviar {
     Usu_Usua: string;
     Usu_Contra: string;  
     Usu_Admin: string;  
-    //Empl_Id: string;  
+    Empl_Id: string;  
     Rol_Id: string;  
 
 }
@@ -42,8 +42,8 @@ export class Fill {
     admin?:String;
     usu_Admin?:String;
     rol_Descripcion:String;
-    //empl_Nombre:String;
-    //empl_Id:String;
+    empl_Nombre:String;
+    empl_Id:String;
     rol_Id:String;
     usuarioCreacion: string;
     usuarioModificacion: string;

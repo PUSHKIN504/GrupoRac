@@ -43,5 +43,6 @@ namespace Grupo_Rac.Entities.Entity
 
         [NotMapped]
         public List<int> PantallasID { get; set; }
+
     }
 }
