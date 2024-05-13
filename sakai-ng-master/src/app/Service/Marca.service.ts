@@ -23,6 +23,12 @@ export class ServiceService {
   getMarca(){
     return this.http.get<Marca[]>(this.url)
   }
+  getMarcaPorUsuarioYSede(usuario: string): Observable<Marca[]> {
+    return this.http.get<Marca[]>(`${BASE_URL}API/Marca/MarcasPorUsuario/${encodeURIComponent(usuario)}`);
+  }
+  
+  
+  
 
   
   EnviarMarca(formData: any): Observable<any> {
@@ -42,4 +48,6 @@ export class ServiceService {
   ActualizarMarca(formData){
     return this.http.put(BASE_URL + 'API/Marca/Edit/', formData)
   }
+
+
 }

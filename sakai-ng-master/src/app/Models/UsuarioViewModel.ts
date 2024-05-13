@@ -19,3 +19,10 @@ export class Usuario{
     Sed_Descripcion?:String;
     
 }
+
+export interface UsuarioD {
+    usuarioId: string;
+    nombre: string;
+    // otros campos relevantes
+}
+

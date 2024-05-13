@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Grupo_Rac.Common.Models;
 using Grupo_Rac.Entities.Entity;
 using Microsoft.Data.SqlClient;
 using System;
@@ -87,6 +88,20 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 return new RequestStatus { CodeStatus = result.Resultado, MessageStatus = (result.Resultado == 1) ? "Exito" : "Error" };
             }
         }
+
+        public IEnumerable<MarcaVehiculoDto> GetMarcasPorUsuarioYSede(string usuario)
+        {
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameter = new DynamicParameters();
+                parameter.Add("@Usuario", usuario); // Cambiado a @Usuario
+
+                var result = db.Query<MarcaVehiculoDto>("[Vent].[sp_ObtenerVentasPorMarcaUsuarioSucursal_dashboard]", parameter, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+
+
 
         public RequestStatus Insertar(tbMarcas item)
         {

@@ -17,12 +17,13 @@ export class LoginComponent {
   onLogin() {
     this.userService.login(this.usuario, this.contrase).subscribe({
       next: (data) => {
-        if (data.length > 0) {
+        if (data && data.length > 0) {
           console.log('Login successful', data);
+          // Asumiendo que 'data[0]' es el objeto de usuario y que 'Usu_Usua' es el nombre de usuario
+          sessionStorage.setItem('usuario', JSON.stringify(data[0])); 
+          console.log('Usuario guardado:', data[0]);  // Verificar qué se guarda
           this.router.navigate(['/app/dashboard']);
-          // Redirecciona al usuario o realiza acciones post-login
         } else {
-          // Maneja la respuesta vacía como credenciales incorrectas
           this.errorMessage = 'Usuario o contraseña incorrectos';
           console.error('Login failed: Incorrect credentials');
         }
@@ -33,4 +34,5 @@ export class LoginComponent {
       }
     });
   }
+  
 }

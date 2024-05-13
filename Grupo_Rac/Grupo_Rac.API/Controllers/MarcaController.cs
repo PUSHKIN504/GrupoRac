@@ -95,5 +95,17 @@ namespace Grupo_Rac.API.Controllers
             var list = _generalServices.EliminarMarcas(id);
             return Ok(new { success = true, message = list.Message });
         }
+
+        [HttpGet("MarcasPorUsuario/{usuario}")]
+        public IActionResult GetMarcasPorUsuario(string usuario)
+        {
+            var result = _generalServices.ObtenerMarcasPorUsuarioYSede(usuario);
+            if (result != null)
+                return Ok(result);
+            else
+                return NotFound("No se encontraron datos.");
+        }
+
+
     }
 }

@@ -4,7 +4,7 @@ import { Product } from '../../api/product';
 import { ProductService } from '../../service/product.service';
 import { Subscription, debounceTime } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
-
+import { ServiceService } from 'src/app/Service/Marca.service';
 @Component({
     templateUrl: './dashboard.component.html',
 })
@@ -17,10 +17,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     chartData: any;
 
     chartOptions: any;
+    marcas: any[] = [];
+    usuarioId: number = 1; // Este ID debería obtenerse de la autenticación
 
     subscription!: Subscription;
 
-    constructor(private productService: ProductService, public layoutService: LayoutService) {
+    constructor(private productService: ProductService, public layoutService: LayoutService, private serviceService: ServiceService) {
         this.subscription = this.layoutService.configUpdate$
         .pipe(debounceTime(25))
         .subscribe((config) => {
@@ -29,38 +31,52 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.initChart();
-        this.productService.getProductsSmall().then(data => this.products = data);
+        this.cargarMarcasPorUsuario();
+      }
+      
+      cargarMarcasPorUsuario() {
+        const usuarioJson = sessionStorage.getItem('usuario');
+        console.log('Usuario desde sessionStorage:', usuarioJson);  // Verificar qué se recupera
+        if (usuarioJson) {
+          const usuario = JSON.parse(usuarioJson);
+          console.log('Nombre de usuario utilizado para la API:', usuario.usu_Usua);  // Verificar el nombre de usuario utilizado
+          this.serviceService.getMarcaPorUsuarioYSede(usuario.usu_Usua).subscribe({
+            next: (data) => {
+              console.log('Datos recibidos:', data);
+              this.marcas = data;
+              this.initChart();
+              if (data.length === 0) {
+                console.log('No hay marcas disponibles para este usuario.');
+              }
+            },
+            error: (error) => {
+              console.error('Error al cargar las marcas:', error);
+            }
+          });
+        } else {
+          console.error('No se encontró información del usuario.');
+        }
+      }
+      
 
-        this.items = [
-            { label: 'Add New', icon: 'pi pi-fw pi-plus' },
-            { label: 'Remove', icon: 'pi pi-fw pi-minus' }
-        ];
-    }
-
-    initChart() {
+      initChart() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
+        const labels = this.marcas.map(m => m.marca);
+        const data = this.marcas.map(m => m.cantidad);
+
         this.chartData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: labels,
             datasets: [
                 {
-                    label: 'First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
+                    label: 'Cantidad de Vehículos por Marca',
+                    data: data,
                     fill: false,
                     backgroundColor: documentStyle.getPropertyValue('--bluegray-700'),
                     borderColor: documentStyle.getPropertyValue('--bluegray-700'),
-                    tension: .4
-                },
-                {
-                    label: 'Second Dataset',
-                    data: [28, 48, 40, 19, 86, 27, 90],
-                    fill: false,
-                    backgroundColor: documentStyle.getPropertyValue('--green-600'),
-                    borderColor: documentStyle.getPropertyValue('--green-600'),
                     tension: .4
                 }
             ]
@@ -71,6 +87,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 legend: {
                     labels: {
                         color: textColor
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.dataset.label + ': ' + tooltipItem.raw;
+                        }
                     }
                 }
             },

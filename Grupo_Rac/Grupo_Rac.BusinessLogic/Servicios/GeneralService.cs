@@ -1,4 +1,5 @@
 ﻿using GestionEmergencias.BussinesLogic;
+using Grupo_Rac.Common.Models;
 using Grupo_Rac.DataAccess.Repositorio;
 using Grupo_Rac.Entities.Entity;
 using System;
@@ -537,6 +538,13 @@ namespace Grupo_Rac.BusinessLogic.Servicios
                 return result.Error(ex);
             }
         }
+
+        public IEnumerable<MarcaVehiculoDto> ObtenerMarcasPorUsuarioYSede(string usuario)
+        {
+            return _marcaRepository.GetMarcasPorUsuarioYSede(usuario);
+        }
+
+
 
         #endregion
 

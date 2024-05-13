@@ -4,8 +4,8 @@ export class Marca{
 }
 
 export class MarcaEnviar {
-    Mar_Id: string;
-    Mar_Descripcion: string;
+    Mar_Id:string;
+    Mar_Descripcion:string;
 }
 export class dropMarca{
     value?:String;

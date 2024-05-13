@@ -122,6 +122,7 @@ validarTexto(event: KeyboardEvent) {
 
 
    onSubmit() {
+    this.submitted = true;
     if (this.marcaForm.valid ) {
        this.viewModel = this.marcaForm.value;
        if (this.Valor == "Agregar") {
@@ -134,7 +135,8 @@ validarTexto(event: KeyboardEvent) {
              this.Collapse= false;
              this.DataTable = true;
              this.submitted = false;
-            
+             this.Detalles = false;
+             this.Agregar= true;
            
     this.marcaForm = new FormGroup({
       Mar_Descripcion: new FormControl("", Validators.required),
@@ -158,7 +160,7 @@ validarTexto(event: KeyboardEvent) {
             this.DataTable = true;
             this.Detalles = false;
             this.submitted = false;
-          
+            this.Agregar= true;
     this.marcaForm = new FormGroup({
       Mar_Descripcion: new FormControl("", Validators.required),
     });
