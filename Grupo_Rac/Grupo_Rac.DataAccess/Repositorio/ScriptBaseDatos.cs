@@ -34,5 +34,26 @@ namespace Grupo_Rac.DataAccess.Repositorio
         public static string Roles_Mostrar = "[Acce].[SP_Rol_Mostrar]";
 
         #endregion
+
+        #region Compra
+        public static string Compra_Listar = "[Vent].[SP_Compras_listar]";
+        public static string Compra_Insertar = "[Vent].[SP_FactCompra_Insertar]";
+        public static string Compra_Actualizar = "[Vent].[SP_Compra_Actualizar]";
+        public static string Compra_Buscar = "[Vent].[SP_Compra_Buscar]";
+        public static string Compra_Eliminar = "[Vent].[SP_Compra_Eliminar]";
+        public static string Compra_Emitir = "[Vent].[SP_Compra_Emitir]";
+
+        #endregion
+
+        #region Vehiculo
+        public static string Vehiculo_Listar = "[Vent].[sp_Vehiculos_listar]";
+        public static string Vehiculo_Insertar = "[Vent].[SP_Vehiculo_Insertar]";
+        public static string Vehiculo_Actualizar = "[Vent].[SP_Vehiculo_Actualizar]";
+        public static string Vehiculo_BuscarDetalle = "[Vent].[SP_Vehiculo_BuscarDetalle]";
+        public static string Vehiculo_Eliminar = "[Vent].[SP_Vehiculo_Eliminar]";
+        public static string Vehiculo_Desactivar = "[Vent].[SP_Vehiculo_Desactivar]";
+
+
+        #endregion
     }
 }

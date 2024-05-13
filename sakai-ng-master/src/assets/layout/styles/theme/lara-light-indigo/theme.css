@@ -4561,11 +4561,11 @@
   .p-fileupload .p-fileupload-buttonbar .p-button {
     margin-right: 0.5rem;
   }
-  /* .p-fileupload .p-fileupload-buttonbar .p-button.p-fileupload-choose.p-focus {
+  .p-fileupload .p-fileupload-buttonbar .p-button.p-fileupload-choose.p-focus {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem #C7D2FE;
-  } */
+  }
   .p-fileupload .p-fileupload-content {
     background: #ffffff;
     padding: 2rem 1rem;

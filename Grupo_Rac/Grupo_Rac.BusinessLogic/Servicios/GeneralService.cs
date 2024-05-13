@@ -404,6 +404,122 @@ namespace Grupo_Rac.BusinessLogic.Servicios
                 return result.Error(ex.Message);
             }
         }
+        public ServiceResult BuscarDetVeh(int Comp_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _vehiculoRepository.findDetalle(Comp_Id);
+
+                if (lost.Any())
+                {
+                    return result.Ok(lost);
+                }
+                else
+                {
+                    return result.Error(lost);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+
+        public ServiceResult InsertVeh(tbVehiculos item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _vehiculoRepository.Insertar(item);
+
+                if(lost.CodeStatus > 0)
+                {
+                    return result.Ok(lost);
+
+                }
+                else
+                {
+                    return result.Error(lost);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult ActualizarVeh(tbVehiculos item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _vehiculoRepository.Actualizar(item);
+
+                if (lost.CodeStatus > 0)
+                {
+                    return result.Ok(lost);
+                }
+                else
+                {
+                    return result.Error(lost);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult EliminarVeh(string? id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _vehiculoRepository.Elimina(id);
+
+                if (lost.CodeStatus > 0)
+                {
+                    return result.Ok(lost);
+                }
+                else
+                {
+                    return result.Error(lost);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult DesactivarVeh(tbVehiculos item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _vehiculoRepository.Desactivar(item);
+
+                if (lost.CodeStatus > 0)
+                {
+                    return result.Ok(lost);
+                }
+                else
+                {
+                    return result.Error(lost);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
 
         #endregion
 

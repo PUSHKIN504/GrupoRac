@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,9 @@ namespace Grupo_Rac.Common.Models
     {
         public string Veh_Placa { get; set; }
         public int? Mod_Id { get; set; }
+        [NotMapped]
+        public string Mod_Descripcion { get; set; }
+
         public int? Sed_Id { get; set; }
         public int? Com_Id { get; set; }
         public decimal? Com_Precio { get; set; }

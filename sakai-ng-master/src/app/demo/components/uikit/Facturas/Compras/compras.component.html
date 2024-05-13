@@ -1,4 +1,4 @@
-<button mat-raised-button color="warn" (click)="togglePanel('new')">Crear</button>
+<!-- <button mat-raised-button color="warn" (click)="togglePanel('new')">Crear</button> -->
 <mat-expansion-panel #panel style="margin-top: 10px; margin-bottom: 10px">
     <mat-panel-title>
         {{modalTitle}}
@@ -10,8 +10,8 @@
     </mat-form-field>
     
 </form>
-<button mat-raised-button color="primary" (click)="agregarEnc()"  class="p-button-outlined" style="margin-right: 10px;">{{modalButtonLabel}}</button>
-<button mat-flat-button color="warn" (click)="cancelar()" >Cancelar</button>
+<button mat-raised-button color="primary"  class="p-button-outlined" style="margin-right: 10px;">{{modalButtonLabel}}</button>
+<!-- <button mat-flat-button color="warn" (click)="cancelar()" >Cancelar</button> -->
 </mat-expansion-panel>
 
 
@@ -43,11 +43,6 @@
             
 
         </p-table> 
-
-  
-
-
-
 <ng-template #content let-c="close" let-d="dismiss">
 	<div class="modal-header">
 		<h4 class="modal-title" id="modal-basic-title">Preview Invoice : <b>{{invoiceno}}</b></h4>

@@ -38,26 +38,68 @@ namespace Grupo_Rac.API.Controllers
         public IActionResult ListComp()
         {
             var list = _ventaService.ListComp();
-            return Ok(list.Data);
+            return Ok(list);
+        }
+        [HttpGet("Buscar/{id}")]
+        public IActionResult BuscarComp(int id)
+        {
+            var list = _ventaService.BuscarComp(id);
+            return Ok(list);
         }
 
-        [HttpPost("Create")]
+        [HttpPost("Insertar")]
         public IActionResult CreateComp(CompViewModel item)
         {
-
             var comp = _mapper.Map<tbCompras>(item);
             var compra = new tbCompras()
             {
 
                 Cli_DNI = item.Cli_DNI,
                 Com_Fecha = item.Com_Fecha,
-                Com_Fecha_Creacion = item.Com_Fecha_Creacion
-               
-
-
+                Com_Creacion = item.Com_Creacion,
+                Com_Precio = item.Com_Precio
+                
             };
             var list = _ventaService.CreateComp(compra);
-            return Ok(list.Data);
+            return Ok(list);
+        }
+
+        [HttpPut("Actualizar")]
+        public IActionResult ActualizarComp(CompViewModel item)
+        {
+            var comp = _mapper.Map<tbCompras>(item);
+            var compra = new tbCompras()
+            {
+                Com_Id = item.Com_Id,
+                Cli_DNI = item.Cli_DNI,
+                Com_Fecha = item.Com_Fecha,
+                Com_Modifica = item.Com_Modifica,
+                Com_Precio = item.Com_Precio
+
+            };
+            var list = _ventaService.UpdateComp(compra);
+            return Ok(list);
+        }
+        [HttpPut("Emitir")]
+        public IActionResult EmitirComp(CompViewModel item)
+        {
+            var comp = _mapper.Map<tbCompras>(item);
+            var compra = new tbCompras()
+            {
+                Com_Id = item.Com_Id,
+                Com_Modifica = item.Com_Modifica,
+
+            };
+            var list = _ventaService.EmitirComp(compra);
+
+            return Ok(list);
+        }
+        [HttpDelete("Eliminar/{id}")]
+        public IActionResult EliminarComp(int? id)
+        {
+            var list = _ventaService.EliminarComp(id);
+
+            return Ok(list);
         }
     }
 }

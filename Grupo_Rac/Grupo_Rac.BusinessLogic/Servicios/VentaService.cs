@@ -32,13 +32,104 @@ namespace Grupo_Rac.BusinessLogic.Servicios
                 return result.Error(ex.Message);
             }
         }
+        public ServiceResult BuscarComp(int Comp_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _compRepository.find(Comp_Id);
+
+                if(lost.Com_Id != 0)
+                {
+                    return result.Ok(lost);
+                }
+                else
+                {
+                    return result.Error(lost);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
         public ServiceResult CreateComp(tbCompras item)
         {
             var result = new ServiceResult();
             try
             {
-                var lost = _compRepository.Insertar(item);
-                return result.Ok(lost);
+                var list = _compRepository.Insertar(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult UpdateComp(tbCompras item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _compRepository.Actualizar(item);
+
+                if(list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult EliminarComp(int? id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _compRepository.Eliminar(id);
+
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult EmitirComp(tbCompras item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _compRepository.Emitir(item);
+
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
             }
             catch (Exception ex)
             {
