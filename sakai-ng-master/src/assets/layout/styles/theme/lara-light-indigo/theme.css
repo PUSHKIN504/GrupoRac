@@ -1,3 +1,9 @@
+.d-none{
+  display: none;
+}
+.flex-wrap{
+  flex-wrap:wrap;
+}
 :root {
   font-family: "Inter var", sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
@@ -4385,6 +4391,7 @@
     padding: 1.5rem;
     border-top-right-radius: 6px;
     border-top-left-radius: 6px;
+    overflow: visible;
   }
   .p-dialog .p-dialog-header .p-dialog-title {
     font-weight: 700;
@@ -4417,6 +4424,7 @@
     background: #ffffff;
     color: #4b5563;
     padding: 0 1.5rem 2rem 1.5rem;
+    overflow-y: visible;
   }
   .p-dialog .p-dialog-content:last-of-type {
     border-bottom-right-radius: 6px;

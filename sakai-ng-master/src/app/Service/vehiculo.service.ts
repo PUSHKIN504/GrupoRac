@@ -19,7 +19,7 @@ export class VehiculoService {
       .then(data => data);
   }
 
-  Find(id: number){
+  FindDetalle(id: number){
     return this.http.get<any>(this.endpoint.Find(id)) 
       .toPromise()  
       .then(res => res.data as Vehiculo[])

@@ -1,9 +1,9 @@
 export class Cliente{
-    Cli_Id?:Number;
-    Cli_Nombre?:String;
-    Cli_DNI?:String;
-    Ciu_Id?:String;
-    Cli_Direccion?:String;
+    cli_Id?:Number;
+    cli_Nombre?:String;
+    cli_DNI?:String;
+    ciu_Id?:String;
+    cli_Direccion?:String;
 
     // dep_Descripcion?:String;
 

@@ -22,6 +22,10 @@ import { ServiceCiu } from 'src/app/Service/service.service';
  import { MatInputModule } from '@angular/material/input';
  import { MatButtonModule } from '@angular/material/button';
  import { ReactiveFormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
  
 @NgModule({
   imports: [
@@ -31,12 +35,14 @@ import { ServiceCiu } from 'src/app/Service/service.service';
     CompRoutingModule,
     ToastModule,
     DialogModule,
+    DropdownModule,
     FormsModule,
     TooltipModule,
     InputTextModule,
     ButtonModule,
     OverlayPanelModule,
     TableModule,
+    InputNumberModule,
     ConfirmDialogModule,
     SidebarModule,
     RippleModule,
@@ -44,7 +50,9 @@ import { ServiceCiu } from 'src/app/Service/service.service';
     MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    CalendarModule,
+    MatButtonModule,
+    AutoCompleteModule,
     // NgxExtendedPdfViewerModule
   ],
   declarations: [CompraDemoComponent],

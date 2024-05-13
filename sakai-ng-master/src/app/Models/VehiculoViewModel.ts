@@ -1,10 +1,11 @@
 export class Vehiculo{
-    Veh_Placa?:string;
-    Mod_Id?:Number;
-    Sed_Id?:Number;
-    Com_Id?:Number;
-    Com_Precio?:Number;
-    Veh_Creacion?: Number;
-    Veh_Modifica?: Number;
-    Veh_Estado?: boolean;
+    veh_Placa?:string;
+    mod_Id?:number;
+    mod_Descripcion?:string;
+    sed_Id?:number;
+    com_Id?:number;
+    com_Precio?:number;
+    veh_Creacion?: number;
+    veh_Modifica?: number;
+    veh_Estado?: boolean;
 }

@@ -1,12 +1,13 @@
 export class Compra{
-    com_Id?:Number;
-    cli_Id?:Number;
+    com_Id?:number;
+    cli_Id?:number;
     cli_DNI?:string;
-    com_Cant?:Number;
-    com_Precio?:Number;
+    cli_Nombre?:string;
+    com_Cant?:number;
+    com_Precio?:number;
     com_Fecha?:Date;
-    com_Creacion?:Number;
-    com_Modifica?:Number;
+    com_Creacion?:number;
+    com_Modifica?:number;
     com_Fecha_Creacion?:Date;
     com_Fecha_Modifica?:Date;
     com_Estado?:string;
