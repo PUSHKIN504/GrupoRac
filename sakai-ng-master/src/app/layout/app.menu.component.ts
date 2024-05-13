@@ -71,6 +71,11 @@ export class AppMenuComponent implements OnInit {
                                 routerLink: ['/app/generales/Cliente']
                             },
                             {
+                                label: 'Empleado',
+                                icon: 'pi pi-fw pi-inbox',
+                                routerLink: ['/app/uikit/charts']
+                            },
+                            {
                                 label: 'Estados Civiles',
                                 icon: 'pi pi-fw pi-inbox',
                                 routerLink: ['/app/generales/EstadoCivil']
@@ -100,6 +105,7 @@ export class AppMenuComponent implements OnInit {
                                 icon: 'pi pi-fw pi-inbox',
                                 routerLink: ['/app/uikit/charts']
                             },
+
                         ]
                     },
                     

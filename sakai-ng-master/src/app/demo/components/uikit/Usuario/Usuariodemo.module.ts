@@ -14,7 +14,8 @@ import { RippleModule } from 'primeng/ripple';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
-import { MatButtonModule } from '@angular/material/button';
+import { DropdownModule } from "primeng/dropdown";
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
 	imports: [
 		CommonModule,
@@ -24,6 +25,7 @@ import { MatButtonModule } from '@angular/material/button';
 		FormsModule,
 		TooltipModule,
 		InputTextModule,
+		DropdownModule,
 		ButtonModule,
 		OverlayPanelModule,
 		TableModule,
@@ -31,7 +33,7 @@ import { MatButtonModule } from '@angular/material/button';
 		SidebarModule,
 		RippleModule,
 		ConfirmPopupModule,
-		MatButtonModule
+		ReactiveFormsModule
 	],
 	declarations: [UsuarioDemoComponent]
 })
