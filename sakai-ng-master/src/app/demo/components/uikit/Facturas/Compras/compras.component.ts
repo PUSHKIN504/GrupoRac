@@ -6,12 +6,12 @@ import { Table } from 'primeng/table';
 import {Compra} from 'src/app/Models/CompViewModel'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatExpansionPanel } from '@angular/material/expansion';
-import { CompraService } from 'src/app/Service/compra.service';
 import { Vehiculo } from 'src/app/Models/VehiculoViewModel';
-import { VehiculoService } from 'src/app/Service/vehiculo.service';
 import { Cliente } from 'src/app/Models/ClienteViewModel';
 import { ServiceCliente, ServiceModelo } from 'src/app/Service/service.service';
 import { Modelo } from 'src/app/Models/ModeloViewModel';
+import { CompraService } from 'src/app/Service/compra.service';
+import { VehiculoService } from 'src/app/Service/vehiculo.service';
 
 @Component({
 
@@ -26,6 +26,8 @@ export class CompraDemoComponent implements OnInit {
     vehiculos: Vehiculo[];
     vehiculo: Vehiculo;
 
+    vehiculoInicial: Vehiculo[];
+
     clientes: Cliente[];
     filtered: Cliente[] = [];
 
@@ -35,6 +37,7 @@ export class CompraDemoComponent implements OnInit {
     encabezadoDialog: boolean = false;
     detalleDialog: boolean = false;
     encabezado: boolean = false;
+    deleteDialog: boolean = false;
 
     loading: boolean = false;
     rowsPerPageOptions = [5, 10, 20];
@@ -67,7 +70,7 @@ export class CompraDemoComponent implements OnInit {
                 this.loading = false;
                 console.log(data)
             })
-
+        
         await this.ClienteService.getCliente().subscribe((data: any)=>{
                 this.clientes = data;
                 console.log(this.clientes)
@@ -83,6 +86,15 @@ export class CompraDemoComponent implements OnInit {
         });           
      }
 
+     async nuevaFactura(){
+        const table = document.getElementById('table');
+        const factura = document.getElementById('factura');
+    
+        this.compra = {};
+
+        this.renderer.addClass(table, 'd-none');
+        this.renderer.removeClass(factura, 'd-none');
+     }
 
     async editFactura(compra: Compra){
         const table = document.getElementById('table');
@@ -97,51 +109,141 @@ export class CompraDemoComponent implements OnInit {
         await this.VehiculoService.FindDetalle(this.compra.com_Id)
             .then(data => {
                 this.vehiculos = data;
+                this.vehiculoInicial = data;
             }),
             error=>{
                 console.log(error);
             };
+        
+            this.calcularPrecio();
+     }
+
+     calcularPrecio(){
+        this.compra.com_Precio = 0;
 
         this.vehiculos.forEach(element => {
+            element.veh_Id = this.createId();
             this.compra.com_Precio += element.com_Precio;
         });
      }
 
-     saveModal(){
+    saveModalVehiculo(){
         this.submitted = true;
 
         if (this.vehiculo.veh_Placa?.trim()) {
-            if (this.vehiculo.veh_Placa) {
+            if (this.vehiculo.veh_Id) {
                 // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus.value ? this.product.inventoryStatus.value : this.product.inventoryStatus;
-                this.products[this.findIndexById(this.product.id)] = this.product;
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Updated', life: 3000 });
-            } else {
-                this.product.id = this.createId();
-                this.product.code = this.createId();
-                this.product.image = 'product-placeholder.svg';
-                // @ts-ignore
-                this.product.inventoryStatus = this.product.inventoryStatus ? this.product.inventoryStatus.value : 'INSTOCK';
-                this.products.push(this.product);
-                this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Product Created', life: 3000 });
-            }
+                this.vehiculo.mod_Id = this.findModelByDescripcion(this.vehiculo.mod_Descripcion);
+                this.vehiculos[this.findIndexById(this.vehiculo.veh_Id)] = this.vehiculo;
 
-            this.products = [...this.products];
-            this.productDialog = false;
-            this.product = {};
+                this.calcularPrecio();
+            } else {
+                this.vehiculo.veh_Id = this.createId();
+                // @ts-ignore
+                this.vehiculo.mod_Id = this.findModelByDescripcion(this.vehiculo.mod_Descripcion);
+                this.vehiculo.com_Id = this.compra.com_Id;
+                this.vehiculo.sed_Id = 1;
+                this.vehiculo.veh_Creacion = 2;
+                this.vehiculos.push(this.vehiculo);
+
+                this.calcularPrecio();
+            }
+            this.vehiculos = [...this.vehiculos];
+            this.detalleDialog = false;
+            this.vehiculo = {};
         }
+     }
+
+     saveModalCompra(){
+        this.submitted = true;
+
+        if (this.compra.cli_DNI?.trim()) {
+            if (this.compra.cli_DNI) {
+               
+                // this.compra.cli_Id = this.createId();
+                // @ts-ignore
+                console.log(this.compra);
+
+                this.compra.com_Creacion = 1;
+
+                this.compras.push(this.compra);
+
+                this.encabezado = true;
+
+                this.calcularPrecio();
+            }
+            this.compras = [...this.compras];
+            this.encabezadoDialog = false;
+            this.compra = {};
+        }
+
+     }
+
+    async saveFactura(){
+        var id;
+        console.log("entraFact")
+        await this.CompraService.Insert(this.compra)
+            .then(result => {
+                id =  result.data.CodeStatus;
+                console.log(result.data.CodeStatus)
+            })
+            ,error=>{
+                console.log(error);
+            };
+            
+        this.vehiculos.forEach(async element => {
+            element.com_Id = id;
+            await this.VehiculoService.Insert(element)
+            ,error=>{
+                console.log(error);
+            };
+        });
+        
+    }
+
+     openDeleteDialog(vehiculo: Vehiculo){
+        this.deleteDialog = true;
+        this.vehiculo = {...vehiculo};
+     }
+
+     confirmDelete(){
+        this.deleteDialog = false;
+        this.vehiculos = this.vehiculos.filter(val => val.veh_Id !== this.vehiculo.veh_Id);
+        this.vehiculo = {};
+        this.calcularPrecio();
+
      }
 
      findIndexById(id: string): number {
         let index = -1;
         for (let i = 0; i < this.vehiculos.length; i++) {
-            if (this.vehiculo[i].id === id) {
+            if (this.vehiculos[i].veh_Id === id) {
                 index = i;
                 break;
             }
         }
 
         return index;
+    }
+
+    findModelByDescripcion(descripcion: string): number {
+        let index = -1;
+        for (let i = 0; i < this.modelos.length; i++) {
+            if (this.modelos[i].mod_Descripcion === descripcion) {
+                index = this.modelos[i].mod_Id;
+                break;
+            }
+        }
+        return index;
+    }
+
+    createId(): string {
+        let id = '';
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        for (let i = 0; i < 5; i++) {
+            id += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return id;
     }
 
      hideTable(){
@@ -160,8 +262,10 @@ export class CompraDemoComponent implements OnInit {
         this.detalleDialog = true;
         this.vehiculo = {};
      }
+
      editDetalle(vehiculo: Vehiculo){
         this.detalleDialog = true;
+        this.vehiculo = {}
         this.vehiculo = {...vehiculo};
      }
 

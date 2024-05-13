@@ -99,8 +99,8 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 //pendiente los parametros
                 var parameter = new DynamicParameters();
                 //parameter.Add("Dept_Id", item.Dep_Id);
-                parameter.Add("@DNI", item.Cli_DNI);
-                parameter.Add("@UsuCrea", item.Com_Creacion);
+                parameter.Add("@DNI", "0601200102969");
+                parameter.Add("@UsuCrea", 1);
                 parameter.Add( "@fechaCrea", DateTime.Now);
                 parameter.Add("@Com_Precio",item.Com_Precio);
 

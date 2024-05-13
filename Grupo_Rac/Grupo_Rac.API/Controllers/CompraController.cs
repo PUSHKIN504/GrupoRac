@@ -48,7 +48,7 @@ namespace Grupo_Rac.API.Controllers
         }
 
         [HttpPost("Insertar")]
-        public IActionResult CreateComp(CompViewModel item)
+        public IActionResult CreateComp(tbCompras item)
         {
             var comp = _mapper.Map<tbCompras>(item);
             var compra = new tbCompras()
@@ -65,7 +65,7 @@ namespace Grupo_Rac.API.Controllers
         }
 
         [HttpPut("Actualizar")]
-        public IActionResult ActualizarComp(CompViewModel item)
+        public IActionResult ActualizarComp(tbCompras item)
         {
             var comp = _mapper.Map<tbCompras>(item);
             var compra = new tbCompras()
@@ -81,7 +81,7 @@ namespace Grupo_Rac.API.Controllers
             return Ok(list);
         }
         [HttpPut("Emitir")]
-        public IActionResult EmitirComp(CompViewModel item)
+        public IActionResult EmitirComp(tbCompras item)
         {
             var comp = _mapper.Map<tbCompras>(item);
             var compra = new tbCompras()

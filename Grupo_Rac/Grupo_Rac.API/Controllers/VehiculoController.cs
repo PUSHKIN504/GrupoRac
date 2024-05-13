@@ -42,7 +42,7 @@ namespace Grupo_Rac.API.Controllers
 
 
         [HttpPost("Insertar")]
-        public IActionResult CreateVeh(VehiculoViewModel item)
+        public IActionResult CreateVeh(tbVehiculos item)
         {
 
             var comp = _mapper.Map<tbVehiculos>(item);
@@ -63,7 +63,7 @@ namespace Grupo_Rac.API.Controllers
         }
 
         [HttpPut("Actualizar")]
-        public IActionResult ActualizarVeh(VehiculoViewModel item)
+        public IActionResult ActualizarVeh(tbVehiculos item)
         {
 
             var veh = _mapper.Map<tbVehiculos>(item);
@@ -83,7 +83,7 @@ namespace Grupo_Rac.API.Controllers
         }
 
         [HttpPut("Desactivar")]
-        public IActionResult DesactivarVeh(VehiculoViewModel item)
+        public IActionResult DesactivarVeh(tbVehiculos item)
         {
             var veh = _mapper.Map<tbVehiculos>(item);
             var vehiculo = new tbVehiculos()

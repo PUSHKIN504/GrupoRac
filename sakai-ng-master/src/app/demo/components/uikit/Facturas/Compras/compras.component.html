@@ -1,4 +1,4 @@
-<button mat-raised-button color="warn" class="mb-4">Crear</button>
+<button mat-raised-button color="warn" class="mb-4" (click)="nuevaFactura()">Crear</button>
 
        <p-table id="table" #dt [loading]="loading"  [value]="compras" [rows]="10" [paginator]="true" [responsive]="true" [autoLayout]="true" [globalFilterFields]="['com_Id']" sortField="representative.name">
         <ng-template pTemplate="header">
@@ -83,7 +83,7 @@
                     </div>
                     <div class="acciones flex flex-row" style="height: 25%;">
                         <button pButton  icon="pi pi-pencil" class="p-button mr-2" label="Editar" (click)="editDetalle(vehiculo)"></button>
-                        <button pButton  icon="pi pi-times" class="p-button mr-2" label="Eliminar" (click)="editDetalle()"></button>
+                        <button pButton  icon="pi pi-times" class="p-button mr-2" label="Eliminar" (click)="openDeleteDialog(vehiculo)"></button>
                     </div>
                 </div>
                 <button pButton color="warn" icon="pi pi-plus"  class="p-button mr-2" (click)="newDetalle()"></button>
@@ -113,11 +113,11 @@
         </div>
         <div class="p-card-footer flex flex-row justify-content-end">
             <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideTable()"></button>
-            <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text"></button>
+            <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveFactura()"></button>
         </div>
     </div>
-   
 </div>
+
 <p-dialog [(visible)]="encabezadoDialog" [style]="{width: '450px'}" [modal]="true">
     <ng-template pTemplate="content">
         <div class="flex flex-row flex-wrap justify-content-around align-items-center">
@@ -130,28 +130,29 @@
                 <p-autoComplete id="cli_DNI" [(ngModel)]="compra.cli_DNI" [suggestions]="filtered" (completeMethod)="filter($event)" [dropdown]="true"></p-autoComplete>
                 <small class="ng-dirty ng-invalid" *ngIf="submitted && !compra.cli_DNI">Cliente es requerido.</small>
             </div>
-            <div class="flex flex-column" style="width: 40%;">
+            <!-- <div class="flex flex-column" style="width: 40%;">
                 <label for="calendar">Fecha</label>
-                <!-- <p-calendar
+                 <p-calendar
                     inputId="calendar"
                     [(ngModel)]="compra.com_Fecha"
-                ></p-calendar> -->
+                ></p-calendar> 
                 <input type="text" pInputText id="cargo_Descripcion" [(ngModel)]="compra.com_Fecha" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !compra.com_Fecha}"/>
                 <small class="ng-dirty ng-invalid" *ngIf="submitted && !compra.com_Fecha">Fecha es requerida.</small>
-            </div>
+            </div> -->
         </div>
         
     </ng-template>
 
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveCargo()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveModalCompra()"></button>
     </ng-template>
 </p-dialog>
+
 <p-dialog [(visible)]="detalleDialog" [style]="{width: '450px'}" [modal]="true" >
     <ng-template pTemplate="content" >
         <div class="flex flex-row flex-wrap justify-content-around align-items-center" >
-            <div class="flex flex-column justify-content-center" style="width: 40%;" *ngIf="encabezado">
+            <div class="flex flex-column justify-content-center" style="width: 40%;" >
                 <label for="cargo_Descripcion">Placa</label>
                 <input type="text" pInputText id="cargo_Descripcion" [(ngModel)]="vehiculo.veh_Placa" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !vehiculo.veh_Placa}"/>
             </div>
@@ -180,7 +181,17 @@
 
     <ng-template pTemplate="footer">
         <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveCargo()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveModalVehiculo()"></button>
+    </ng-template>
+</p-dialog>
+<p-dialog [(visible)]="deleteDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+    <div class="flex align-items-center justify-content-center">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+        <span *ngIf="vehiculo">Seguro que desea eliminar <b>{{vehiculo.veh_Placa}}</b>?</span>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
+        <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
     </ng-template>
 </p-dialog>
 
