@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace Grupo_Rac.Common.Models
 {
+    public class MarcaVehiculoDto
+    {
+        public string Marca { get; set; }
+        public int Cantidad { get; set; }
+    }
+
     public class MarcaViewModel
     {
         public int Mar_Id { get; set; }

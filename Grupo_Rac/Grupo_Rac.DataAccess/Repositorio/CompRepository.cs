@@ -29,6 +29,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
 
         public RequestStatus Insertar(tbCompras item)
         {
+<<<<<<< HEAD
             using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
             {
                 //pendiente los parametros
@@ -45,7 +46,30 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 string mensaje = (result == 1) ? "Exito" : "Eroor";
                 return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
             }
+=======
+            throw new NotImplementedException();
+>>>>>>> yordin
         }
+
+        //public RequestStatus Insertar(tbCompras item)
+        //{
+        //    using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+        //    {
+        //        //pendiente los parametros
+        //        var parameter = new DynamicParameters();
+        //        //parameter.Add("Dept_Id", item.Dep_Id);
+        //        //parameter.Add("Dept_Descripcion", item.Dep_Descripcion);
+        //        //parameter.Add("Dept_Usua_Creacion", 1);
+        //        //parameter.Add("Dept_Fecha_Creacion", DateTime.Now);
+
+        //        var result = db.Execute(ScriptBaseDatos.Departamentos_Insetar,
+        //            parameter,
+        //            commandType: CommandType.StoredProcedure
+        //            );
+        //        string mensaje = (result == 1) ? "Exito" : "Eroor";
+        //        return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
+        //    }
+        //}
 
         public IEnumerable<tbCompras> List()
         {

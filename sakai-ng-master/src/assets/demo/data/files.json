@@ -2,53 +2,31 @@
     "data": [
         {
             "key": "0",
-            "label": "Accesos",
+            "label": "Gruppo Rac",
             "data": "Documents Folder",
             "icon": "pi pi-fw pi-inbox",
             "children": [{
-                "key": "0-0",
-                "label": "Pantalla",
+                "key": "102",
+                "label": "Acceso",
                 "data": "Work Folder",
                 "icon": "pi pi-fw pi-cog",
-                "children": [{ "key": "0-0-0", "label": "Pantalla", "icon": "pi pi-fw pi-file", "data": "Expenses Document" }, { "key": "0-0-1", "label": "Resume.doc", "icon": "pi pi-fw pi-file", "data": "Resume Document" }]
+                "children": [{ "key": "1", "label": "Usuarios", "icon": "pi pi-fw pi-file" }, { "key": "2", "label": "Roles", "icon": "pi pi-fw pi-file"}]
             },
             {
-                "key": "0-1",
-                "label": "pantalla",
-                "data": "Home Folder",
-                "icon": "pi pi-fw pi-home",
-                "children": [{ "key": "0-1-0", "label": "Pantalla", "icon": "pi pi-fw pi-file", "data": "Invoices for this month" }]
-            }]
-        },
-        {
-            "key": "1",
-            "label": "General",
-            "data": "Events Folder",
-            "icon": "pi pi-fw pi-calendar",
-            "children": [
-                { "key": "1-0", "label": "Pantalla", "icon": "pi pi-fw pi-calendar-plus", "data": "Meeting" },
-                { "key": "1-1", "label": "Pantalla", "icon": "pi pi-fw pi-calendar-plus", "data": "Product Launch" },
-                { "key": "1-2", "label": "Pantalla", "icon": "pi pi-fw pi-calendar-plus", "data": "Report Review" }]
-        },
-        {
-            "key": "2",
-            "label": "Factura",
-            "data": "Movies Folder",
-            "icon": "pi pi-fw pi-star",
-            "children": [{
-                "key": "2-0",
-                "icon": "pi pi-fw pi-star",
-                "label": "Pantalla",
-                "data": "Pacino Movies",
-                "children": [{ "key": "2-0-0", "label": "Pantalla", "icon": "pi pi-fw pi-video", "data": "Scarface Movie" }, { "key": "2-0-1", "label": "Serpico", "icon": "pi pi-fw pi-video", "data": "Serpico Movie" }]
+                "key": "101",
+                "label": "Generales",
+                "data": "Work Folder",
+                "icon": "pi pi-fw pi-cog",
+                "children": [{ "key": "3", "label": "Departamentos", "icon": "pi pi-fw pi-file" }, { "key": "4", "label": "Municipios", "icon": "pi pi-fw pi-file" },{ "key": "5", "label": "Cargos", "icon": "pi pi-fw pi-file" },{ "key": "6", "label": "Clientes", "icon": "pi pi-fw pi-file" },{ "key": "7", "label": "Estados Civiles", "icon": "pi pi-fw pi-file" },{ "key": "8", "label": "Marcas", "icon": "pi pi-fw pi-file" },{ "key": "9", "label": "Modelos", "icon": "pi pi-fw pi-file" },{ "key": "10", "label": "Sedes", "icon": "pi pi-fw pi-file" },{ "key": "11", "label": "Vehiculos", "icon": "pi pi-fw pi-file" },{ "key": "12", "label": "Graficos", "icon": "pi pi-fw pi-file" }]
             },
             {
-                "key": "2-1",
-                "label": "Pantalla",
-                "icon": "pi pi-fw pi-star",
-                "data": "De Niro Movies",
-                "children": [{ "key": "2-1-0", "label": "Pantalla", "icon": "pi pi-fw pi-video", "data": "Goodfellas Movie" }, { "key": "2-1-1", "label": "Untouchables", "icon": "pi pi-fw pi-video", "data": "Untouchables Movie" }]
-            }]
+                "key": "100",
+                "label": "Ventas",
+                "data": "Work Folder",
+                "icon": "pi pi-fw pi-cog",
+                "children": [{ "key": "13", "label": "Facturas Compras", "icon": "pi pi-fw pi-file" }, { "key": "14", "label": "Facturas Cambios", "icon": "pi pi-fw pi-file" }, { "key": "15", "label": "Reportes", "icon": "pi pi-fw pi-file" }]
+            }
+        ]
         }
     ]
 }

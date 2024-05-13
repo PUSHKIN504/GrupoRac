@@ -1,6 +1,27 @@
 export class Cargo{
-    Crg_ID?:Number;
-    Crg_Descripcion?:String;
-    // dep_Descripcion?:String;
+    crg_ID?:String;
+    crg_Descripcion?:String;
 
+
+}
+
+export class CargoEnviar {
+    Crg_ID: string;
+    Crg_Descripcion: string;
+}
+
+
+export class dropCargo{
+    value?:String;
+    text?:String;
+}
+
+
+export class Fill {
+    crg_ID: string;
+    crg_Descripcion: string;
+    usuarioCreacion: string;
+    usuarioModificacion: string;
+    fechaCreacion : string;
+    fechaModificacion : string;
 }

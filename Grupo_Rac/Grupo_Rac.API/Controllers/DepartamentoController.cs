@@ -15,6 +15,7 @@ using PdfSharpCore;
 using TheArtOfDev.HtmlRenderer.PdfSharp;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Grupo_Rac.API.Controllers
 {
@@ -33,13 +34,31 @@ namespace Grupo_Rac.API.Controllers
             this.environment = webHostEnvironment;
 
         }
+
         [HttpGet("List")]
-        public IActionResult List()
+        public IActionResult Index()
         {
-            var list = _generalService.ListDepto();
+            var list = _generalService.ListadoDepartamentos();
             return Ok(list.Data);
         }
-        [HttpPost("Insert")]
+
+        [HttpGet("DropDown")]
+        public IActionResult List()
+        {
+            var list = _generalService.ListadoDepartamentos();
+            var drop = list.Data as List<tbDepartamento>;
+            var rol = drop.Select(x => new SelectListItem
+            {
+                Text = x.Dep_Descripcion,
+                Value = x.Dep_Id
+            }).ToList();
+
+
+            rol.Insert(0, new SelectListItem { Text = "-- SELECCIONE --", Value = "0" });
+            return Ok(rol.ToList());
+        }
+
+        [HttpPost("Create")]
         public IActionResult Create(DepartamentoViewModel item)
         {
             var model = _mapper.Map<tbDepartamento>(item);
@@ -47,52 +66,51 @@ namespace Grupo_Rac.API.Controllers
             {
                 Dep_Id = item.Dep_Id,
                 Dep_Descripcion = item.Dep_Descripcion,
+                Dep_Creacion = item.Dep_Creacion,
+                Dep_Fecha_Creacion = DateTime.Now,
             };
 
-            var list = _generalService.ListDepto();
-            _generalService.InsertarDepto(modelo);
-            return Ok(list);
+            var list = _generalService.InsertarDepto(modelo);
+            return Ok(new { success = true, message = list.Message });
 
         }
 
-        [HttpGet("Edit/{id}")]
-        public IActionResult Edit(string id)
+        [HttpGet("Fill/{id}")]
+
+        public IActionResult Llenar(string id)
         {
-            var modelo = _generalService.DetallesDepto(id);
-            return Json(modelo.Data);
+
+            var list = _generalService.obterDepto(id);
+            return Json(list.Data);
         }
 
-        [HttpPut("Edit/{id}")]
-        public IActionResult Edit(DepartamentoViewModel item)
+
+        [HttpPut("Edit")]
+        public IActionResult Update(DepartamentoViewModel item)
         {
-            var model = _mapper.Map<tbDepartamento>(item);
+            _mapper.Map<tbDepartamento>(item);
             var modelo = new tbDepartamento()
             {
                 Dep_Id = item.Dep_Id,
                 Dep_Descripcion = item.Dep_Descripcion,
+                Dep_Modifica = 1,
+                Dep_Fecha_Modifica = DateTime.Now
             };
-
-            var list = _generalService.ListDepto();
-            _generalService.ActualizarDepto(modelo);
-            return Ok(list);
-
+            var list = _generalService.EditarDepto(modelo);
+            return Ok(new { success = true, message = list.Message });
         }
 
         [HttpDelete("Delete/{id}")]
         public IActionResult Delete(string id)
         {
-            var list = _generalService.ListDepto();
-            _generalService.EliminarDepto(id);
-            return Ok(list);
-
+            var list = _generalService.EliminarDepto(id);
+            return Ok(new { success = true, message = list.Message });
         }
 
-        [HttpGet("Details/{id}")]
-        public IActionResult Details(string id)
-        {
 
-            var listado = _generalService.DetallesDepto(id);
+        
 
+<<<<<<< HEAD
             return Ok(listado.Data);
         }
 
@@ -249,6 +267,8 @@ namespace Grupo_Rac.API.Controllers
 
         }
         #endregion
+=======
+>>>>>>> yordin
         #region Modelo
         [HttpGet("ListModelo")]
         public IActionResult ListModelo()
@@ -257,22 +277,7 @@ namespace Grupo_Rac.API.Controllers
             return Ok(list.Data);
         }
         #endregion
-        #region Sede
-        [HttpGet("ListSede")]
-        public IActionResult ListSede()
-        {
-            var list = _generalService.ListSede();
-            return Ok(list.Data);
-        }
-        #endregion
-        #region usuario
-        [HttpGet("ListUsua")]
-        public IActionResult ListUsua()
-        {
-            var list = _generalService.ListUsuario();
-            return Ok(list.Data);
-        }
-        #endregion
+
         #region Vehiculo
         [HttpGet("ListVehiculo")]
         public IActionResult ListVeh()
@@ -281,13 +286,7 @@ namespace Grupo_Rac.API.Controllers
             return Ok(list.Data);
         }
         #endregion
-        #region Cargo
-        [HttpGet("ListCargo")]
-        public IActionResult ListCarg()
-        {
-            var list = _generalService.ListCargo();
-            return Ok(list.Data);
-        }
-        #endregion
+
+
     }
 }

@@ -16,8 +16,12 @@ namespace Grupo_Rac.Entities.Entity
 
         public int Cli_Id { get; set; }
         public string Cli_Nombre { get; set; }
+        public string Cli_Apellido { get; set; }
+        public DateTime? Cli_FechaNac { get; set; }
+        public string Cli_Sexo { get; set; }
         public string Cli_DNI { get; set; }
         public string Ciu_Id { get; set; }
+        public int? Est_ID { get; set; }
         public string Cli_Direccion { get; set; }
         public int? Cli_Creacion { get; set; }
         public int? Cli_Modifica { get; set; }
@@ -28,6 +32,7 @@ namespace Grupo_Rac.Entities.Entity
         public virtual tbCiudades Ciu { get; set; }
         public virtual tbUsuarios Cli_CreacionNavigation { get; set; }
         public virtual tbUsuarios Cli_ModificaNavigation { get; set; }
+        public virtual tbEstadosCiviles Est { get; set; }
         public virtual ICollection<tbCompras> tbCompras { get; set; }
         public virtual ICollection<tbVentasEnc> tbVentasEnc { get; set; }
     }

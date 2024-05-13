@@ -15,6 +15,12 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
+                //label: 'Home',
+                items: [
+                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/app/dashboard'] }
+                ]
+            },
+            {
                 items: [
                     {
                         label: 'Acceso',
@@ -29,7 +35,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Roles',
                                 icon: 'pi pi-fw pi-folder',
-                                routerLink: ['/app/uikit/rol']
+                                routerLink: ['/app/acceso/rol']
                             },
                         ]
                     },
@@ -46,54 +52,60 @@ export class AppMenuComponent implements OnInit {
                         items: [
                             {
                                 label: 'Departamento',
-                                icon: 'pi pi-fw pi-folder',
-                                routerLink: ['/app/uikit/departamento']
+                                icon: 'pi pi-fw pi-inbox',
+                                routerLink: ['/app/generales/departamento']
                             },
                             {
-                                label: 'Ciudades',
-                                icon: 'pi pi-fw pi-folder',
-                                routerLink: ['/app/uikit/ciudad']
+                                label: 'Municipio',
+                                icon: 'pi pi-fw pi-inbox',
+                                routerLink: ['/app/generales/Municipio']
                             },
                             {
                                 label: 'Cargos',
-                                icon: 'pi pi-fw pi-folder',
-                                routerLink: ['/app/uikit/cargo']
+                                icon: 'pi pi-fw pi-inbox',
+                                routerLink: ['/app/generales/Cargo']
                             },
                             {
                                 label: 'Clientes',
-                                icon: 'pi pi-fw pi-folder',
-                                routerLink: ['/app/uikit/cliente']
+                                icon: 'pi pi-fw pi-inbox',
+                                routerLink: ['/app/generales/Cliente']
+                            },
+                            {
+                                label: 'Empleado',
+                                icon: 'pi pi-fw pi-inbox',
+                                routerLink: ['/app/generales/Empleado']
                             },
                             {
                                 label: 'Estados Civiles',
-                                icon: 'pi pi-fw pi-folder',
-                                routerLink: ['/app/uikit/estadocivil']
+                                icon: 'pi pi-fw pi-inbox',
+                                routerLink: ['/app/generales/EstadoCivil']
                             },
                             {
                                 label: 'Marcas',
-                                icon: 'pi pi-fw pi-folder',
-                                routerLink: ['/app/uikit/marca']
+                                icon: 'pi pi-fw pi-inbox',
+                                routerLink: ['/app/generales/Marca']
                             },
                             {
                                 label: 'Modelo',
-                                icon: 'pi pi-fw pi-folder',
+                                icon: 'pi pi-fw pi-inbox',
                                 routerLink: ['/app/uikit/modelo']
                             },
                             {
                                 label: 'Sede',
-                                icon: 'pi pi-fw pi-folder',
-                                routerLink: ['/app/uikit/sede']
+                                icon: 'pi pi-fw pi-inbox',
+                                routerLink: ['/app/generales/Sede']
                             },
                             {
                                 label: 'Vehiculo',
-                                icon: 'pi pi-fw pi-folder',
+                                icon: 'pi pi-fw pi-inbox',
                                 routerLink: ['/app/uikit/veh']
                             },
                             {
                                 label: 'graficos',
-                                icon: 'pi pi-fw pi-folder',
-                                routerLink: ['/app/uikit/tree']
+                                icon: 'pi pi-fw pi-inbox',
+                                routerLink: ['/app/uikit/charts']
                             },
+
                         ]
                     },
                     

@@ -14,6 +14,8 @@ import { RippleModule } from 'primeng/ripple';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from "primeng/dropdown";
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
 	imports: [
 		CommonModule,
@@ -23,13 +25,15 @@ import { InputTextModule } from 'primeng/inputtext';
 		FormsModule,
 		TooltipModule,
 		InputTextModule,
+		DropdownModule,
 		ButtonModule,
 		OverlayPanelModule,
 		TableModule,
 		ConfirmDialogModule,
 		SidebarModule,
 		RippleModule,
-		ConfirmPopupModule
+		ConfirmPopupModule,
+		ReactiveFormsModule
 	],
 	declarations: [UsuarioDemoComponent]
 })

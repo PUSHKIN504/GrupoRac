@@ -13,19 +13,15 @@ namespace Grupo_Rac.Common.Models
         public string Usu_Usua { get; set; }
         public string Usu_Contra { get; set; }
         public bool? Usu_Admin { get; set; }
-        public string Usu_Codigo { get; set; }
-        public string Usu_Correo { get; set; }
-        public string Usu_Nombre { get; set; }
-        public string Usu_Apellido { get; set; }
+        public string Admin { get; set; }
+        public string Rol_Descripcion { get; set; }
+        public string Ptl_Descripcion { get; set; }
         [NotMapped]
         public string Usu_Nombrecompleto { get; set; }
-        public string Usu_Sexo { get; set; }
-        public int? Est_Id { get; set; }
-        public DateTime? Usu_FechaNacimiento { get; set; }
-        public string Usu_Telefono { get; set; }
-        public int? Sed_Id { get; set; }
-        public int? Crg_Id { get; set; }
+        public string Usu_Codigo { get; set; }
+        public string Usu_Correo { get; set; }
         public int? Rol_Id { get; set; }
+        public int? Empl_Id { get; set; }
         public int? Usu_UsuCre { get; set; }
         public int? Usu_UsuModi { get; set; }
         public DateTime? Usu_FechaCreacion { get; set; }

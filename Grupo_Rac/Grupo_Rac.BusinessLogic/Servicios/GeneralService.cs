@@ -1,4 +1,5 @@
 ﻿using GestionEmergencias.BussinesLogic;
+using Grupo_Rac.Common.Models;
 using Grupo_Rac.DataAccess.Repositorio;
 using Grupo_Rac.Entities.Entity;
 using System;
@@ -21,9 +22,10 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         private readonly UsuarioRepository _usuarioRepository;
         private readonly VehiculoRepository _vehiculoRepository;
         private readonly CargoRepository _cargoRepository;
+        private readonly EmpleadoRepository _empleadoRepository;
         public GeneralService(DepartamentoRepositorio departamentoRepositorio, CiudadReposity ciudadReposity, ClienteRepository clienteRepository, 
             EstadoCivilRepository estadoCivilRepository, MarcaRepository marcaRepository, ModeloRepository modeloRepository, SedeRepository sedeRepository,
-            UsuarioRepository usuarioRepository, VehiculoRepository vehiculoRepository, CargoRepository cargoRepository)
+            UsuarioRepository usuarioRepository, VehiculoRepository vehiculoRepository, CargoRepository cargoRepository, EmpleadoRepository empleadoRepository)
         {
             _departamentoRepositorio = departamentoRepositorio;
             _ciudadReposity = ciudadReposity;
@@ -35,164 +37,486 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             _usuarioRepository = usuarioRepository;
             _vehiculoRepository = vehiculoRepository;
             _cargoRepository = cargoRepository;
+            _empleadoRepository = empleadoRepository;
         }
 
         #region Departamento
 
-        public ServiceResult ListDepto()
+        public ServiceResult ListadoDepartamentos()
         {
             var result = new ServiceResult();
             try
             {
-                var lost = _departamentoRepositorio.List();
-                return result.Ok(lost);
+                var list = _departamentoRepositorio.List();
+                return result.Ok(list);
             }
+
             catch (Exception ex)
             {
+
                 return result.Error(ex.Message);
             }
         }
+        public ServiceResult EditarDepto(tbDepartamento item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _departamentoRepositorio.Update(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error("Y existe un registro con ese nombre");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+        public ServiceResult EliminarDepto(string Depa_Codigo)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _departamentoRepositorio.Delete(Depa_Codigo);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok($"La accion ha sido existosa", list);
+                }
+                else
+                {
+                    return result.Error("No se pudo realizar la accion");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
         public ServiceResult InsertarDepto(tbDepartamento item)
         {
-            var resul = new ServiceResult();
-            try
-            {
-                var lost = _departamentoRepositorio.Insertar(item);
-                if (lost.CodeStatus > 0)
-                {
-                    return resul.Ok(lost);
-                }
-                else
-                {
-                    lost.MessageStatus = (lost.CodeStatus == 0) ? "401 error de consulta" : lost.MessageStatus;
-                    return resul.Error(lost);
-                }
-            }
-            catch (Exception ex)
-            {
-                return resul.Error(ex.Message);
-            }
-        }
-
-        public ServiceResult ActualizarDepto(tbDepartamento item)
-        {
-            var resul = new ServiceResult();
-            try
-            {
-                var lost = _departamentoRepositorio.Update(item);
-                if (lost.CodeStatus > 0)
-                {
-                    return resul.Ok(lost);
-                }
-                else
-                {
-                    lost.MessageStatus = (lost.CodeStatus == 0) ? "401 error de consulta" : lost.MessageStatus;
-                    return resul.Error(lost);
-                }
-            }
-            catch (Exception ex)
-            {
-                return resul.Error(ex.Message);
-            }
-        }
-
-
-        public ServiceResult EliminarDepto(string Dept_Id)
-        {
-            var resul = new ServiceResult();
-            try
-            {
-                var lost = _departamentoRepositorio.DeleteS(Dept_Id);
-                if (lost.CodeStatus > 0)
-                {
-                    return resul.Ok(lost);
-                }
-                else
-                {
-                    return resul.Error(lost);
-                }
-            }
-            catch (Exception ex)
-            {
-                return resul.Error(ex.Message);
-            }
-        }
-
-
-        public ServiceResult DetallesDepto(string Dept_Id)
-        {
-            var resul = new ServiceResult();
-            try
-            {
-                var lost = _departamentoRepositorio.findS(Dept_Id);
-                return resul.Ok(lost);
-
-            }
-            catch (Exception ex)
-            {
-                return resul.Error(ex.Message);
-            }
-        }
-        #endregion
-
-        #region Ciudades
-        public ServiceResult ListCiu()
-        {
             var result = new ServiceResult();
             try
             {
-                var lost = _ciudadReposity.List();
-                return result.Ok(lost);
+                var list = _departamentoRepositorio.Insert(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
             }
             catch (Exception ex)
             {
                 return result.Error(ex.Message);
             }
         }
+
+        public ServiceResult obterDepto(string id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _departamentoRepositorio.Fill(id);
+
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+        #endregion
+
+        #region Municipo
+        public ServiceResult ListadoMunicipio()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _ciudadReposity.List();
+                return result.Ok(list);
+            }
+
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult ListadoMunicipioDepartamento(string id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _ciudadReposity.Lista(id);
+                return result.Ok(list);
+            }
+
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult EditarMunicipio(tbCiudades item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _ciudadReposity.Update(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error("Y existe un registro con ese nombre");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+        public ServiceResult EliminarMunicipio(string Muni_Codigo)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _ciudadReposity.Delete(Muni_Codigo);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok($"La accion ha sido existosa", list);
+                }
+                else
+                {
+                    return result.Error("No se pudo realizar la accion");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+        public ServiceResult InsertarMunicipio(tbCiudades item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _ciudadReposity.Insert(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+
+
+        public ServiceResult obterMunicipio(string id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _ciudadReposity.Fill(id);
+
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
         #endregion
 
         #region cliente
-        public ServiceResult ListCli()
+        public ServiceResult ListadoClientes()
         {
             var result = new ServiceResult();
             try
             {
-                var lost = _clienteRepository.List();
-                return result.Ok(lost);
+                var list = _clienteRepository.List();
+                return result.Ok(list);
+            }
+
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult EditarCliente(tbClientes item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _clienteRepository.Update(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error("Y existe un registro con ese nombre");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+        public ServiceResult EliminarClientes(int Clie_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _clienteRepository.Delete(Clie_Id);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok($"La accion ha sido existosa", list);
+                }
+                else
+                {
+                    return result.Error("No se pudo realizar la accion");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+        public ServiceResult InsertarCliente(tbClientes item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _clienteRepository.Insert(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
             }
             catch (Exception ex)
             {
                 return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult obterCliente(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _clienteRepository.Fill(id);
+
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
             }
         }
 
         #endregion
 
         #region Estadocivil
-        public ServiceResult ListEstC()
+        public ServiceResult ListadoEstadosCiviles()
         {
             var result = new ServiceResult();
             try
             {
-                var lost = _estadoCivilRepository.List();
-                return result.Ok(lost);
+                var list = _estadoCivilRepository.List();
+                return result.Ok(list);
+            }
+
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult EditarEstadosCiviles(tbEstadosCiviles item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _estadoCivilRepository.Update(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error("Y existe un registro con ese nombre");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+        public ServiceResult EliminarEstadosCiviles(string Esta_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _estadoCivilRepository.Delete(Esta_Id);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok($"La accion ha sido existosa", list);
+                }
+                else
+                {
+                    return result.Error("No se pudo realizar la accion");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+        public ServiceResult InsertarEstadoCiviles(tbEstadosCiviles item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _estadoCivilRepository.Insert(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
             }
             catch (Exception ex)
             {
                 return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult obterEstadosCiviles(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _estadoCivilRepository.Fill(id);
+
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
             }
         }
 
         #endregion
 
         #region Marca
-        public ServiceResult ListMarca()
+        public ServiceResult ListadoMarca()
         {
             var result = new ServiceResult();
             try
             {
-                var lost = _marcaRepository.List();
-                return result.Ok(lost);
+                var list = _marcaRepository.List();
+                return result.Ok(list);
+            }
+
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+
+
+
+
+
+        public ServiceResult EditarMarca(tbMarcas item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _marcaRepository.Update(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error("Y existe un registro con ese nombre");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+        public ServiceResult EliminarMarcas(string Marc_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _marcaRepository.Delete(Marc_Id);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok($"La accion ha sido existosa", list);
+                }
+                else
+                {
+                    return result.Error("No se pudo realizar la accion");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+
+
+        public ServiceResult InsertarMarcas(tbMarcas item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _marcaRepository.Insert(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
             }
             catch (Exception ex)
             {
@@ -200,6 +524,7 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             }
         }
 
+<<<<<<< HEAD
         public ServiceResult InsertarMarca(tbMarcas item)
         {
             var resul = new ServiceResult();
@@ -223,10 +548,16 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         }
 
         public ServiceResult EliminarMarc(int id)
+=======
+
+
+        public ServiceResult obterMarcas(int id)
+>>>>>>> yordin
         {
             var result = new ServiceResult();
             try
             {
+<<<<<<< HEAD
                 var lost = _marcaRepository.Eliminar(id);
                 if (lost.CodeStatus > 0)
                 {
@@ -268,6 +599,25 @@ namespace Grupo_Rac.BusinessLogic.Servicios
                 return result.Error(ex.Message);
             }
         }
+=======
+                var list = _marcaRepository.Fill(id);
+
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+        public IEnumerable<MarcaVehiculoDto> ObtenerMarcasPorUsuarioYSede(string usuario)
+        {
+            return _marcaRepository.GetMarcasPorUsuarioYSede(usuario);
+        }
+
+
+
+>>>>>>> yordin
         #endregion
 
         #region Modelo
@@ -357,17 +707,94 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         #endregion
 
         #region Sede
-        public ServiceResult ListSede()
+        public ServiceResult ListadoSucursal()
         {
             var result = new ServiceResult();
             try
             {
-                var lost = _sedeRepository.List();
-                return result.Ok(lost);
+                var list = _sedeRepository.List();
+                return result.Ok(list);
+            }
+
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult EditarSucursal(tbSedes item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _sedeRepository.Update(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok("okis", list);
+                }
+                else
+                {
+                    return result.Error("Y existe un registro con ese nombre");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+        public ServiceResult EliminarSucursal(string Sucu_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _sedeRepository.Delete(Sucu_Id);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok($"Exelente chiquit@", list);
+                }
+                else
+                {
+                    return result.Error("Hijole ahi si te quedo mal tito");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+        public ServiceResult InsertarSucursal(tbSedes item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _sedeRepository.Insert(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
             }
             catch (Exception ex)
             {
                 return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult obterSucursal(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _sedeRepository.Fill(id);
+
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
             }
         }
 
@@ -408,13 +835,179 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         #endregion
 
         #region Cargo
-        public ServiceResult ListCargo()
+        public ServiceResult ListadoCargos()
         {
             var result = new ServiceResult();
             try
             {
-                var lost = _cargoRepository.List();
-                return result.Ok(lost);
+                var list = _cargoRepository.List();
+                return result.Ok(list);
+            }
+
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult EditarCargo(tbCargos item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _cargoRepository.Update(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error("Y existe un registro con ese nombre");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+        public ServiceResult EliminarCargo(int Carg_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _cargoRepository.Delete(Carg_Id);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok($"La accion ha sido existosa", list);
+                }
+                else
+                {
+                    return result.Error("No se pudo realizar la accion");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+        public ServiceResult InsertarCargos(tbCargos item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _cargoRepository.Insert(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult obterCargos(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _cargoRepository.Fill(id);
+
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+
+        #endregion
+
+        #region Empleados
+        public ServiceResult ListadoEmpleado()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _empleadoRepository.List();
+                return result.Ok(list);
+            }
+
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+
+
+
+
+
+        public ServiceResult EditarEmpleado(tbEmpleados item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _empleadoRepository.Update(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error("Y existe un registro con ese nombre");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+        public ServiceResult EliminarEmpleado(string Empl_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _empleadoRepository.Delete(Empl_Id);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok($"La accion ha sido existosa", list);
+                }
+                else
+                {
+                    return result.Error("No se pudo realizar la accion");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+
+
+        public ServiceResult InsertarEmpleado(tbEmpleados item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _empleadoRepository.Insert(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
             }
             catch (Exception ex)
             {
@@ -422,6 +1015,23 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             }
         }
 
+
+
+        public ServiceResult obterEmpleado(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _empleadoRepository.Fill(id);
+
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
         #endregion
+
     }
 }

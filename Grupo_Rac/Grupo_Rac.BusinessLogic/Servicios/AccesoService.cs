@@ -13,10 +13,12 @@ namespace Grupo_Rac.BusinessLogic.Servicios
     {
         private readonly RolRepositorio _rolRepositorio;
         private readonly UsuarioRepository _usuarioRepository;
-        public AccesoService(RolRepositorio rolRepositorio, UsuarioRepository usuarioRepository)
+        private readonly pantallaRolesRepository _pantallaRolesRepository;
+        public AccesoService(RolRepositorio rolRepositorio, UsuarioRepository usuarioRepository, pantallaRolesRepository pantallaRolesRepository)
         {
             _rolRepositorio = rolRepositorio;
             _usuarioRepository = usuarioRepository;
+            _pantallaRolesRepository = pantallaRolesRepository;
         }
 
         #region Usuario
@@ -233,6 +235,223 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             catch (Exception ex)
             {
                 return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult ListadoRol()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _rolRepositorio.List();
+                return result.Ok(list);
+            }
+
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+
+
+
+        public ServiceResult EditarRol(tbRoles item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _rolRepositorio.Update(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok("okis", list);
+                }
+                else
+                {
+                    return result.Error("Y existe un registro con ese nombre");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+        public ServiceResult EliminarRol(string Role_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _rolRepositorio.Delete(Role_Id);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok($"La accion ha sido existosa", list);
+                }
+                else
+                {
+                    return result.Error("No se pudo realizar la accion");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+        public string InsertarRol(tbRoles item)
+        {
+            string error = "";
+            try
+            {
+                int result = _rolRepositorio.Insert(item);
+                if (result == 0)
+                    error = "el codigo no es valido";
+                else error = result.ToString();
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+            return error;
+        }
+
+        public ServiceResult obterRol(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _rolRepositorio.Fill(id);
+
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+        public ServiceResult ListadoPantallas()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _rolRepositorio.Listpantallas();
+                return result.Ok(list);
+            }
+
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region RolesPantalla
+        public ServiceResult ListadoPantallaRoles()
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _pantallaRolesRepository.List();
+                return result.Ok(list);
+            }
+
+            catch (Exception ex)
+            {
+
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult EditarRolesPantalla(tbPantallas_PorRoles item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _pantallaRolesRepository.Update(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok("okis", list);
+                }
+                else
+                {
+                    return result.Error("Y existe un registro con ese nombre");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+        public ServiceResult EliminarRolesPantalla(string Role_Id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _pantallaRolesRepository.Delete(Role_Id);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok($"La accion ha sido existosa", list);
+                }
+                else
+                {
+                    return result.Error("No se pudo realizar la accion");
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+        public ServiceResult InsertarRolesPantalla(tbPantallas_PorRoles item)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _pantallaRolesRepository.Insert(item);
+                if (list.CodeStatus > 0)
+                {
+                    return result.Ok(list);
+                }
+                else
+                {
+                    return result.Error(list);
+                }
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+        public ServiceResult obterRolesPantalla(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _pantallaRolesRepository.Fill(id);
+
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
+            }
+        }
+
+        public ServiceResult ObtenerRoles(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var list = _pantallaRolesRepository.Fill2(id);
+
+                return result.Ok(list);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex);
             }
         }
         #endregion

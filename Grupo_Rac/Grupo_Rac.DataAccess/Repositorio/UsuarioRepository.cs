@@ -21,7 +21,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 parametro.Add("Usua_Usuario", item.Usu_Usua);
                 parametro.Add("Usua_Admin", item.Usu_Admin);
                 parametro.Add("Rol_Id", item.Rol_Id);
-                //parametro.Add("Empl_Id", item.Empl_Id);
+                parametro.Add("Empl_Id", item.Empl_Id);
                 parametro.Add("UsuarioModificacion", item.Usu_UsuModi);
                 parametro.Add("FechaModificacion", DateTime.Now);
 
@@ -89,7 +89,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 parametro.Add("Usu_Contra", item.Usu_Contra);
                 parametro.Add("Usu_Admin", item.Usu_Admin);
                 parametro.Add("Rol_Id", item.Rol_Id);
-                //parametro.Add("Empl_Id", item.Empl_Id);
+                parametro.Add("Empl_Id", item.Empl_Id);
                 parametro.Add("Usu_UsuCre", item.Usu_UsuCre);
                 parametro.Add("Usu_FechaCreacion", DateTime.Now);
 

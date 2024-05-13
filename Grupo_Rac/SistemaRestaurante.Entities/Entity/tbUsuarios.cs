@@ -23,6 +23,8 @@ namespace Grupo_Rac.Entities.Entity
             tbComprasCom_ModificaNavigation = new HashSet<tbCompras>();
             tbDepartamentoDep_CreacionNavigation = new HashSet<tbDepartamento>();
             tbDepartamentoDep_ModificaNavigation = new HashSet<tbDepartamento>();
+            tbEmpleadosEmpl_UsuarioCreacionNavigation = new HashSet<tbEmpleados>();
+            tbEmpleadosEmpl_UsuarioModificacionNavigation = new HashSet<tbEmpleados>();
             tbEstadosCivilesEst_UsuCreNavigation = new HashSet<tbEstadosCiviles>();
             tbEstadosCivilesEst_UsuModiNavigation = new HashSet<tbEstadosCiviles>();
             tbMarcasMar_CreacionNavigation = new HashSet<tbMarcas>();
@@ -49,32 +51,23 @@ namespace Grupo_Rac.Entities.Entity
         public string Usu_Usua { get; set; }
         public string Usu_Contra { get; set; }
         public bool? Usu_Admin { get; set; }
-        public string Admin { get; set; }  // Asegúrate de que este campo esté presente para recibir el CASE
+        public string Admin { get; set; }
         public string Rol_Descripcion { get; set; }
         public string Ptl_Descripcion { get; set; }
-        public string Crg_Descripcion { get; set; }
-        public string Sed_Descripcion { get; set; }
         [NotMapped]
         public string Usu_Nombrecompleto { get; set; }
         public string Usu_Codigo { get; set; }
         public string Usu_Correo { get; set; }
-        public string Usu_Nombre { get; set; }
-        public string Usu_Apellido { get; set; }
-        public string Usu_Sexo { get; set; }
-        public int? Est_Id { get; set; }
-        public DateTime? Usu_FechaNacimiento { get; set; }
-        public string Usu_Telefono { get; set; }
-        public int? Sed_Id { get; set; }
-        public int? Crg_Id { get; set; }
         public int? Rol_Id { get; set; }
+        public int? Empl_Id { get; set; }
+        public int? Sed_Id { get; set; }
         public int? Usu_UsuCre { get; set; }
         public int? Usu_UsuModi { get; set; }
         public DateTime? Usu_FechaCreacion { get; set; }
         public DateTime? Usu_FechaModifica { get; set; }
         public int? Usu_Estado { get; set; }
 
-        public virtual tbCargos Crg { get; set; }
-        public virtual tbEstadosCiviles Est { get; set; }
+        public virtual tbEmpleados Empl { get; set; }
         public virtual tbRoles Rol { get; set; }
         public virtual tbSedes Sed { get; set; }
         public virtual tbUsuarios Usu_UsuCreNavigation { get; set; }
@@ -91,6 +84,8 @@ namespace Grupo_Rac.Entities.Entity
         public virtual ICollection<tbCompras> tbComprasCom_ModificaNavigation { get; set; }
         public virtual ICollection<tbDepartamento> tbDepartamentoDep_CreacionNavigation { get; set; }
         public virtual ICollection<tbDepartamento> tbDepartamentoDep_ModificaNavigation { get; set; }
+        public virtual ICollection<tbEmpleados> tbEmpleadosEmpl_UsuarioCreacionNavigation { get; set; }
+        public virtual ICollection<tbEmpleados> tbEmpleadosEmpl_UsuarioModificacionNavigation { get; set; }
         public virtual ICollection<tbEstadosCiviles> tbEstadosCivilesEst_UsuCreNavigation { get; set; }
         public virtual ICollection<tbEstadosCiviles> tbEstadosCivilesEst_UsuModiNavigation { get; set; }
         public virtual ICollection<tbMarcas> tbMarcasMar_CreacionNavigation { get; set; }
