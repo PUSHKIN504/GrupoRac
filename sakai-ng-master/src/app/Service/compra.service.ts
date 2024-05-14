@@ -40,8 +40,8 @@ export class CompraService {
     return this.http.delete<any>(this.endpoint.Delete(id)) 
       .toPromise()  
   }
-  Desactivar(model: Compra){
-    return this.http.put<any>(this.endpoint.Desactivar(), model) 
+  Emitir(model: Compra){
+    return this.http.put<any>(this.endpoint.Emitir(), model) 
       .toPromise()  
   }
 

@@ -1,6 +1,6 @@
-<button mat-raised-button color="warn" class="mb-4" (click)="nuevaFactura()">Crear</button>
-
-       <p-table id="table" #dt [loading]="loading"  [value]="compras" [rows]="10" [paginator]="true" [responsive]="true" [autoLayout]="true" [globalFilterFields]="['com_Id']" sortField="representative.name">
+<p-toast></p-toast>
+<button pButton icon="pi pi-plus" class="mb-4" id="btnCrear" label="Crear" (click)="nuevaFactura()"></button>
+<p-table id="table" #dt [loading]="loading"  [value]="compras" [rows]="10" [paginator]="true" [responsive]="true" [autoLayout]="true" [globalFilterFields]="['com_Id']" sortField="representative.name">
         <ng-template pTemplate="header">
             <tr>
                 <th>Factura No</th>
@@ -18,9 +18,9 @@
                 <td>{{compra.com_Fecha}}</td>
                 <td>{{compra.com_Estado}}</td>
                 <td>
-                        <button pButton pRipple type="button" (click)="editFactura(compra)">Editar</button>
-                        <button class="btn btn-primary">Detalles</button>
-                        <button class="btn btn-danger">Eliminar</button>
+                    <p-button severity="primary" *ngIf="compra.com_Estado" type="button" icon="pi pi-eye" class="mr-2" label="Ver" (click)="editFactura(compra)"></p-button>
+                    <p-button severity="secondary" *ngIf="compra.com_Estado" type="button" icon="pi pi-arrow-up" class="mr-2" label="Emitir" (click)="openEmitirDialog(compra)"></p-button>
+                    <p-button severity="danger" type="button" icon="pi pi-trash" class="mr-2" label="Eliminar"></p-button>
                 </td>
                 <!-- Add more table cells as per your Ciudad model -->
             </tr>
@@ -36,7 +36,7 @@
         <div class="card" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
             <div class=" flex flex-column justify-content-center align-items-center ">
                 <div class="flex flex-row mb-4 justify-content-around" style="width: 100%;">
-                    <div class="flex flex-column text-center" *ngIf="encabezado">
+                    <div class="flex flex-column text-center" *ngIf="encabezado && compra.com_Id">
                         <div class="p-card-subtitle">
                             No. Factura
                         </div>
@@ -62,12 +62,12 @@
                     </div> -->
                 </div>
                 <div class="acciones">
-                    <button pButton  icon="pi pi-pencil" class="p-button mr-2" label="Editar" *ngIf="encabezado" (click)="openDialogEncabezado()"></button>
+                    <button pButton  icon="pi pi-pencil" class="p-button mr-2" label="Editar" *ngIf="encabezado && compra.com_Estado" (click)="openDialogEncabezado()"></button>
                     <button pButton  icon="pi pi-plus" class="p-button mr-2" label="Nuevo" *ngIf="!encabezado" (click)="openDialogEncabezado()"></button>
                 </div>
             </div>
-            <hr>
-            <div class="p-card-body flex flex-column justify-content-center align-items-center">
+            <hr *ngIf="encabezado">
+            <div class="p-card-body flex flex-column justify-content-center align-items-center" *ngIf="encabezado">
                 <div class="p-card p-card-body flex flex-row flex-wrap justify-content-around align-items-center mb-3" *ngFor="let vehiculo of vehiculos" style="width: 100%; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
                     <div class="flex flex-column">
                         <label class="p-card-subtitle" for="cargo_Descripcion">Placa</label>
@@ -82,29 +82,29 @@
                         <div>{{vehiculo.com_Precio | currency:'LPS ':'symbol'}}</div>
                     </div>
                     <div class="acciones flex flex-row" style="height: 25%;">
-                        <button pButton  icon="pi pi-pencil" class="p-button mr-2" label="Editar" (click)="editDetalle(vehiculo)"></button>
-                        <button pButton  icon="pi pi-times" class="p-button mr-2" label="Eliminar" (click)="openDeleteDialog(vehiculo)"></button>
+                        <p-button severity="primary" icon="pi pi-pencil" class="mr-2" label="Editar" *ngIf="compra.com_Estado" (click)="editDetalle(vehiculo)"></p-button>
+                        <p-button severity="danger" icon="pi pi-trash" class="mr-2" label="Eliminar" *ngIf="compra.com_Estado" (click)="openDeleteDialog(vehiculo)"></p-button>
                     </div>
                 </div>
-                <button pButton color="warn" icon="pi pi-plus"  class="p-button mr-2" (click)="newDetalle()"></button>
+                <button pButton color="warn" icon="pi pi-plus" label="Agregar Vehículo" *ngIf="compra.com_Estado"  class="p-button mr-2" (click)="newDetalle()"></button>
             </div>
-            <hr>
-            <div class="p-card-body flex flex-column justify-content-center align-items-end">
-                <div style="width: 40%;">
+            <hr *ngIf="encabezado">
+            <div class="p-card-body flex flex-column justify-content-center align-items-end" *ngIf="encabezado">
+                <div style="width: 30%;">
                     <div class="flex flex-row justify-content-between">
-                        <label for="cargo_Descripcion">Subtotal: </label>
+                        <label for="cargo_Descripcion" class=" p-card-subtitle">Subtotal: </label>
                         <div>{{compra.com_Precio | currency:'LPS ':'symbol'}}</div>
                     </div>
                     <div class="flex flex-row justify-content-between">
-                        <label for="cargo_Descripcion">Descuento: </label>
+                        <label for="cargo_Descripcion"class=" p-card-subtitle">Descuento: </label>
                         <div>{{0 | currency:'LPS ':'symbol'}}</div>
                     </div>
                     <div class="flex flex-row justify-content-between">
-                        <label for="cargo_Descripcion">Impuesto: </label>
+                        <label for="cargo_Descripcion" class=" p-card-subtitle">Impuesto: </label>
                         <div>{{0 | currency:'LPS ':'symbol'}}</div>
                     </div>
                     <div class="flex flex-row justify-content-between">
-                        <label for="cargo_Descripcion">Total a Pagar: </label>
+                        <label for="cargo_Descripcion" class=" p-card-subtitle">Total a Pagar: </label>
                         <div>{{compra.com_Precio | currency:'LPS ':'symbol'}}</div>
                     </div>
                 </div>
@@ -112,8 +112,8 @@
             </div>
         </div>
         <div class="p-card-footer flex flex-row justify-content-end">
-            <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideTable()"></button>
-            <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveFactura()"></button>
+            <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text mr-2" (click)="cancelarFactura()"></button>
+            <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text mr-2" *ngIf="!encabezado || compra.com_Estado" (click)="saveFactura()"></button>
         </div>
     </div>
 </div>
@@ -121,7 +121,7 @@
 <p-dialog [(visible)]="encabezadoDialog" [style]="{width: '450px'}" [modal]="true">
     <ng-template pTemplate="content">
         <div class="flex flex-row flex-wrap justify-content-around align-items-center">
-            <div class="flex flex-column justify-content-center" style="width: 40%;" *ngIf="encabezado">
+            <div class="flex flex-column justify-content-center" style="width: 40%;" *ngIf="encabezado && compra.com_Id">
                 <label for="cargo_Descripcion">No. Factura</label>
                 <div>{{compra.com_Id}}</div>
             </div>
@@ -144,8 +144,8 @@
     </ng-template>
 
     <ng-template pTemplate="footer">
-        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveModalCompra()"></button>
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text mr-2" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text mr-2" (click)="saveModalCompra()"></button>
     </ng-template>
 </p-dialog>
 
@@ -154,7 +154,8 @@
         <div class="flex flex-row flex-wrap justify-content-around align-items-center" >
             <div class="flex flex-column justify-content-center" style="width: 40%;" >
                 <label for="cargo_Descripcion">Placa</label>
-                <input type="text" pInputText id="cargo_Descripcion" [(ngModel)]="vehiculo.veh_Placa" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !vehiculo.veh_Placa}"/>
+                <input *ngIf="insertarVehiculo" type="text" pInputText id="cargo_Descripcion" [(ngModel)]="vehiculo.veh_Placa" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !vehiculo.veh_Placa}"/>
+                <span *ngIf="!insertarVehiculo">{{vehiculo.veh_Placa}}</span>
             </div>
             <div class="flex flex-column" style="width: 40%;">
                 <h5>Modelo</h5>
@@ -184,14 +185,39 @@
         <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveModalVehiculo()"></button>
     </ng-template>
 </p-dialog>
-<p-dialog [(visible)]="deleteDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+<p-dialog [(visible)]="deleteDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
     <div class="flex align-items-center justify-content-center">
         <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-        <span *ngIf="vehiculo">Seguro que desea eliminar <b>{{vehiculo.veh_Placa}}</b>?</span>
+        <span *ngIf="vehiculo">¿Seguro que desea eliminar <b>{{vehiculo.veh_Placa}}</b>?</span>
     </div>
     <ng-template pTemplate="footer">
         <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
-        <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+        <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Si" (click)="confirmDelete()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="emitirDialog" header="Emición" [modal]="true" [style]="{width:'450px'}">
+    <div class="flex align-items-center justify-content-center">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+        <span *ngIf="compra">¿Seguro que desea emitir la factura <b>{{compra.com_Id}}</b>?</span>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="emitirDialog = false"></button>
+        <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Si" (click)="emitirFactura()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="cambiosDialog" header="¡Cambios sin Guardar!" [modal]="true" [style]="{width:'450px'}">
+    <div class="flex align-items-center justify-content-center">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+        <div class="flex flex-column">
+            <span>Tiene cambios <b>sin guardar</b>.</span>
+            <span>¿Está seguro que desea <b>salir sin guardar</b>?</span>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="cambiosDialog = false"></button>
+        <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Si" (click)="confirmCancelar()"></button>
     </ng-template>
 </p-dialog>
 

@@ -33,8 +33,8 @@ export class CompraEndPoint{
         return `${this.api.baseUrl}/Compra/Eliminar/${id}`;
     }
 
-    public Desactivar():string{
-        return `${this.api.baseUrl}/Compra/Desactivar`;
+    public Emitir():string{
+        return `${this.api.baseUrl}/Compra/Emitir`;
     }
 }
 

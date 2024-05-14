@@ -1,3 +1,6 @@
 primary: #920808
 primary-light: #BF0A0A
-primary-dark:
+primary-dark: 
+
+secondary-light: #4b5563
+secondary-ligher: #dfdfdf

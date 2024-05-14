@@ -2012,17 +2012,17 @@
   }
   .p-button.p-button-text {
     background-color: transparent;
-    color: #6366F1;
+    color: #920808;
     border-color: transparent;
   }
   .p-button.p-button-text:not(:disabled):hover {
-    background: rgba(99, 102, 241, 0.04);
-    color: #6366F1;
-    border-color: transparent;
+    background: transparent;
+    color: #BF0A0A;
+    border-color: #dfdfdf;
   }
   .p-button.p-button-text:not(:disabled):active {
-    background: rgba(99, 102, 241, 0.16);
-    color: #6366F1;
+    background: #dfdfdf;
+    color: #BF0A0A;
     border-color: transparent;
   }
   .p-button.p-button-text.p-button-plain {
@@ -2036,11 +2036,11 @@
     background: #e5e7eb;
     color: #6b7280;
   }
-  .p-button:focus {
+  /* .p-button:focus {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: 0 0 0 0.2rem #C7D2FE;
-  }
+  } */
   .p-button .p-button-label {
     transition-duration: 0.2s;
   }

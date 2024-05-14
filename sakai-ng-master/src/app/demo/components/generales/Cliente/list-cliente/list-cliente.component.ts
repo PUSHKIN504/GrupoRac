@@ -4,7 +4,7 @@ import { Product } from 'src/app/demo/api/product';
 import {Router} from '@angular/router';
 import { Table } from 'primeng/table';
 import { Cliente,ClienteEnviar,Fill } from 'src/app/Models/ClienteViewModel';
-import { ServiceService } from 'src/app/Service/Cliente.service';
+import { ClienteService } from 'src/app/Service/Cliente.service';
 import { MensajeViewModel } from 'src/app/Models/MensajeViewModel';
 import { FormGroup, FormControl,  Validators  } from '@angular/forms';
 import { dropDepartamento } from 'src/app/Models/DepartamentoViewModel';
@@ -63,7 +63,7 @@ export class ListClienteComponent implements OnInit{
   ID: string = "";
   MunicipioCodigo: String = "";
 
-  constructor(private service: ServiceService, private router: Router,   private messageService: MessageService
+  constructor(private service: ClienteService, private router: Router,   private messageService: MessageService
   
   ) { }
 

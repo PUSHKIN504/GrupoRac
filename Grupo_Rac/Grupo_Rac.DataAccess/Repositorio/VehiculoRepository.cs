@@ -27,7 +27,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 parameter.Add("@Veh_Modifica", item.Veh_Modifica);
                 parameter.Add("@Veh_Fecha_Modifica", DateTime.Now);
 
-                var result = db.Execute(ScriptBaseDatos.Vehiculo_Actualizar,
+                var result = db.QueryFirstOrDefault<int>(ScriptBaseDatos.Vehiculo_Actualizar,
                     parameter,
                     commandType: CommandType.StoredProcedure
                     );
@@ -50,7 +50,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
 
                 parameter.Add("@Veh_Placa", id);
 
-                var result = db.Execute(ScriptBaseDatos.Vehiculo_Eliminar,
+                var result = db.QueryFirstOrDefault<int>(ScriptBaseDatos.Vehiculo_Eliminar,
                     parameter,
                     commandType: CommandType.StoredProcedure
                     );
@@ -110,7 +110,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 parameter.Add("@Veh_Creacion", item.Veh_Creacion);
                 parameter.Add("@Veh_Fecha_Creacion", DateTime.Now);
 
-                var result = db.Execute(ScriptBaseDatos.Vehiculo_Insertar,
+                var result = db.QueryFirstOrDefault<int>(ScriptBaseDatos.Vehiculo_Insertar,
                     parameter,
                     commandType: CommandType.StoredProcedure
                     );

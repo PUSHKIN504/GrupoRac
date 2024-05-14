@@ -16,7 +16,7 @@ import { dropCargo } from '../Models/CargoViewModel';
 @Injectable({
   providedIn: 'root'
 })
-export class ServiceService {
+export class ClienteService {
   constructor(private http:HttpClient) { }
 
 

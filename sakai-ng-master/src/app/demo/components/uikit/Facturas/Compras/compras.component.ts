@@ -8,10 +8,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Vehiculo } from 'src/app/Models/VehiculoViewModel';
 import { Cliente } from 'src/app/Models/ClienteViewModel';
-import { ServiceCliente, ServiceModelo } from 'src/app/Service/service.service';
+
 import { Modelo } from 'src/app/Models/ModeloViewModel';
 import { CompraService } from 'src/app/Service/compra.service';
 import { VehiculoService } from 'src/app/Service/vehiculo.service';
+import { ClienteService } from 'src/app/Service/Cliente.service';
+import { ServiceModelo } from 'src/app/Service/service.service';
 
 @Component({
 
@@ -23,13 +25,23 @@ export class CompraDemoComponent implements OnInit {
     compras:Compra[];
     compra:Compra;
     com_Fecha: string;
+
     vehiculos: Vehiculo[];
     vehiculo: Vehiculo;
 
-    vehiculoInicial: Vehiculo[];
+    insertarVehiculo: boolean = false;
+
+    vehiculosUpdate: Vehiculo[];
+    vehiculosDelete: Vehiculo[];
+    vehiculosInsert: Vehiculo[];
+
+    cambiosDialog: boolean = false;
+    cambios: boolean = false;
 
     clientes: Cliente[];
     filtered: Cliente[] = [];
+
+    emitirDialog: boolean = false;
 
     modelos: Modelo[];
 
@@ -45,7 +57,7 @@ export class CompraDemoComponent implements OnInit {
     fin:any;
 
     constructor(private CompraService: CompraService,private VehiculoService: VehiculoService,
-        private ClienteService: ServiceCliente, private ModeloService: ServiceModelo,
+        private clienteService: ClienteService, private modeloService: ServiceModelo,
         private router: Router, private messageService: MessageService,
         private fb:FormBuilder, private renderer: Renderer2
     
@@ -71,14 +83,14 @@ export class CompraDemoComponent implements OnInit {
                 console.log(data)
             })
         
-        await this.ClienteService.getCliente().subscribe((data: any)=>{
+        await this.clienteService.getClientes().subscribe((data: any)=>{
                 this.clientes = data;
                 console.log(this.clientes)
             },error=>{
               console.log(error);
             });
 
-        await this.ModeloService.getModelo().subscribe((data: any)=>{
+        await this.modeloService.getModelo().subscribe((data: any)=>{
             this.modelos = data;
             console.log(this.modelos)
         },error=>{
@@ -87,18 +99,33 @@ export class CompraDemoComponent implements OnInit {
      }
 
      async nuevaFactura(){
+        //visiblidad
         const table = document.getElementById('table');
         const factura = document.getElementById('factura');
-    
-        this.compra = {};
-
+        const btnCrear = document.getElementById('btnCrear');
+        this.renderer.addClass(btnCrear, 'd-none');
         this.renderer.addClass(table, 'd-none');
         this.renderer.removeClass(factura, 'd-none');
+        //visiblidad
+
+        this.compra = {};
+        this.vehiculo = {};
+        this.vehiculos = [];
+        
+        this.encabezadoDialog = true;
      }
 
     async editFactura(compra: Compra){
+
+        //visibilidad
         const table = document.getElementById('table');
         const factura = document.getElementById('factura');
+        const btnCrear = document.getElementById('btnCrear');
+        this.renderer.addClass(btnCrear, 'd-none');
+        this.renderer.addClass(table, 'd-none');
+        this.renderer.removeClass(factura, 'd-none');
+        //visibilidad
+
         this.encabezado = true;
         this.compra = {};
         this.compra = {...compra};
@@ -109,11 +136,15 @@ export class CompraDemoComponent implements OnInit {
         await this.VehiculoService.FindDetalle(this.compra.com_Id)
             .then(data => {
                 this.vehiculos = data;
-                this.vehiculoInicial = data;
+                this.vehiculosUpdate = data;
+                this.vehiculosInsert = [];
+                this.vehiculosDelete = [];
             }),
             error=>{
                 console.log(error);
             };
+        
+        
         
             this.calcularPrecio();
      }
@@ -128,11 +159,14 @@ export class CompraDemoComponent implements OnInit {
      }
 
     saveModalVehiculo(){
+        this.cambios = true;
+
         this.submitted = true;
 
         if (this.vehiculo.veh_Placa?.trim()) {
             if (this.vehiculo.veh_Id) {
                 // @ts-ignore
+                
                 this.vehiculo.mod_Id = this.findModelByDescripcion(this.vehiculo.mod_Descripcion);
                 this.vehiculos[this.findIndexById(this.vehiculo.veh_Id)] = this.vehiculo;
 
@@ -146,6 +180,10 @@ export class CompraDemoComponent implements OnInit {
                 this.vehiculo.veh_Creacion = 2;
                 this.vehiculos.push(this.vehiculo);
 
+                this.vehiculosInsert.push(this.vehiculo);
+
+                this.insertarVehiculo = false;
+
                 this.calcularPrecio();
             }
             this.vehiculos = [...this.vehiculos];
@@ -155,18 +193,20 @@ export class CompraDemoComponent implements OnInit {
      }
 
      saveModalCompra(){
+        this.cambios = true;
+
         this.submitted = true;
 
         if (this.compra.cli_DNI?.trim()) {
             if (this.compra.cli_DNI) {
-               
+
                 // this.compra.cli_Id = this.createId();
                 // @ts-ignore
                 console.log(this.compra);
 
                 this.compra.com_Creacion = 1;
 
-                this.compras.push(this.compra);
+                // this.compras.push(this.compra);
 
                 this.encabezado = true;
 
@@ -174,41 +214,197 @@ export class CompraDemoComponent implements OnInit {
             }
             this.compras = [...this.compras];
             this.encabezadoDialog = false;
-            this.compra = {};
         }
 
      }
 
+     openEmitirDialog(compra: Compra){
+        this.emitirDialog = true;
+        this.compra = compra;
+     }
+
+     async emitirFactura(){
+        this.compra.com_Modifica = 2;
+
+        await this.CompraService.Emitir(this.compra)
+                    .then(result => {
+                        if(result.code == 200){
+                            
+                            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'insercion Correctamente', life: 3000 });
+                            
+                            this.ngOnInit();
+
+                            this.cancelarFactura();
+                        }else{
+                            this.messageService.add({ severity: 'warning', summary: 'Advertencia', detail: `Algo salió mal | Código: ${result.code}`, life: 3000 });
+                        }
+                    })
+                    ,error=>{
+                        this.messageService.add({ severity: 'error', summary: 'Error', detail: `Algo salió mal | Error: ${error}`, life: 3000 });
+                    };
+     }
+
     async saveFactura(){
-        var id;
-        console.log("entraFact")
-        await this.CompraService.Insert(this.compra)
+        let com_Id;
+
+        if(this.compra.com_Id && this.compra.com_Estado){
+            console.log(this.vehiculosInsert,"insert")
+            console.log(this.vehiculosDelete, "delete")
+            console.log(this.vehiculosUpdate, "update")
+
+            this.compra.com_Modifica = 2;
+
+            await this.CompraService.Update(this.compra)
             .then(result => {
-                id =  result.data.CodeStatus;
-                console.log(result.data.CodeStatus)
+                if(result.code == 200){
+                    this.cambios = false;
+
+                    if(this.vehiculos.length < 1){
+                        
+                        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Factura Creada Correctamente', life: 3000 });
+                        
+                        this.ngOnInit();
+
+                        this.cancelarFactura();
+                    }
+                }else{
+                    this.messageService.add({ severity: 'warn', summary: 'Advertencia', detail: `Algo salió mal | Código: ${result.code}`, life: 3000 });
+                }
             })
             ,error=>{
-                console.log(error);
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: `Algo salió mal | Error: ${error}`, life: 3000 });
+            };
+            let contador = 0;
+            this.vehiculosInsert.forEach(async element => {
+                element.com_Id = this.compra.com_Id;
+
+                await this.VehiculoService.Insert(element)
+                    .then(result => {
+                        if(result.code == 200){
+                            
+                            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'insercion Correctamente', life: 3000 });
+                            
+                            this.ngOnInit();
+
+                            this.cancelarFactura();
+                        }else{
+                            this.messageService.add({ severity: 'warning', summary: 'Advertencia', detail: `Algo salió mal | Código: ${result.code}`, life: 3000 });
+                        }
+                    })
+                    ,error=>{
+                        this.messageService.add({ severity: 'error', summary: 'Error', detail: `Algo salió mal | Error: ${error}`, life: 3000 });
+                    };
+            });
+
+            this.vehiculosDelete.forEach(async element => {
+                await this.VehiculoService.Delete(element.veh_Placa)
+                    .then(result => {
+                        if(result.code == 200){
+                            
+                            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'deletion Correctamente', life: 3000 });
+                            
+                            this.ngOnInit();
+
+                            this.cancelarFactura();
+                        }else{
+                            this.messageService.add({ severity: 'warning', summary: 'Advertencia', detail: `Algo salió mal | Código: ${result.code}`, life: 3000 });
+                        }
+                    })
+                    ,error=>{
+                        this.messageService.add({ severity: 'error', summary: 'Error', detail: `Algo salió mal | Error: ${error}`, life: 3000 });
+                    };
+            });
+            contador = 0;
+            this.vehiculosUpdate.forEach(async element => {
+                element.veh_Modifica = 2;
+
+                await this.VehiculoService.Update(element)
+                    .then(result => {
+                        if(result.code == 200){
+                            if(contador == 0){
+                                this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'update Correctamente', life: 3000 });
+                            }
+                            
+                            this.ngOnInit();
+
+                            this.cancelarFactura();
+                        }else{
+                            this.messageService.add({ severity: 'warning', summary: 'Advertencia', detail: `Algo salió mal | Código: ${result.code}`, life: 3000 });
+                        }
+                    })
+                    ,error=>{
+                        this.messageService.add({ severity: 'error', summary: 'Error', detail: `Algo salió mal | Error: ${error}`, life: 3000 });
+                    };
+                
+                    contador ++;
+            });
+        }else{
+            await this.CompraService.Insert(this.compra)
+            .then(result => {
+                if(result.code == 200){
+                    this.cambios = false;
+
+                    com_Id = result.data.codeStatus;
+                    if(this.vehiculos.length < 1){
+                        
+                        this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Factura Creada Correctamente', life: 3000 });
+                        
+                        this.ngOnInit();
+
+                        this.cancelarFactura();
+
+                    }
+                }else{
+                    this.messageService.add({ severity: 'warn', summary: 'Advertencia', detail: `Algo salió mal | Código: ${result.code}`, life: 3000 });
+                }
+            })
+            ,error=>{
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: `Algo salió mal | Error: ${error}`, life: 3000 });
             };
             
-        this.vehiculos.forEach(async element => {
-            element.com_Id = id;
-            await this.VehiculoService.Insert(element)
-            ,error=>{
-                console.log(error);
-            };
-        });
-        
+            this.vehiculos.forEach(async element => {
+                element.com_Id = com_Id;
+                await this.VehiculoService.Insert(element)
+                    .then(result => {
+                        if(result.code == 200){
+                            
+                            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Factura Creada Correctamente', life: 3000 });
+                            
+                            this.ngOnInit();
+
+                            this.cancelarFactura();
+
+
+                        }else{
+                            this.messageService.add({ severity: 'warning', summary: 'Advertencia', detail: `Algo salió mal | Código: ${result.code}`, life: 3000 });
+                        }
+                    })
+                    ,error=>{
+                        this.messageService.add({ severity: 'error', summary: 'Error', detail: `Algo salió mal | Error: ${error}`, life: 3000 });
+                    };
+            });
+
+
+        }        
     }
 
      openDeleteDialog(vehiculo: Vehiculo){
+        this.cambios = true;
         this.deleteDialog = true;
         this.vehiculo = {...vehiculo};
      }
 
      confirmDelete(){
+        this.cambios = true;
+
         this.deleteDialog = false;
+        
+        this.vehiculosDelete.push(this.vehiculo);
+        
         this.vehiculos = this.vehiculos.filter(val => val.veh_Id !== this.vehiculo.veh_Id);
+        
+        this.vehiculosUpdate = this.vehiculosUpdate.filter(val => val.veh_Id !== this.vehiculo.veh_Id);
+        
         this.vehiculo = {};
         this.calcularPrecio();
 
@@ -245,13 +441,28 @@ export class CompraDemoComponent implements OnInit {
         }
         return id;
     }
+    confirmCancelar(){
+        this.cambios = false;
+        this.cambiosDialog = false;
+        this.cancelarFactura();
+    }
+    
+     cancelarFactura(){
+        if(this.cambios){
+            this.cambiosDialog = true;
+        }else{
+            //visbilidad
+            const table = document.getElementById('table');
+            const factura = document.getElementById('factura');
+            const btnCrear = document.getElementById('btnCrear');
+            this.renderer.removeClass(btnCrear, 'd-none');
+            this.renderer.removeClass(table, 'd-none');
+            this.renderer.addClass(factura, 'd-none');
+            //visbilidad
 
-     hideTable(){
-        const table = document.getElementById('table');
-        const factura = document.getElementById('factura');
-
-        this.renderer.removeClass(table, 'd-none');
-        this.renderer.addClass(factura, 'd-none');
+            this.encabezado = false;
+            this.compra = {}
+        }       
      }
 
      openDialogEncabezado(){
@@ -260,6 +471,7 @@ export class CompraDemoComponent implements OnInit {
 
      newDetalle(){
         this.detalleDialog = true;
+        this.insertarVehiculo = true;
         this.vehiculo = {};
      }
 
@@ -282,6 +494,7 @@ export class CompraDemoComponent implements OnInit {
     }
 
     filter(event: any) {
+
         const filtered: any[] = [];
         const query = event.query;
         for (let i = 0; i < this.clientes.length; i++) {

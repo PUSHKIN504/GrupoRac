@@ -20,13 +20,13 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 var parameter = new DynamicParameters();
                 //parameter.Add("Dept_Id", item.Dep_Id);
                 parameter.Add("@Com_Id", item.Com_Id);
-                parameter.Add("@DNI", item.Cli_DNI);
+                parameter.Add("@Cli_DNI", item.Cli_DNI);
                 parameter.Add("@Com_Precio", item.Com_Precio);
-                parameter.Add("@Com_Modifica", item.Com_Creacion);
+                parameter.Add("@Com_Modifica", item.Com_Modifica);
                 parameter.Add("@Com_Fecha_Modifica", DateTime.Now);
 
 
-                var result = db.Execute(ScriptBaseDatos.Compra_Actualizar,
+                var result = db.QueryFirstOrDefault<int>(ScriptBaseDatos.Compra_Actualizar,
                     parameter,
                     commandType: CommandType.StoredProcedure
                     );
@@ -99,13 +99,13 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 //pendiente los parametros
                 var parameter = new DynamicParameters();
                 //parameter.Add("Dept_Id", item.Dep_Id);
-                parameter.Add("@DNI", "0601200102969");
+                parameter.Add("@DNI", item.Cli_DNI);
                 parameter.Add("@UsuCrea", 1);
                 parameter.Add( "@fechaCrea", DateTime.Now);
                 parameter.Add("@Com_Precio",item.Com_Precio);
 
 
-                var result = db.Execute(ScriptBaseDatos.Compra_Insertar,
+                var result = db.QueryFirstOrDefault<int>(ScriptBaseDatos.Compra_Insertar,
                     parameter,
                     commandType: CommandType.StoredProcedure
                     );
