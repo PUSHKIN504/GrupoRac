@@ -18,9 +18,9 @@
                 <td>{{compra.com_Fecha}}</td>
                 <td>{{compra.com_Estado}}</td>
                 <td>
-                    <p-button severity="primary" *ngIf="compra.com_Estado" type="button" icon="pi pi-eye" class="mr-2" label="Ver" (click)="editFactura(compra)"></p-button>
-                    <p-button severity="secondary" *ngIf="compra.com_Estado" type="button" icon="pi pi-arrow-up" class="mr-2" label="Emitir" (click)="openEmitirDialog(compra)"></p-button>
-                    <p-button severity="danger" type="button" icon="pi pi-trash" class="mr-2" label="Eliminar"></p-button>
+                    <p-button severity="primary"  type="button" icon="pi pi-eye" class="mr-2" label="Ver" (click)="editFactura(compra)"></p-button>
+                    <p-button severity="secondary"  type="button" icon="pi pi-arrow-up" class="mr-2" label="Emitir" (click)="openEmitirDialog(compra)"></p-button>
+                    <!-- <p-button severity="danger" type="button" icon="pi pi-trash" class="mr-2" label="Eliminar"></p-button> -->
                 </td>
                 <!-- Add more table cells as per your Ciudad model -->
             </tr>
@@ -62,8 +62,8 @@
                     </div> -->
                 </div>
                 <div class="acciones">
-                    <button pButton  icon="pi pi-pencil" class="p-button mr-2" label="Editar" *ngIf="encabezado && compra.com_Estado" (click)="openDialogEncabezado()"></button>
-                    <button pButton  icon="pi pi-plus" class="p-button mr-2" label="Nuevo" *ngIf="!encabezado" (click)="openDialogEncabezado()"></button>
+                    <button pButton  icon="pi pi-pencil" class="p-button mr-2" label="Editar" *ngIf="encabezado && (insertarFactura || compra.com_Estado != 'Emitida')" (click)="openDialogEncabezado()"></button>
+                    <button pButton  icon="pi pi-plus" class="p-button mr-2" label="Nuevo" *ngIf="!encabezado && (insertarFactura || compra.com_Estado != 'Emitida')" (click)="openDialogEncabezado()"></button>
                 </div>
             </div>
             <hr *ngIf="encabezado">
@@ -82,11 +82,11 @@
                         <div>{{vehiculo.com_Precio | currency:'LPS ':'symbol'}}</div>
                     </div>
                     <div class="acciones flex flex-row" style="height: 25%;">
-                        <p-button severity="primary" icon="pi pi-pencil" class="mr-2" label="Editar" *ngIf="compra.com_Estado" (click)="editDetalle(vehiculo)"></p-button>
-                        <p-button severity="danger" icon="pi pi-trash" class="mr-2" label="Eliminar" *ngIf="compra.com_Estado" (click)="openDeleteDialog(vehiculo)"></p-button>
+                        <p-button severity="primary" icon="pi pi-pencil" class="mr-2" label="Editar" *ngIf="insertarFactura || compra.com_Estado != 'Emitida'" (click)="editDetalle(vehiculo)"></p-button>
+                        <p-button severity="danger" icon="pi pi-trash" class="mr-2" label="Eliminar" *ngIf="insertarFactura || compra.com_Estado != 'Emitida'"  (click)="openDeleteDialog(vehiculo)"></p-button>
                     </div>
                 </div>
-                <button pButton color="warn" icon="pi pi-plus" label="Agregar Vehículo" *ngIf="compra.com_Estado"  class="p-button mr-2" (click)="newDetalle()"></button>
+                <button pButton color="warn" icon="pi pi-plus" label="Agregar Vehículo"   class="p-button mr-2" *ngIf="insertarFactura || compra.com_Estado != 'Emitida'" (click)="newDetalle()"></button>
             </div>
             <hr *ngIf="encabezado">
             <div class="p-card-body flex flex-column justify-content-center align-items-end" *ngIf="encabezado">
@@ -113,7 +113,7 @@
         </div>
         <div class="p-card-footer flex flex-row justify-content-end">
             <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text mr-2" (click)="cancelarFactura()"></button>
-            <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text mr-2" *ngIf="!encabezado || compra.com_Estado" (click)="saveFactura()"></button>
+            <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text mr-2" *ngIf="insertarFactura || compra.com_Estado != 'Emitida'" (click)="saveFactura()"></button>
         </div>
     </div>
 </div>

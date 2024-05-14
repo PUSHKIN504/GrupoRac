@@ -29,6 +29,9 @@ export class CompraDemoComponent implements OnInit {
     vehiculos: Vehiculo[];
     vehiculo: Vehiculo;
 
+
+    insertarFactura: boolean = false;
+
     insertarVehiculo: boolean = false;
 
     vehiculosUpdate: Vehiculo[];
@@ -51,6 +54,7 @@ export class CompraDemoComponent implements OnInit {
     encabezado: boolean = false;
     deleteDialog: boolean = false;
 
+
     loading: boolean = false;
     rowsPerPageOptions = [5, 10, 20];
     inicio:any;
@@ -72,6 +76,7 @@ export class CompraDemoComponent implements OnInit {
    
 
     async ngOnInit(){
+        
         this.vehiculos = [];
         this.compra = {};
         this.loading = true;
@@ -108,15 +113,17 @@ export class CompraDemoComponent implements OnInit {
         this.renderer.removeClass(factura, 'd-none');
         //visiblidad
 
+        this.insertarFactura = true;
         this.compra = {};
         this.vehiculo = {};
         this.vehiculos = [];
+
         
         this.encabezadoDialog = true;
      }
 
     async editFactura(compra: Compra){
-
+        console.log(this.insertarFactura, "insertarboolean");
         //visibilidad
         const table = document.getElementById('table');
         const factura = document.getElementById('factura');
@@ -129,6 +136,9 @@ export class CompraDemoComponent implements OnInit {
         this.encabezado = true;
         this.compra = {};
         this.compra = {...compra};
+
+        
+        console.log(this.compra.com_Estado, "estado");
 
         this.renderer.addClass(table, 'd-none');
         this.renderer.removeClass(factura, 'd-none');
@@ -230,11 +240,11 @@ export class CompraDemoComponent implements OnInit {
                     .then(result => {
                         if(result.code == 200){
                             
-                            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'insercion Correctamente', life: 3000 });
+                            this.messageService.add({ severity: 'success', summary: 'Éxito', detail: 'Emición ejecutada correctamente', life: 3000 });
                             
                             this.ngOnInit();
 
-                            this.cancelarFactura();
+                            this.emitirDialog = false;
                         }else{
                             this.messageService.add({ severity: 'warning', summary: 'Advertencia', detail: `Algo salió mal | Código: ${result.code}`, life: 3000 });
                         }
@@ -459,6 +469,9 @@ export class CompraDemoComponent implements OnInit {
             this.renderer.removeClass(table, 'd-none');
             this.renderer.addClass(factura, 'd-none');
             //visbilidad
+
+
+            this.insertarFactura = false;
 
             this.encabezado = false;
             this.compra = {}

@@ -65,7 +65,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 parameter.Add("@Com_Modifica", item.Com_Modifica);
                 parameter.Add("@Com_Fecha_Modifica", DateTime.Now);
 
-                var result = db.Execute(ScriptBaseDatos.Compra_Emitir,
+                var result = db.QueryFirstOrDefault<int>(ScriptBaseDatos.Compra_Emitir,
                     parameter,
                     commandType: CommandType.StoredProcedure
                     );
