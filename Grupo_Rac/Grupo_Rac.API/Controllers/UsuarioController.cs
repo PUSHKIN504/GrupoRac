@@ -24,7 +24,6 @@ namespace Grupo_Rac.API.Controllers
             _mapper = mapper;
             _AccesoService = AccesoService;
             _mailService = _MailService;
-
         }
         [HttpGet("List")]
         public IActionResult List()
