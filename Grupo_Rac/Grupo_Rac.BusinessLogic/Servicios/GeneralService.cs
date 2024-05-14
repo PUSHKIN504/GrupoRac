@@ -23,7 +23,7 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         private readonly VehiculoRepository _vehiculoRepository;
         private readonly CargoRepository _cargoRepository;
         private readonly EmpleadoRepository _empleadoRepository;
-        public GeneralService(DepartamentoRepositorio departamentoRepositorio, CiudadReposity ciudadReposity, ClienteRepository clienteRepository, 
+        public GeneralService(DepartamentoRepositorio departamentoRepositorio, CiudadReposity ciudadReposity, ClienteRepository clienteRepository,
             EstadoCivilRepository estadoCivilRepository, MarcaRepository marcaRepository, ModeloRepository modeloRepository, SedeRepository sedeRepository,
             UsuarioRepository usuarioRepository, VehiculoRepository vehiculoRepository, CargoRepository cargoRepository, EmpleadoRepository empleadoRepository)
         {
@@ -524,82 +524,13 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             }
         }
 
-<<<<<<< HEAD
-        public ServiceResult InsertarMarca(tbMarcas item)
-        {
-            var resul = new ServiceResult();
-            try
-            {
-                var lost = _marcaRepository.Insertar(item);
-                if (lost.CodeStatus > 0)
-                {
-                    return resul.Ok(lost);
-                }
-                else
-                {
-                    lost.MessageStatus = (lost.CodeStatus == 0) ? "401 error de consulta" : lost.MessageStatus;
-                    return resul.Error(lost);
-                }
-            }
-            catch (Exception ex)
-            {
-                return resul.Error(ex.Message);
-            }
-        }
-
-        public ServiceResult EliminarMarc(int id)
-=======
 
 
         public ServiceResult obterMarcas(int id)
->>>>>>> yordin
         {
             var result = new ServiceResult();
             try
             {
-<<<<<<< HEAD
-                var lost = _marcaRepository.Eliminar(id);
-                if (lost.CodeStatus > 0)
-                {
-                    return result.Ok(lost);
-                }
-                else
-                {
-                    lost.MessageStatus = (lost.CodeStatus == 0) ? "401 Error de Consulta" : lost.MessageStatus;
-                    return result.Error(lost);
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                return result.Error(ex.Message);
-            }
-        }
-        public ServiceResult ActualizarMarc(tbMarcas item)
-        {
-            var result = new ServiceResult();
-            try
-            {
-                var lost = _marcaRepository.Actualizar(item);
-                if (lost.CodeStatus > 0)
-                {
-                    return result.Ok(lost);
-                }
-                else
-                {
-                    lost.MessageStatus = (lost.CodeStatus == 0) ? "401 Error de Consulta" : lost.MessageStatus;
-                    return result.Error(lost);
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                return result.Error(ex.Message);
-            }
-        }
-=======
                 var list = _marcaRepository.Fill(id);
 
                 return result.Ok(list);
@@ -617,7 +548,6 @@ namespace Grupo_Rac.BusinessLogic.Servicios
 
 
 
->>>>>>> yordin
         #endregion
 
         #region Modelo
@@ -631,75 +561,6 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             }
             catch (Exception ex)
             {
-                return result.Error(ex.Message);
-            }
-        }
-
-        public ServiceResult InsertarModelo(tbModelos item)
-        {
-            var resul = new ServiceResult();
-            try
-            {
-                var lost = _modeloRepository.Insertar(item);
-                if (lost.CodeStatus > 0)
-                {
-                    return resul.Ok(lost);
-                }
-                else
-                {
-                    lost.MessageStatus = (lost.CodeStatus == 0) ? "401 error de consulta" : lost.MessageStatus;
-                    return resul.Error(lost);
-                }
-            }
-            catch (Exception ex)
-            {
-                return resul.Error(ex.Message);
-            }
-        }
-
-        public ServiceResult EliminarModelo(int id)
-        {
-            var result = new ServiceResult();
-            try
-            {
-                var lost = _modeloRepository.Eliminar(id);
-                if (lost.CodeStatus > 0)
-                {
-                    return result.Ok(lost);
-                }
-                else
-                {
-                    lost.MessageStatus = (lost.CodeStatus == 0) ? "401 Error de Consulta" : lost.MessageStatus;
-                    return result.Error(lost);
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                return result.Error(ex.Message);
-            }
-        }
-        public ServiceResult ActualizarModelo(tbModelos item)
-        {
-            var result = new ServiceResult();
-            try
-            {
-                var lost = _modeloRepository.Actualizar(item);
-                if (lost.CodeStatus > 0)
-                {
-                    return result.Ok(lost);
-                }
-                else
-                {
-                    lost.MessageStatus = (lost.CodeStatus == 0) ? "401 Error de Consulta" : lost.MessageStatus;
-                    return result.Error(lost);
-                }
-
-            }
-            catch (Exception ex)
-            {
-
                 return result.Error(ex.Message);
             }
         }

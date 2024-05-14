@@ -18,10 +18,11 @@ export class LoginComponent {
     this.userService.login(this.usuario, this.contrase).subscribe({
       next: (data) => {
         if (data && data.length > 0) {
-          console.log('Login successful', data);
+          console.log('Login successful', "jjjjjjjjjjjjjj");
           // Asumiendo que 'data[0]' es el objeto de usuario y que 'Usu_Usua' es el nombre de usuario
-          sessionStorage.setItem('usuario', JSON.stringify(data[0])); 
-          console.log('Usuario guardado:', data[0]);  // Verificar qué se guarda
+          sessionStorage.setItem('usuario', JSON.stringify(data[0]["usu_Usua"])); 
+          localStorage.setItem('esdra', data[0]["usu_Usua"]);
+          console.log('Usuario guardado:', data[0]["usu_Usua"]);  // Verificar qué se guarda
           this.router.navigate(['/app/dashboard']);
         } else {
           this.errorMessage = 'Usuario o contraseña incorrectos';

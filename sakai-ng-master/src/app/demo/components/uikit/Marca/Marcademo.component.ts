@@ -87,7 +87,7 @@ MarcaAEliminar: Marca | null = null;
         this.modalTitle = 'Nuevo Registro';
 
     }
-    eliminar() {
+    /*eliminar() {
         if (this.MarcaAEliminar) {
           const idDepartamento = this.MarcaAEliminar.mar_Id;
           this.service.eliminar(idDepartamento).subscribe({
@@ -102,7 +102,7 @@ MarcaAEliminar: Marca | null = null;
             }
           });
         }
-      }
+      }*/
       cancelarEliminar() {
         this.confirmacionVisible = false;
       }

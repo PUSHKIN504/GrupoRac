@@ -15,11 +15,6 @@ namespace Grupo_Rac.API.Extensiones
             CreateMap<DepartamentoViewModel, tbDepartamento>().ReverseMap();
             CreateMap<UsuarioViewModel, tbUsuarios>().ReverseMap();
             CreateMap<RolViewModel, tbRoles>().ReverseMap();
-<<<<<<< HEAD
-            CreateMap<MarcaViewModel, tbMarcas>();
-            CreateMap<ModeloViewModel, tbModelos>();
-            CreateMap<CompViewModel, tbCompras>();
-=======
             CreateMap<CargoViewModel, tbCargos>().ReverseMap();
             CreateMap<EstadoCivilViewModel, tbEstadosCiviles>().ReverseMap();
             CreateMap<CiudadViewModel, tbCiudades>().ReverseMap();
@@ -27,7 +22,6 @@ namespace Grupo_Rac.API.Extensiones
             CreateMap<PantallaRolViewModel, tbPantallas_PorRoles>().ReverseMap();
             CreateMap<MarcaViewModel, tbMarcas>().ReverseMap();
             CreateMap<EmpleadoViewModel, tbEmpleados>().ReverseMap();
->>>>>>> yordin
         }
     }
 }

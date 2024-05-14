@@ -58,7 +58,6 @@ namespace Grupo_Rac.DataAccess.Repositorio
 
         public RequestStatus Insertar(tbModelos item)
         {
-<<<<<<< HEAD
             using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
             {
                 //pendiente los parametros
@@ -77,9 +76,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 string mensaje = (result == 1) ? "Exito" : "Error";
                 return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
             }
-=======
-            throw new NotImplementedException();
->>>>>>> yordin
+
         }
 
         //public RequestStatus Insertar(tbModelos item)

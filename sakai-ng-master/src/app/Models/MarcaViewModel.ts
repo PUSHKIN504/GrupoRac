@@ -1,13 +1,6 @@
 export class Marca{
-<<<<<<< HEAD
-    mar_Id?:Number;
-    mar_Descripcion?:String;
-    // dep_Descripcion?:String;
-
-=======
     mar_Id?:String;
     mar_Descripcion?:String;
->>>>>>> yordin
 }
 
 export class MarcaEnviar {

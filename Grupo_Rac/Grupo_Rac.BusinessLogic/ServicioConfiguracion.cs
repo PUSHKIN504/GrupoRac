@@ -27,12 +27,8 @@ namespace Grupo_Rac.BusinessLogic
             service.AddScoped<UsuarioRepository>();
             service.AddScoped<CargoRepository>();
             service.AddScoped<VehiculoRepository>();
-<<<<<<< HEAD
-            service.AddScoped<CompRepository>();
-=======
             service.AddScoped<pantallaRolesRepository>();
             service.AddScoped<EmpleadoRepository>();
->>>>>>> yordin
             GrupoRacContext.BuildConnectionString(conn);
 
         }
@@ -40,12 +36,6 @@ namespace Grupo_Rac.BusinessLogic
         {
             service.AddScoped<GeneralService>();
             service.AddScoped<AccesoService>();
-<<<<<<< HEAD
-            service.AddScoped<VentaService>();
-            //service.AddScoped<ServiciosAcceso>();
-            //service.AddScoped<ServicioRestaurantes>();
-=======
->>>>>>> yordin
         }
     }
 }

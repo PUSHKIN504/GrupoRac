@@ -29,26 +29,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
 
         public RequestStatus Insertar(tbCompras item)
         {
-<<<<<<< HEAD
-            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
-            {
-                //pendiente los parametros
-                var parameter = new DynamicParameters();
-                //parameter.Add("Dept_Id", item.Dep_Id);
-                parameter.Add("@DNI", item.Cli_DNI);
-                parameter.Add("@UsuCrea", 1);
-                parameter.Add( "@fechaCrea", DateTime.Now);
-
-                var result = db.Execute("[Vent].[SP_FactCompra_Insertar]",
-                    parameter,
-                    commandType: CommandType.StoredProcedure
-                    );
-                string mensaje = (result == 1) ? "Exito" : "Eroor";
-                return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
-            }
-=======
             throw new NotImplementedException();
->>>>>>> yordin
         }
 
         //public RequestStatus Insertar(tbCompras item)
@@ -76,7 +57,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
             List<tbCompras> result = new List<tbCompras>();
             using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
             {
-                result = db.Query<tbCompras>("[Vent].[SP_Compras_listar]", commandType: CommandType.Text).ToList();
+                result = db.Query<tbCompras>("[Gral].[sp_cargo_listar]", commandType: CommandType.Text).ToList();
                 return result;
             }
         }
