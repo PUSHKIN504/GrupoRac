@@ -11,7 +11,7 @@ namespace Grupo_Rac.Common.Models
         public int Cli_Id { get; set; }
         public string Cli_Nombre { get; set; }
         public string Cli_DNI { get; set; }
-        public int? Ciu_Id { get; set; }
+        public string Ciu_Id { get; set; }
         public string Cli_Direccion { get; set; }
         public int? Cli_Creacion { get; set; }
         public int? Cli_Modifica { get; set; }

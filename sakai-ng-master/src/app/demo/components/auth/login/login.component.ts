@@ -48,6 +48,8 @@ export class LoginComponent implements OnInit{
           next: (data) => {
             if (data.length > 0) {
               console.log('Login successful', data);
+              sessionStorage.setItem('usuario', JSON.stringify(data[0])); 
+              console.log('Usuario guardado:', data[0]);
               this.router.navigate(['/app/dashboard']);
               // Redirecciona al usuario o realiza acciones post-login
             } else {

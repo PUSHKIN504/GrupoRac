@@ -30,6 +30,8 @@ export class ClienteDemoComponent implements OnInit {
     loading: boolean = false;
 
     @ViewChild('filter') filter!: ElementRef;
+    @ViewChild('dt') dataTable!: Table; 
+    globalFilter: string;
 
     constructor(private service: ServiceCliente, private router: Router
     
@@ -45,6 +47,14 @@ export class ClienteDemoComponent implements OnInit {
         });
      }
     
+
+     formatCurrency(value: number) {
+        return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    onGlobalFilter(table: Table, event: Event) {
+        table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+    }
     
       
 }

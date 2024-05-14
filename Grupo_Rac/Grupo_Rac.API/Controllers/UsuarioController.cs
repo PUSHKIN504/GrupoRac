@@ -97,12 +97,12 @@ namespace Grupo_Rac.API.Controllers
                 Usu_Contra = item.Usu_Contra,
                 Usu_Admin = item.Usu_Admin,
                 Rol_Id = item.Rol_Id,
-                //Empl_Id = item.Empl_Id,
+                Empl_Id = item.Empl_Id,
                 Usu_UsuCre = 1
             };
 
             var list = _AccesoService.CrearUsua(modelo);
-            return Ok(list.Message);
+            return Ok(new { success = true, message = list.Message });
         }
 
         //pendiente 
@@ -133,8 +133,9 @@ namespace Grupo_Rac.API.Controllers
                 Usu_Usua = item.Usu_Usua,
                 Usu_Admin = item.Usu_Admin,
                 Rol_Id = item.Rol_Id,
-                //Empl_Id = item.Empl_Id,
-                Usu_UsuModi = item.Usu_UsuModi
+                Empl_Id = item.Empl_Id,
+                Usu_UsuModi = item.Usu_UsuModi,
+                Usu_FechaModifica = DateTime.Now
             };
 
             var list = _AccesoService.ActualizarUsua(modelo);

@@ -33,58 +33,58 @@ namespace Grupo_Rac.API.Controllers
                 this.environment = webHostEnvironment;
 
             }
-            [HttpDelete("Delete/{id}")]
-            public IActionResult Delete(int id)
-            {
-                _generalService.EliminarModelo(id);
-                var list = _generalService.ListModelo();
+        //    [HttpDelete("Delete/{id}")]
+        //    public IActionResult Delete(int id)
+        //    {
+        //        _generalService.EliminarModelo(id);
+        //        var list = _generalService.ListModelo();
 
-                return Ok(list);
+        //        return Ok(list);
 
-            }
-            [HttpPut("Edit")]
-            public IActionResult Edit(ModeloViewModel item)
-            {
+        //    }
+        //    [HttpPut("Edit")]
+        //    public IActionResult Edit(ModeloViewModel item)
+        //    {
 
-                var model = _mapper.Map<tbModelos>(item);
-                var modelo = new tbModelos()
-                {
+        //        var model = _mapper.Map<tbModelos>(item);
+        //        var modelo = new tbModelos()
+        //        {
                     
-                    Mar_Descripcion = item.Mar_Descripcion,
-                    Mod_Descripcion = item.Mod_Descripcion,
-                    Mod_Año = item.Mod_Año,
-                    Mod_Modifica = item.Mod_Modifica,
-                    Mod_Fecha_Modifica = item.Mod_Fecha_Modifica,
+        //            Mar_Descripcion = item.Mar_Descripcion,
+        //            Mod_Descripcion = item.Mod_Descripcion,
+        //            Mod_Año = item.Mod_Año,
+        //            Mod_Modifica = item.Mod_Modifica,
+        //            Mod_Fecha_Modifica = item.Mod_Fecha_Modifica,
                    
 
-                };
-                var listado = _generalService.ActualizarModelo(modelo);
+        //        };
+        //        var listado = _generalService.ActualizarModelo(modelo);
 
-                return Ok(listado);
+        //        return Ok(listado);
 
-            }
+        //    }
 
-        [HttpPost("Create")]
-        public IActionResult Create(ModeloViewModel item)
-        {
+        //[HttpPost("Create")]
+        //public IActionResult Create(ModeloViewModel item)
+        //{
 
-            var model = _mapper.Map<tbModelos>(item);
-            var modelo = new tbModelos()
-            {
+        //    var model = _mapper.Map<tbModelos>(item);
+        //    var modelo = new tbModelos()
+        //    {
                
-                Mar_Descripcion = item.Mar_Descripcion,
-                Mod_Descripcion = item.Mod_Descripcion,
-                Mod_Año = item.Mod_Año,
-                Mod_Creacion = item.Mod_Creacion,
-                Mod_Fecha_Creacion = item.Mod_Fecha_Creacion,
+        //        Mar_Descripcion = item.Mar_Descripcion,
+        //        Mod_Descripcion = item.Mod_Descripcion,
+        //        Mod_Año = item.Mod_Año,
+        //        Mod_Creacion = item.Mod_Creacion,
+        //        Mod_Fecha_Creacion = item.Mod_Fecha_Creacion,
 
 
-            };
-            var listado = _generalService.InsertarModelo(modelo);
+        //    };
+        //    var listado = _generalService.InsertarModelo(modelo);
 
-            return Ok(listado);
+        //    return Ok(listado);
 
-        }
+        //}
     }
 }
 
