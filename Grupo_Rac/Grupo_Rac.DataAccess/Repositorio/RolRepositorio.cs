@@ -108,6 +108,19 @@ namespace Grupo_Rac.DataAccess.Repositorio
             }
         }
 
+        public IEnumerable<tbPantallas_PorRoles> ListPadelRol(int id)
+        {
+
+            List<tbPantallas_PorRoles> result = new List<tbPantallas_PorRoles>();
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameters = new { Roles_Id = id };
+                result = db.Query<tbPantallas_PorRoles>(ScriptBaseDatos.PantallasRoles_ListaPorRol, parameters, commandType: CommandType.StoredProcedure).ToList();
+                return result;
+            }
+
+        }
+
 
         public RequestStatus Actualizar(tbRoles item)
         {

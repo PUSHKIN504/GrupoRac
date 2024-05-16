@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
     selector: 'app-menu',
@@ -8,9 +9,13 @@ import { LayoutService } from './service/app.layout.service';
 })
 export class AppMenuComponent implements OnInit {
 
-    model: any[] = [];
+    //model: any[] = [];
 
-    constructor(public layoutService: LayoutService) { }
+    model: any[] = [];
+    permisosPermitidos: Set<string> = new Set();
+    prueba: boolean = false;
+
+    constructor(public layoutService: LayoutService, private cookieService: CookieService) { }
 
     ngOnInit() {
         this.model = [
@@ -40,8 +45,6 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     
-                 
-
                 ]
             },
             {
@@ -109,8 +112,6 @@ export class AppMenuComponent implements OnInit {
                         ]
                     },
                     
-                 
-
                 ]
             },
             {
@@ -137,5 +138,10 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
         ];
+
+
+        //----------------------------------------------------------
+
+
     }
 }

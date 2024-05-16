@@ -4,6 +4,7 @@ import { MenuItem } from 'primeng/api';
 import { delay, identity } from 'rxjs';
 import { ServiceUsuario } from 'src/app/Service/service.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
     selector: 'app-login',
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit{
     
     errorMessage: string = ''; // Usa el modelo de Usuario para vincular los datos del formulario
   
-    constructor(private router: Router, private userService: ServiceUsuario, private renderer: Renderer2) {}
+    constructor(private router: Router, private userService: ServiceUsuario, private renderer: Renderer2, private cookieService : CookieService) {}
 
     ngOnInit(): void {
       const loginContent = document.getElementById('login-content');
@@ -49,6 +50,10 @@ export class LoginComponent implements OnInit{
             if (data.length > 0) {
               console.log('Login successful', data);
               sessionStorage.setItem('usuario', JSON.stringify(data[0])); 
+
+              this.cookieService.set('roleID', data[0].rol_Id); 
+              this.cookieService.set('esAdmin', data[0].usu_Admin);
+
               console.log('Usuario guardado:', data[0]);
               this.router.navigate(['/app/dashboard']);
               // Redirecciona al usuario o realiza acciones post-login

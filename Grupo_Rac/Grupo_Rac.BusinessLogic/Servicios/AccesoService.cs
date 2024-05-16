@@ -349,6 +349,21 @@ namespace Grupo_Rac.BusinessLogic.Servicios
         #endregion
 
         #region RolesPantalla
+        public ServiceResult ListPantdelRol(int id)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _rolRepositorio.ListPadelRol(id);
+
+                return result.Ok(lost);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
         public ServiceResult ListadoPantallaRoles()
         {
             var result = new ServiceResult();

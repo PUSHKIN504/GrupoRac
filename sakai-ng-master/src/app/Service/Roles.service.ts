@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BASE_URL } from './ulrsettings';
 import { Rol,Fill } from '../Models/RolViewModel';
 import { Observable } from 'rxjs/internal/Observable';
+import { Pantalla } from '../Models/PantallaViewModel';
 import { map } from 'rxjs';
 
 
@@ -31,6 +32,11 @@ export class ServiceService {
       }),
     );
   }
+
+  getPantallasDeRol(idRoll: Number) {
+    return this.http.get<Pantalla[]>(`${BASE_URL + 'Api/PantallaporRol/PantdelRol/' + idRoll}`);
+  }
+
   getFill(codigo: string): Observable<Fill> {
     return this.http.get<Fill>(`${BASE_URL + 'API/Rol/Fill/' + codigo}`);
   }

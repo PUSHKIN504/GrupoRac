@@ -30,7 +30,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
         #endregion
 
         #region Roles
-
+        public static string PantallasRoles_ListaPorRol = "[Acce].[SP_PantallaPorRol_PorRol]";
         public static string RolesListar = "Acce.sp_Roles_listar";
         public static string Rolesllenar = "Acce.sp_Roles_buscar";
         public static string RolesActualizar = "Acce.sp_Roles_actualizar";
@@ -104,6 +104,8 @@ namespace Grupo_Rac.DataAccess.Repositorio
         public static string EmpleadosActualizar = "Gral.sp_Empleados_actualizar";
         public static string EmpleadosEliminar = "Gral.sp_Empleados_eliminar";
         #endregion
+
+
 
 
     }
