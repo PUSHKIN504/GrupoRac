@@ -9,7 +9,7 @@ import { Marca } from '../Models/MarcaViewModel';
 import { Modelo } from '../Models/ModeloViewModel';
 import { Sede } from '../Models/SedeViewModel';
 import { Vehiculo } from '../Models/VehiculoViewModel';
-import { Usuario } from '../Models/UsuarioViewModel';
+import { Reestb, Usuario } from '../Models/UsuarioViewModel';
 import { Observable, map } from 'rxjs';
 import { Compra } from '../Models/CompViewModel';
 import { Fill, Rol } from '../Models/RolViewModel';
@@ -319,6 +319,21 @@ export class ServiceUsuario {
     const url = `${this.baseUrl}/Login/${encodeURIComponent(usuario)},${encodeURIComponent(contraseña)}`;
     return this.http.get<any>(url);
   }
+  recuperacion(usuario: string): Observable<any> {
+    const url = `${this.baseUrl}/ValidarReestablecer/${encodeURIComponent(usuario)}`;
+    return this.http.get<any>(url);
+  }
+
+  codigo(codigo: string): Observable<any> {
+    const url = `${this.baseUrl}/MostrarCodigo/${encodeURIComponent(codigo)}`;
+    return this.http.get<any>(url);
+  }
+
+  reestablecer(usuario: Reestb): Observable<any> {
+    const url = `${this.baseUrl}/Reestablecer`;
+    return this.http.post<any>(url, usuario);
+  }
+
 }
 
 
