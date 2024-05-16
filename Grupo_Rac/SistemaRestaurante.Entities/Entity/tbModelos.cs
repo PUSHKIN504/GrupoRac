@@ -25,6 +25,8 @@ namespace Grupo_Rac.Entities.Entity
         public bool? Mod_Estado { get; set; }
         [NotMapped]
         public string? Mar_Descripcion { get; set; }
+        [NotMapped]
+        public string CantidadVehiculos { get; set; }
 
         public virtual tbMarcas Mar { get; set; }
         public virtual tbUsuarios Mod_CreacionNavigation { get; set; }

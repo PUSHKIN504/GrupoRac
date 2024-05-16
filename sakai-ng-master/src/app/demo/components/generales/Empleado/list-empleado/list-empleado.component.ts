@@ -78,10 +78,10 @@ export class ListEmpleadoComponent {
         Empl_Sexo: new FormControl("", Validators.required),
         Empl_FechaNac: new FormControl("", Validators.required),
         Carg_Id: new FormControl("", Validators.required),
-        Empl_Correo:new FormControl("",Validators.required),
-      Esta_Id: new FormControl("", Validators.required),
-      Depa_Codigo: new FormControl("0", [Validators.required]),
-      Muni_Codigo: new FormControl("0", [Validators.required]),
+        //Empl_Correo:new FormControl("",Validators.required),
+        Est_ID: new FormControl("", Validators.required),
+        Depa_Codigo: new FormControl("0", [Validators.required]),
+        Ciu_Id: new FormControl("0", [Validators.required]),
     });
     this.service.getDropDownsDepartamentos().subscribe((data: dropDepartamento[]) => {
     console.log(data);
@@ -145,13 +145,13 @@ detalles(codigo){
          this.Detalle_Nombre = data.empl_Nombre,
          this.Detalle_Apellido = data.empl_Apellido,
          this.Detalle_Sexo = data.empl_Sexo,
-         this.Detalle_Estado = data.esta_EstadoCivil,
-        this.Detalle_Cargo = data.carg_Cargo,
-        this.Detalle_Correo = data.empl_Correo,
+         this.Detalle_Estado = data.est_ID,
+         this.Detalle_Cargo = data.crg_Descripcion,
+       // this.Detalle_Correo = data.empl_Correo,
 
          this.Detalle_FechaNac = data.empl_FechaNac,
-         this.Detalle_Departamento = data.depa_Departamento,
-         this.Detalle_Municipio = data.muni_Municipio,
+         this.Detalle_Departamento = data.dep_Descripcion,
+         this.Detalle_Municipio = data.ciu_Descripcion,
          this.UsuarioCreacion = data.usuarioCreacion,
          this.UsuarioModificacion = data.usuarioModificacion
          this.FechaCreacion = data.fechaCreacion,
@@ -191,7 +191,7 @@ ValidarNumero(event: KeyboardEvent) {
   }
 }
 onSubmit() {
-  if (this.clienteForm.valid && this.clienteForm.get('Depa_Codigo').value !== '0' && this.clienteForm.get('Muni_Codigo').value !== '0'&& this.clienteForm.get('Esta_Id').value !== '0' ) {
+  if (this.clienteForm.valid && this.clienteForm.get('Depa_Codigo').value !== '0' && this.clienteForm.get('Ciu_Id').value !== '0' && this.clienteForm.get('Est_ID').value !== '0' ) {
      this.viewModel = this.clienteForm.value;
      if (this.Valor == "Agregar") {
       this.service.EnviarEmpleado(this.viewModel).subscribe((data: MensajeViewModel[]) => {
@@ -218,6 +218,7 @@ onSubmit() {
            this.Detalles = false;
            this.submitted = false;
            this.Agregar= true;
+
           }else{
            this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se logro actualizar', life: 3000 });
           }
@@ -268,17 +269,17 @@ Fill(codigo) {
             Empl_Apellido: new FormControl(data.empl_Apellido, Validators.required),
             Empl_Sexo: new FormControl(data.empl_Sexo, Validators.required),
             Empl_FechaNac: new FormControl(data.empl_FechaNac, Validators.required),
-            Carg_Id: new FormControl(data.carg_Id, Validators.required),
-            Empl_Correo: new FormControl(data.empl_Correo, Validators.required),
+            Carg_Id: new FormControl(data.crg_Descripcion, Validators.required),
+            //Empl_Correo: new FormControl(data.empl_Correo, Validators.required),
 
-          Esta_Id: new FormControl(data.esta_Id, Validators.required),
-          Depa_Codigo: new FormControl(data.depa_Codigo, [Validators.required]),
-          Muni_Codigo: new FormControl(data.muni_Codigo, [Validators.required]),
+          Est_ID: new FormControl(data.est_ID, Validators.required),
+          Depa_Codigo: new FormControl(data.dep_Id, [Validators.required]),
+          Ciu_Id: new FormControl(data.ciu_Id, [Validators.required]),
         });
 
-          this.MunicipioCodigo = data.muni_Codigo;
+          this.MunicipioCodigo = data.ciu_Id;
           console.log(this.MunicipioCodigo);
-          this.service.getMunicipios(data.depa_Codigo).subscribe(
+          this.service.getMunicipios(data.dep_Id).subscribe(
             (data: any) => {
               this.municipios = data; 
               this.clienteForm.get('Muni_Codigo').setValue(this.MunicipioCodigo); 

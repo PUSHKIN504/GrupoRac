@@ -1,16 +1,16 @@
 export class Empleado{
-    ciu_Descripcion?:String;
-    esta_EstadoCivil?:String;
-    carg_Cargo?:String;
+    ciu_Id?:String;
+    est_Descripcion?:String;
+    crg_Descripcion?:String;
     empl_Id?:String;
     empl_Nombre?:String;
     empl_Apellido?:String;
     empl_Sexo?:String;    
     empl_FechaNac?:String;
-    empl_Correo:string;
+    //empl_Correo:string;
 
     empl_DNI?:String;
-    Ciu_Descripcion:string;
+    ciu_Descripcion:string;
 
 }
 
@@ -28,11 +28,11 @@ export class EmpleadoEnviar {
     Empl_Apellido: string;
     Empl_FechaNac: string;
     Empl_Sexo: string;
-    Muni_Codigo: string;
-    Esta_Id: string;
+    Ciu_Id: string;
+    Est_ID: string;
     Carg_Id: string;
-    Sucu_Id: string;
-    Empl_Correo:string;
+    //Sucu_Id: string;
+    //Empl_Correo:string;
 
 
 }
@@ -43,16 +43,16 @@ export class Fill {
     empl_Apellido?:String;
     empl_FechaNac?:String;
     empl_Sexo?:String;
-    muni_Codigo?:String;
-    esta_Id?:String;
-    carg_Id :string;
-    carg_Cargo?:string;
-    esta_EstadoCivil?:String;
-    muni_Municipio?:String;
-    empl_Correo:string;
+    ciu_Id?:String;
+    est_ID?:String;
+    carg_Id:string;
+    crg_Descripcion?:string;
+    est_Descripcion?:String;
+    ciu_Descripcion?:String;
+    //empl_Correo:string;
     empl_DNI?:String;
-    depa_Codigo?:String;
-    depa_Departamento?:String;
+    dep_Id?:String;
+    dep_Descripcion?:String;
     usuarioCreacion: string;
     usuarioModificacion: string;
     fechaCreacion : string;

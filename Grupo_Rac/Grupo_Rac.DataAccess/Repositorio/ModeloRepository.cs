@@ -108,5 +108,27 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 return result;
             }
         }
+
+        public IEnumerable<tbModelos> Popularidad(int sucursal, string inicio, string fin)
+        {
+            List<tbModelos> result = new List<tbModelos>();
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameters = new { Sed_Id = sucursal, FiltroSucursal = 1, FechaInicio = inicio, FechaFin = fin };
+                result = db.Query<tbModelos>(ScriptBaseDatos.Modelo_Popularidad, parameters, commandType: CommandType.StoredProcedure).ToList();
+                return result;
+            }
+        }
+
+        public IEnumerable<tbModelos> Todassss(string inicio, string fin)
+        {
+            List<tbModelos> result = new List<tbModelos>();
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameters = new { FiltroSucursal = 0, FechaInicio = inicio, FechaFin = fin };
+                result = db.Query<tbModelos>(ScriptBaseDatos.Modelo_Popularidad, parameters, commandType: CommandType.StoredProcedure).ToList();
+                return result;
+            }
+        }
     }
 }

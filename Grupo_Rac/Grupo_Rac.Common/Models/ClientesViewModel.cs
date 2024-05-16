@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace Grupo_Rac.Common.Models
     {
         public int Cli_Id { get; set; }
         public string Cli_Nombre { get; set; }
+        [NotMapped]
+        public string TotalGastado { get; set; }
         public string Cli_DNI { get; set; }
         public string Ciu_Id { get; set; }
         public string Cli_Direccion { get; set; }

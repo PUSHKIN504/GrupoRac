@@ -8,7 +8,7 @@ export class Modelo{
     mod_Modifica?:Number;
     mod_Creacion?:Number;
     mod_Fecha_Modifica?:Date;
-
+    cantidadVehiculos?:string;
     // dep_Descripcion?:String;
 
 }

@@ -51,6 +51,27 @@ namespace Grupo_Rac.DataAccess.Repositorio
             }
         }
 
+        public IEnumerable<tbClientes> Totalcompras(int sucursal, string inicio, string fin)
+        {
+            List<tbClientes> result = new List<tbClientes>();
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameters = new { Sed_Id = sucursal, FiltroSucursal = 1, FechaInicio = inicio, FechaFin = fin };
+                result = db.Query<tbClientes>(ScriptBaseDatos.Cliente_TotalCompras, parameters, commandType: CommandType.StoredProcedure).ToList();
+                return result;
+            }
+        }
+
+        public IEnumerable<tbClientes> Todasss(string inicio, string fin)
+        {
+            List<tbClientes> result = new List<tbClientes>();
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameters = new { FiltroSucursal = 0, FechaInicio = inicio, FechaFin = fin };
+                result = db.Query<tbClientes>(ScriptBaseDatos.Cliente_TotalCompras, parameters, commandType: CommandType.StoredProcedure).ToList();
+                return result;
+            }
+        }
         public tbClientes Fill(int id)
         {
 

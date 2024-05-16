@@ -47,6 +47,28 @@ namespace Grupo_Rac.DataAccess.Repositorio
             }
         }
 
+        public IEnumerable<tbDepartamento> Empledept(int sucursal, string inicio, string fin)
+        {
+            List<tbDepartamento> result = new List<tbDepartamento>();
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameters = new { Sed_Id = sucursal, FiltroSucursal = 1, FechaInicio = inicio, FechaFin = fin };
+                result = db.Query<tbDepartamento>(ScriptBaseDatos.Departamento_EmpleadoporDept, parameters, commandType: CommandType.StoredProcedure).ToList();
+                return result;
+            }
+        }
+
+        public IEnumerable<tbDepartamento> Todas(string inicio, string fin)
+        {
+            List<tbDepartamento> result = new List<tbDepartamento>();
+            using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
+            {
+                var parameters = new { FiltroSucursal = 0, FechaInicio = inicio, FechaFin = fin };
+                result = db.Query<tbDepartamento>(ScriptBaseDatos.Departamento_EmpleadoporDept, parameters, commandType: CommandType.StoredProcedure).ToList();
+                return result;
+            }
+        }
+
         public tbDepartamento Fill(string id)
         {
 

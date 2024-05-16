@@ -20,6 +20,8 @@ namespace Grupo_Rac.Common.Models
         public bool? Mod_Estado { get; set; }
         [NotMapped]
         public string? Mar_Descripcion { get; set; }
+        [NotMapped]
+        public string CantidadVehiculos { get; set; }
 
     }
 }

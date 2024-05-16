@@ -30,6 +30,21 @@ namespace Grupo_Rac.API.Controllers
             return Ok(list.Data);
         }
 
+        [HttpGet("Tocalcompras/{sucursal}/{inicio}/{fin}")]
+        public IActionResult Tocalcompras(int sucursal, string inicio, string fin)
+        {
+            var estado = _generalServices.Totalcompras(sucursal, inicio, fin);
+            return Ok(estado);
+
+        }
+        [HttpGet("Todas/{inicio}/{fin}")]
+        public IActionResult Todasss(string inicio, string fin)
+        {
+            var estado = _generalServices.Todasss(inicio, fin);
+            return Ok(estado);
+
+        }
+
         [HttpPost("Create")]
         public IActionResult Insert(ClientesViewModel item)
         {

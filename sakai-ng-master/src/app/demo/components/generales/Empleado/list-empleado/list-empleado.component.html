@@ -59,7 +59,7 @@
 
                             <div class="field col-12 md:col-6">
                                 <label for="state">Estado Civil</label>
-                                <select formControlName="Esta_Id" pInputText id="estado" required autofocus [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.get('Esta_Id').value === '0'}" >
+                                <select formControlName="Est_ID" pInputText id="estado" required autofocus [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.get('Est_ID').value === '0'}" >
                                   <option *ngFor="let estadocivil of estadocivil" [value]="estadocivil.value">{{ estadocivil.text }}</option>
                                 </select>
                                 <small *ngIf="submitted && clienteForm.get('Esta_Id').value === '0'" style="color: red;">Estado Civil Requerido</small>
@@ -87,20 +87,11 @@
 
                       <div class="field col-12 md:col-6">
                           <label for="Municipio">Municipio</label>
-                          <select formControlName="Muni_Codigo" pInputText id="Municipio" required autofocus [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.get('Muni_Codigo').value === '0'}" >
+                          <select formControlName="Ciu_Id" pInputText id="Municipio" required autofocus [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.get('Ciu_Id').value === '0'}" >
                             <option *ngFor="let muni of municipios" [value]="muni.value">{{ muni.text }}</option>
                           </select>
                           <small *ngIf="submitted && clienteForm.get('Muni_Codigo').value === '0'" style="color: red;">Municipio Requerido</small>
                         </div>
-
-
-                        <div class="field col-12 md:col-6">
-                            <label for="Cliente">Correo</label>
-                            <input pInputText id="Cliente" formControlName="Empl_Correo" type="text" required autofocus 
-                                   [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.controls['Empl_Correo'].invalid}"
-                                   (keydown)="validarTexto($event)" />
-                            <small class="ng-dirty ng-invalid" *ngIf="submitted && clienteForm.controls['Empl_Correo'].invalid" style="color: red !important;">Correo Requerido</small>
-                         </div>
                         
                     </div>
 
@@ -111,15 +102,7 @@
         
 
           </form>
-
-
         </div>
-
-
-
-
-
-
 
         <p-table #dt1 [value]="Empleado" dataKey="empl_Id" [rows]="10" [loading]="loading" [rowHover]="true" [class.hidden]="!DataTable" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['Empl_Id,Empl_Nombre,Empl_Apellido, Empl_Sexo,Carg_Cargo,Empl_FechaNaciminto,Esta_Id,Muni_Municipio']" responsiveLayout="scroll">
 
@@ -197,14 +180,14 @@
                         {{empl.empl_Sexo}}
                     </td>
                     <td>
-                        {{empl.esta_EstadoCivil}}
+                        {{empl.est_Descripcion}}
                     </td>
                     <td>
-                        {{empl.carg_Cargo}}
+                        {{empl.crg_Descripcion}}
                     </td>
                
                     <td>
-                        {{empl.muni_Municipio}}
+                        {{empl.Ciu_Descripcion}}
                     </td>
                     <td style="display: flex; justify-content: space-around;">
                         <button pButton pRipple type="button" label="Editar" class="p-button-raised p-button-success"  (click)="Fill(empl.empl_Id)"></button>
@@ -298,17 +281,6 @@
                 </div>
                 <div class="field rows">
                     <label for="Departamento">{{ Detalle_Municipio }}</label>
-                </div>
-            </div>
-
-
-
-            <div class="field col-12 md:col-4">
-                <div class="field rows">
-                    <label for="Municipio" style="font-weight: 800;">Correo:</label>
-                </div>
-                <div class="field rows">
-                    <label for="Municipio">{{ Detalle_Correo }}</label>
                 </div>
             </div>
        

@@ -37,7 +37,9 @@ import { TreeTableModule } from 'primeng/treetable';
 		ConfirmPopupModule,
 		TreeModule,
 		TreeTableModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		
+		
 		
 	],
 	declarations: [ListRolComponent]

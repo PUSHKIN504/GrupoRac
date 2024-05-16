@@ -21,6 +21,10 @@ export class ClienteEnviar {
     Cli_Direccion?:String;
 }
 
+export class dcliente{
+    nombreCompleto:string;
+    totalGastdo:string;
+}
 
 export class Fill {
     cli_Id: string;

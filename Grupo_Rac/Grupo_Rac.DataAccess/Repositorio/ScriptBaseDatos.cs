@@ -13,6 +13,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
         public static string Departamentollenar = "Gral.sp_Departamentos_buscar";
         public static string DepartamentoActualizar = "Gral.sp_Departamentos_actualizar";
         public static string DepartamentoEliminar = "Gral.sp_Departamentos_eliminar";
+        public static string Departamento_EmpleadoporDept = "[Gral].[sp_EmpleadosPorDepartamento]";
         #endregion
 
         #region Usuario
@@ -52,6 +53,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
         public static string Cargosllenar = "Gral.sp_Cargos_buscar";
         public static string CargosActualizar = "Gral.sp_Cargos_actualizar";
         public static string CargosEliminar = "Gral.sp_Cargos_eliminar";
+        public static string Cargo_EmpleadoporCargo = "[Gral].[sp_EmpleadosPorCargo]";
         #endregion
 
         #region EstadoCivil
@@ -76,6 +78,10 @@ namespace Grupo_Rac.DataAccess.Repositorio
         public static string MarcasEliminar = "Gral.sp_Marcas_eliminar";
         #endregion
 
+        #region Modelo
+        public static string Modelo_Popularidad = "[Gral].[sp_PopularidadMarcasYModelosVehiculo]";
+        #endregion
+
         #region Sede
         public static string SucursalessListar = "Gral.sp_Sucursales_listar";
         public static string Sucursalesllenar = "Gral.sp_Sucursales_buscar";
@@ -89,6 +95,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
         public static string Clientesllenar = "Gral.sp_Clientes_buscar";
         public static string ClientesActualizar = "Gral.sp_Clientes_actualizar";
         public static string ClientesEliminar = "Gral.sp_Clientes_eliminar";
+        public static string Cliente_TotalCompras = "[Vent].[sp_TotalComprasPorCliente]";
         #endregion
 
         #region Empleado
