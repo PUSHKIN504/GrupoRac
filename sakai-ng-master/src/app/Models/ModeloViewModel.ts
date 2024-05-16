@@ -3,7 +3,7 @@ export class Modelo{
     mod_Descripcion?:String;
     mod_Ano?:Date;
     mar_Id?:Number;
-    mar_Descripcion?:String;
+    mar_Descripcion?:string;
     mod_Fecha_Creacion?:Date;
     mod_Modifica?:Number;
     mod_Creacion?:Number;

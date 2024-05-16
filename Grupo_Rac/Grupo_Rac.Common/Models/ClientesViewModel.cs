@@ -12,6 +12,8 @@ namespace Grupo_Rac.Common.Models
         public int Cli_Id { get; set; }
         public string Cli_Nombre { get; set; }
         [NotMapped]
+        public string NombreCompleto { get; set; } 
+        [NotMapped]
         public string TotalGastado { get; set; }
         public string Cli_DNI { get; set; }
         public string Ciu_Id { get; set; }

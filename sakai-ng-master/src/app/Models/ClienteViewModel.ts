@@ -23,7 +23,7 @@ export class ClienteEnviar {
 
 export class dcliente{
     nombreCompleto:string;
-    totalGastdo:string;
+    totalGastado:string;
 }
 
 export class Fill {

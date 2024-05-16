@@ -101,7 +101,7 @@ export class AppMenuComponent implements OnInit {
                                 routerLink: ['/app/uikit/veh']
                             },
                             {
-                                label: 'graficos',
+                                label: 'Graficos',
                                 icon: 'pi pi-fw pi-inbox',
                                 routerLink: ['/app/uikit/charts']
                             },

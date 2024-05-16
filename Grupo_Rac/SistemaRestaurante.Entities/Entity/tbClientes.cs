@@ -19,6 +19,8 @@ namespace Grupo_Rac.Entities.Entity
         public string Cli_Nombre { get; set; }
         [NotMapped]
         public string TotalGastado { get; set; }
+        [NotMapped]
+        public string NombreCompleto { get; set; }
         public string Cli_Apellido { get; set; }
         public DateTime? Cli_FechaNac { get; set; }
         public string Cli_Sexo { get; set; }

@@ -1,34 +1,64 @@
-<div class="grid p-fluid">
-    <div class="col-12 lg:col-6">
-        <div class="card">
-            <h5>Linear Chart</h5>
-            <p-chart type="line" [data]="lineData" [options]="lineOptions"></p-chart>
+<div class="card">
+    <div class="grid p-fluid">
+       
+        <div class="field col-12 md:col-3">
+           <span class="p-float-label">
+                <p-dropdown
+                    inputId="dropdown"
+                    [autoDisplayFirst]="false"
+                    [options]="sedes"
+                    [(ngModel)]="sedeid"
+                    optionLabel="sed_Descripcion"
+                    (onChange)="onSedeChange($event.value)"
+                ></p-dropdown>
+                <label for="dropdown">Sede</label>
+            </span>
+        </div> 
+        <div class="field col-12 md:col-3">
+            <span class="p-float-label">
+                <p-calendar
+                    inputId="calendar"
+                    [(ngModel)]="inicio"
+                    (onSelect)="onFechaChange('inicio', $event)"
+                ></p-calendar>
+                <label for="calendar">Fecha Inicio</label>
+            </span>
         </div>
-
-        <div class="card flex flex-column align-items-center">
-            <h5 class="text-left w-full">Pie Chart</h5>
-            <p-chart type="pie" [data]="pieData" [options]="pieOptions"></p-chart>
+        <div class="field col-12 md:col-4">
+            <span class="p-float-label">
+                <p-calendar
+                    inputId="calendar"
+                    [(ngModel)]="fin"
+                    (onSelect)="onFechaChange('fin', $event)"
+                ></p-calendar>
+                <label for="calendar">Fecha Fin</label>
+            </span>
         </div>
-
-        <div class="card flex flex-column align-items-center">
-            <h5 class="text-left w-full">Polar Area Chart</h5>
-            <p-chart type="polarArea" [data]="polarData" [options]="polarOptions"></p-chart>
+    
+        <div class="col-12 lg:col-6">
+            
+            <div class="card">
+                <h5>Modelos por marcas</h5>
+                <p-chart type="bar" [data]="barData2" [options]="barOptions2"></p-chart>
+            </div>
+    
+            
+            <div class="card flex flex-column align-items-center">
+                <h5 class="text-left w-full">Empleados por Departamentos</h5>
+                <p-chart type="pie" [data]="pieData" [options]="pieOptions"></p-chart>
+            </div>
+    
+        </div>
+        <div class="col-12 lg:col-6">
+            <div class="card">
+                <h5>Empleados por Cargos</h5>
+                <p-chart type="bar" [data]="barData" [options]="barOptions"></p-chart>
+            </div>
+            <div class="card flex flex-column align-items-center">
+                <h5 class="text-left w-full">Ventas por Clientes</h5>
+                <p-chart type="doughnut" [data]="siData" [options]="pieOptions"></p-chart>
+            </div>
+            
         </div>
     </div>
-    <div class="col-12 lg:col-6">
-        <div class="card">
-            <h5>Bar Chart</h5>
-            <p-chart type="bar" [data]="barData" [options]="barOptions"></p-chart>
-        </div>
-
-        <div class="card flex flex-column align-items-center">
-            <h5 class="text-left w-full">Doughnut Chart</h5>
-            <p-chart type="doughnut" [data]="pieData" [options]="pieOptions"></p-chart>
-        </div>
-
-        <div class="card flex flex-column align-items-center">
-            <h5 class="text-left w-full">Radar Chart</h5>
-            <p-chart type="radar" [data]="radarData" [options]="radarOptions"></p-chart>
-        </div>
     </div>
-</div>
