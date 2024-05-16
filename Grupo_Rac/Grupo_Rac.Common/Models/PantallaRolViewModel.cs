@@ -21,7 +21,7 @@ namespace Grupo_Rac.Common.Models
         public bool? PaR_Estado { get; set; }
 
         [NotMapped]
-        public int? Pantalla { get; set; }
+        public string Ptl_Descripcion { get; set; }
 
         [NotMapped]
         public string UsuarioCreacion { get; set; }

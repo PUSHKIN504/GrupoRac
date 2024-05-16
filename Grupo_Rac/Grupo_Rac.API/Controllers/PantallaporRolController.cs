@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Grupo_Rac.API.Controllers
 {
     [ApiController]
-    [Route("Api/[controller]")]
+    [Route("API/[controller]")]
     public class PantallaporRolController : Controller
     {
         private readonly AccesoService _AccesoService;

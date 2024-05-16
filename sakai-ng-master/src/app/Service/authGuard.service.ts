@@ -28,12 +28,12 @@ interface Pantalla {
 
 
     loadPermissions(): void {
-    const roles_Descripcion = Number.parseInt(this.cookieService.get('roles_Descripcion'));
+    const rol_Descripcion = Number.parseInt(this.cookieService.get('rol_Descripcion'));
 
-        this.service.getPantallasDeRol(roles_Descripcion).subscribe({
+        this.service.getPantallasDeRol(rol_Descripcion).subscribe({
           next: (pantallas: Pantalla[]) => {
 
-            if (roles_Descripcion !== null) {
+            if (rol_Descripcion !== null) {
                 const pantallaAdicional = {
                     ptl_Descripcion: "dash",
                 };

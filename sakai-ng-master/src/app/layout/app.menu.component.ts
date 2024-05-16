@@ -2,6 +2,7 @@ import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
 import { CookieService } from 'ngx-cookie-service';
+import { ServiceService } from '../Service/Roles.service';
 
 @Component({
     selector: 'app-menu',
@@ -15,133 +16,174 @@ export class AppMenuComponent implements OnInit {
     permisosPermitidos: Set<string> = new Set();
     prueba: boolean = false;
 
-    constructor(public layoutService: LayoutService, private cookieService: CookieService) { }
+    constructor(private servicioLogin: ServiceService,public layoutService: LayoutService, private cookieService: CookieService) { }
+
+    // ngOnInit() {
+    //     this.model = [
+    //         {
+    //             //label: 'Home',
+                
+    //         },
+    //     ];
+
+    // }
+
+
+    //----------------------------------------------------------
 
     ngOnInit() {
-        this.model = [
-            {
-                //label: 'Home',
-                items: [
-                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/app/dashboard'] }
-                ]
-            },
-            {
-                items: [
-                    {
-                        label: 'Acceso',
-                        icon: 'pi pi-fw pi-user',
-                        items: [
-                            {
-                                label: 'Usuario',
-                                icon: 'pi pi-fw pi-user',
-                                routerLink: ['/app/uikit/usuario']
-                            },
-                            
-                            {
-                                label: 'Roles',
-                                icon: 'pi pi-fw pi-folder',
-                                routerLink: ['/app/acceso/rol']
-                            },
-                        ]
-                    },
-                    
-                ]
-            },
-            {
-                items: [
-                    {
-                        label: 'General',
-                        icon: 'pi pi-fw pi-cloud',
-                        items: [
-                            {
-                                label: 'Departamento',
-                                icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/app/generales/departamento']
-                            },
-                            {
-                                label: 'Municipio',
-                                icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/app/generales/Municipio']
-                            },
-                            {
-                                label: 'Cargos',
-                                icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/app/generales/Cargo']
-                            },
-                            {
-                                label: 'Clientes',
-                                icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/app/generales/Cliente']
-                            },
-                            {
-                                label: 'Empleado',
-                                icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/app/generales/Empleado']
-                            },
-                            {
-                                label: 'Estados Civiles',
-                                icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/app/generales/EstadoCivil']
-                            },
-                            {
-                                label: 'Marcas',
-                                icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/app/generales/Marca']
-                            },
-                            {
-                                label: 'Modelo',
-                                icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/app/uikit/modelo']
-                            },
-                            {
-                                label: 'Sede',
-                                icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/app/generales/Sede']
-                            },
-                            {
-                                label: 'Vehiculo',
-                                icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/app/uikit/veh']
-                            },
-                            {
-                                label: 'Graficos',
-                                icon: 'pi pi-fw pi-inbox',
-                                routerLink: ['/app/uikit/charts']
-                            },
+        const admin = this.cookieService.get('esAdmin').toString();
+        console.log("Admin status:", admin);
+        if (admin !== "true") {
+            const roleId = Number.parseInt(this.cookieService.get('roleID'));
+            this.servicioLogin.getPantallasDeRol(roleId).subscribe({
+                next: (response) => {
+                    if (response && response.data && Array.isArray(response.data)) {
+                        const pantallasPermitidas = response.data;
+                        const nombresPermitidos = new Set(pantallasPermitidas.map(pant => pant.ptl_Descripcion.toLowerCase().trim()));
+                        console.log('Permitted screens:', nombresPermitidos);
 
-                        ]
-                    },
-                    
-                ]
-            },
-            {
-                items: [
-                    {
-                        label: 'Factura',
-                        icon: 'pi pi-fw pi-car',
-                        items: [
-                            {
+                        const filtrarSubitems = (subitems) => subitems.filter(opcion => nombresPermitidos.has(opcion.label.toLowerCase().trim()));
+                        this.model = this.menuCompleto.map(section => {
+                            const itemsFiltrados = section.items.map(subSection => ({
+                                ...subSection,
+                                items: filtrarSubitems(subSection.items || [])
+                            })).filter(subSection => subSection.items.length > 0);
 
-                                label: 'Factura Compra',
-                                icon: 'pi pi-fw pi-sign-in',
-                                routerLink: ['/app/uikit/comp']
-
-                            },
-                            {
-                                label: 'Detalle',
-                                icon: 'pi pi-fw pi-folder',
-                                routerLink: ['/auth/error']
-                            },
-                        ]
-                    },
-
-                ]
-            },
-        ];
-
-
-        //----------------------------------------------------------
-
-
+                            return { ...section, items: itemsFiltrados };
+                        }).filter(section => section.items.length > 0);
+                    } else {
+                        console.error('Invalid response structure:', response);
+                    }
+                },
+                error: (err) => {
+                    console.error('Error fetching role screens:', err);
+                }
+            });
+        } else {
+            this.model = this.menuCompleto; // Admin gets the full menu
+        }
     }
+    
+    menuCompleto = [
+        {
+            items: [
+                                    { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/app/dashboard'] }
+                                ]
+                            },
+                            {
+                                items: [
+                                    {
+                                        label: 'Acceso',
+                                        icon: 'pi pi-fw pi-user',
+                                        items: [
+                                            {
+                                                label: 'Usuarios',
+                                                icon: 'pi pi-fw pi-user',
+                                                routerLink: ['/app/uikit/usuario']
+                                            },
+                                            
+                                            {
+                                                label: 'Roles',
+                                                icon: 'pi pi-fw pi-folder',
+                                                routerLink: ['/app/acceso/role']
+                                            },
+                                        ]
+                                    },
+                                    
+                                ]
+                            },
+                            {
+                                items: [
+                                    {
+                                        label: 'General',
+                                        icon: 'pi pi-fw pi-cloud',
+                                        items: [
+                                            {
+                                                label: 'Departamentos',
+                                                icon: 'pi pi-fw pi-inbox',
+                                                routerLink: ['/app/generales/departamento']
+                                            },
+                                            {
+                                                label: 'Municipios',
+                                                icon: 'pi pi-fw pi-inbox',
+                                                routerLink: ['/app/generales/Municipio']
+                                            },
+                                            {
+                                                label: 'Cargos',
+                                                icon: 'pi pi-fw pi-inbox',
+                                                routerLink: ['/app/generales/Cargo']
+                                            },
+                                            {
+                                                label: 'Clientes',
+                                                icon: 'pi pi-fw pi-inbox',
+                                                routerLink: ['/app/generales/Cliente']
+                                            },
+                                            {
+                                                label: 'Empleado',
+                                                icon: 'pi pi-fw pi-inbox',
+                                                routerLink: ['/app/generales/Empleado']
+                                            },
+                                            {
+                                                label: 'Estados Civiles',
+                                                icon: 'pi pi-fw pi-inbox',
+                                                routerLink: ['/app/generales/EstadoCivil']
+                                            },
+                                            {
+                                                label: 'Marcas',
+                                                icon: 'pi pi-fw pi-inbox',
+                                                routerLink: ['/app/generales/Marca']
+                                            },
+                                            {
+                                                label: 'Modelos',
+                                                icon: 'pi pi-fw pi-inbox',
+                                                routerLink: ['/app/uikit/modelo']
+                                            },
+                                            {
+                                                label: 'Sedes',
+                                                icon: 'pi pi-fw pi-inbox',
+                                                routerLink: ['/app/generales/Sede']
+                                            },
+                                            {
+                                                label: 'Vehiculos',
+                                                icon: 'pi pi-fw pi-inbox',
+                                                routerLink: ['/app/uikit/veh']
+                                            },
+                                            {
+                                                label: 'Graficos',
+                                                icon: 'pi pi-fw pi-inbox',
+                                                routerLink: ['/app/uikit/charts']
+                                            },
+                
+                                        ]
+                                    },
+                                    
+                                ]
+                            },
+                            {
+                                items: [
+                                    {
+                                        label: 'Factura',
+                                        icon: 'pi pi-fw pi-car',
+                                        items: [
+                                            {
+                
+                                                label: 'Facturas Compras',
+                                                icon: 'pi pi-fw pi-sign-in',
+                                                routerLink: ['/app/uikit/comp']
+                
+                                            },
+                                            {
+                                                label: 'Facturas Cambios',
+                                                icon: 'pi pi-fw pi-folder',
+                                                routerLink: ['/auth/error']
+                                            },
+                                            
+                                        ]
+                                    },
+                
+                                ]
+        },
+    ];
+
 }
