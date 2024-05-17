@@ -1,3 +1,5 @@
+<p-toast ></p-toast>
+
 <div class="wrapper">
   <div class="reestablecer-card">
     <div class="reestablecer-aside flex justify-content-center align-items-center">
@@ -27,7 +29,7 @@
             </div>
             <div  *ngIf="mostrarreestablecer"  class="flex flex-column mb-4">
               <label for="name">Codigo</label>
-              <input type="number" pInputText id="name" placeholder="Codigo" [(ngModel)]="codigo" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !codigo}"/>
+              <input type="text" pInputText id="name" placeholder="Codigo" [(ngModel)]="codigo" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !codigo}"/>
             </div>
             <div  *ngIf="mostrarreestablecer"  class="flex flex-column mb-4" style="width: 100%;">
               <label for="name">Contraseña</label>
@@ -35,7 +37,8 @@
             </div>
             
             <div _ngcontent-ng-c1839742986="" class="flex align-items-center justify-content-between mb-3 gap-5">
-              
+              <div class="field-checkbox-1">
+              </div>
               <a _ngcontent-ng-c1839742986=""  routerLink="/login" class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: #920808;">
                 Volver al login
               </a>
