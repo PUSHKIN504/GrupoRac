@@ -1,44 +1,53 @@
 <div class="wrapper">
-  <div class="login-card">
-    <div class="login-aside flex justify-content-center align-items-center">
-      <div>
+  <div class="reestablecer-card">
+    <div class="reestablecer-aside flex justify-content-center align-items-center">
+      <div >
         <div class="icon-wrapper mt-3">
           <img src="assets/layout/images/themes/logo-removebg.png" alt="Home Icon" id="logo">
         </div>
+        <!-- <div class="sinopsis text-center">
+          <p>
+            Grupo Rac es tu socio confiable para la compra y venta de automóviles. Nos especializamos en ofrecer una experiencia segura y transparente, con un enfoque personalizado para ayudarte a encontrar el auto perfecto, ya sea un coche económico, un sedán familiar o un vehículo de lujo.
+          </p>
+          
+        
+        </div> -->
       </div>
     </div>
-    <div class="login-aside-container">
-      <div class="login-container">
-        <div id="login-content" class="login-content d-none">
+    <div class="reestablecer-aside-container">
+      <div class="reestablecer-container">
+        <div id="reestablecer-content" class="reestablecer-content d-none">
           <div class="text-center mb-5">
             <div class="text-900 text-3xl font-medium mb-3">Reestablecer Contraseña</div>
           </div>
-          <div class="login-form">
-            <div *ngIf="!mostrarReestablecer" class="flex flex-column mb-4">
-              <label for="usuario">Usuario</label>
-              <input type="text" pInputText id="usuario" placeholder="Usuario" [(ngModel)]="usuario" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !usuario}"/>
+          <div class="reestablecer-form">
+            <div  *ngIf="!mostrarreestablecer"  class="flex flex-column mb-4">
+              <label for="name">Usuario</label>
+              <input type="text" pInputText id="name" placeholder="Usuario" [(ngModel)]="usuario" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !usuario}"/>
             </div>
-            <div *ngIf="mostrarReestablecer" class="flex flex-column mb-4">
-              <label for="codigo">Código</label>
-              <input type="text" pInputText id="codigo" placeholder="Código" [(ngModel)]="codigo" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !codigo}"/>
+            <div  *ngIf="mostrarreestablecer"  class="flex flex-column mb-4">
+              <label for="name">Codigo</label>
+              <input type="number" pInputText id="name" placeholder="Codigo" [(ngModel)]="codigo" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !codigo}"/>
             </div>
-            <div *ngIf="mostrarReestablecer" class="flex flex-column mb-4" style="width: 100%;">
-              <label for="contrasena">Contraseña</label>
-              <input type="password" pInputText id="contrasena" placeholder="Contraseña" [(ngModel)]="contrasena" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !contrasena}"/>
+            <div  *ngIf="mostrarreestablecer"  class="flex flex-column mb-4" style="width: 100%;">
+              <label for="name">Contraseña</label>
+              <input type="password" pInputText id="name" placeholder="Contraseña" [(ngModel)]="contrasena" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !contrasena}"/>
             </div>
-            <div class="flex align-items-center justify-content-between mb-3 gap-5">
-              <a routerLink="/login" class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: #920808;">
-                Volver al login 
+            
+            <div _ngcontent-ng-c1839742986="" class="flex align-items-center justify-content-between mb-3 gap-5">
+              
+              <a _ngcontent-ng-c1839742986=""  routerLink="/login" class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: #920808;">
+                Volver al login
               </a>
             </div>
             <div class="flex flex-column mb-3" style="color: red;">
-              <small class="ng-dirty ng-invalid" *ngIf="submitted && !usuario && !mostrarReestablecer">Usuario es requerido.</small>
-              <small class="ng-dirty ng-invalid" *ngIf="submitted && !codigo && mostrarReestablecer && ocultr">Código es requerido.</small>
-              <small class="ng-dirty ng-invalid" *ngIf="submitted && !contrasena && mostrarReestablecer && ocultr">Contraseña es requerida.</small>  
+              <small class="ng-dirty ng-invalid" *ngIf="submitted && !usuario &&  !mostrarreestablecer">Usuario es requerido.</small>
+              <small class="ng-dirty ng-invalid" *ngIf="submitted && !codigo && mostrarreestablecer && ocultr">Codigo es requerido.</small>
+              <small class="ng-dirty ng-invalid" *ngIf="submitted && !contrasena && mostrarreestablecer && ocultr">Contraseña es requerida.</small>  
               <small class="ng-dirty ng-invalid" *ngIf="submitted && errorMessage">{{errorMessage}}</small>  
             </div>
-            <div>
-              <button pButton (click)="onReestablecer()" label="Reestablecer Contraseña" class="p-element w-full p-3 text-xl p-button p-component"></button>
+             <div>
+              <button pButton (click)="onReestablecer()" label="Reestablecer" class="p-element w-full p-3 text-xl p-button p-component"></button>
             </div>
           </div>
         </div>
@@ -61,7 +70,7 @@
         height: 100%;
       }
   
-      .login-card{
+      .reestablecer-card{
         z-index: 1;
         width: 800px;
         height: 500px;
@@ -78,7 +87,7 @@
               }
           }
   
-      .login-aside {
+      .reestablecer-aside {
         z-index: 2;
         background-color: #000;
         width: 35%;
@@ -98,7 +107,7 @@
                   
                 }
           }
-      .login-aside-container{
+      .reestablecer-aside-container{
         display: flex;
         align-items: center;
         width: 0%;
@@ -108,7 +117,7 @@
         position: relative; 
       }
   
-    .login-container {
+    .reestablecer-container {
       
       display: flex;
       justify-content: center;
@@ -123,7 +132,7 @@
       box-shadow:rgba(0, 0, 0, 0.25) 10px 14px 28px,rgba(0, 0, 0, 0.22) 8px 10px 10px;
       }
 
-      .login-content{
+      .reestablecer-content{
         /* border-style: dotted;
         border-color: #920808;
         border-radius: 20px; */

@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
-import { ServiceUsuario } from 'src/app/Service/service.service';
-import { Reestb } from 'src/app/Models/UsuarioViewModel'; // Asegúrate de que esta ruta sea correcta
+import { ServiceUsuario } from '../../../../Service/service.service';
+import { Reestb } from '../../../../Models/UsuarioViewModel';
 import { delay } from 'rxjs';
 
 @Component({
@@ -20,7 +20,7 @@ export class ReestablecerComponent implements OnInit {
   usuario: string = '';
   contrasena: string = '';
   codigo: string = '';
-  mostrarReestablecer: boolean = false;
+  mostrarreestablecer: boolean = false;
   ocultr: boolean = true;
   submitted: boolean = false;
   errorMessage: string = '';
@@ -40,14 +40,17 @@ export class ReestablecerComponent implements OnInit {
 
   onReestablecer(): void {
     this.submitted = true;
+    this.ocultr=true;
 
-    if (!this.mostrarReestablecer && this.usuario?.trim()) {
+    if (!this.mostrarreestablecer && this.usuario?.trim()) {
       this.userService.recuperacion(this.usuario).subscribe({
-        next: (data) => {
-          if (data.length > 0) {
-            this.mostrarReestablecer = true;
+        next: (response) => {
+          console.log(response);
+          if (response.data && response.data.length > 0) {
+            this.mostrarreestablecer = true;
             this.ocultr = false;
             this.usuario = ''; 
+            console.log('entra');
           } else {
             this.errorMessage = 'Usuario incorrecto';
           }
@@ -57,25 +60,43 @@ export class ReestablecerComponent implements OnInit {
           console.error(err);
         }
       });
-    } else if (this.contrasena.trim() && this.codigo?.trim()) {
-      const usuario: Reestb = {
-        Usu_Codigo: this.usuario,
-        Usu_Contra: this.contrasena,
-        Usu_ID: this.codigo // Asigna el ID del usuario aquí si es necesario
-      };
+    }
+     else  if (!this.contrasena && this.codigo.trim()) {
+      this.userService.codigo(this.codigo).subscribe({
+        next: (response) => {
+          console.log(response);
+          if (response.data && response.data.length > 0) {
+            const usuario: Reestb = {
+              Usu_Codigo: this.codigo,
+              Usu_Contra: this.contrasena
+            };
 
-      this.userService.reestablecer(usuario).subscribe({
-        next: (data) => {
-          console.log('Contraseña reestablecida con éxito:', data);
-          this.router.navigate(['/login']); // Redirigir al login después del reestablecimiento
+            this.userService.reestablecer(usuario).subscribe({
+              next: (data) => {
+                if (data.success) {
+                  console.log('Contraseña reestablecida con éxito:', data);
+                  this.router.navigate(['/login']);
+                } else {
+                  this.errorMessage = 'Error al reestablecer la contraseña';
+                }
+              },
+              error: (err) => {
+                this.errorMessage = 'Error al reestablecer la contraseña';
+                console.error(err);
+              }
+            });
+
+          } else {
+            this.errorMessage = 'Codigo incorrecto';
+          }
         },
         error: (err) => {
-          this.errorMessage = 'Error al reestablecer la contraseña';
+          this.errorMessage = 'Error al verificar el usuario';
           console.error(err);
         }
       });
-    } else {
-      this.errorMessage = 'Todos los campos son obligatorios';
     }
+     
+
   }
 }
