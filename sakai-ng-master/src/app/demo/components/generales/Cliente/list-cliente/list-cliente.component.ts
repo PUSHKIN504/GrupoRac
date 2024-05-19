@@ -4,18 +4,19 @@ import { Product } from 'src/app/demo/api/product';
 import {Router} from '@angular/router';
 import { Table } from 'primeng/table';
 import { Cliente,ClienteEnviar,Fill } from 'src/app/Models/ClienteViewModel';
-import { ClienteService } from 'src/app/Service/Cliente.service';
+import { ServiceService } from 'src/app/Service/Cliente.service';
 import { MensajeViewModel } from 'src/app/Models/MensajeViewModel';
 import { FormGroup, FormControl,  Validators  } from '@angular/forms';
 import { dropDepartamento } from 'src/app/Models/DepartamentoViewModel';
 import { dropMunicipio } from 'src/app/Models/CiudadViewModel';
 import { dropCargo } from 'src/app/Models/CargoViewModel';
-//import { dropEstadoCivil } from 'src/app/Models/EstadoCivilViewModel';
+import { dropEstadoCivil } from 'src/app/Models/EstadoCivilViewModel';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   templateUrl: './list-cliente.component.html',
   styleUrl: './list-cliente.component.scss',
-  providers: [ConfirmationService, MessageService]
+  providers: [ConfirmationService, MessageService, CookieService]
 })
 export class ListClienteComponent implements OnInit{
   Cliente!:Cliente[];
@@ -62,32 +63,31 @@ export class ListClienteComponent implements OnInit{
   FechaModificacion: String = "";
   ID: string = "";
   MunicipioCodigo: String = "";
-
-  constructor(private service: ClienteService, private router: Router,   private messageService: MessageService
-  
+  Usua_Id: any = this.cookie.get('ID_Usuario');
+  constructor(private service: ServiceService, private router: Router,   private messageService: MessageService, private cookie: CookieService
   ) { }
 
 
   ngOnInit(): void {
     this.clienteForm = new FormGroup({
-      Clie_DNI: new FormControl("",Validators.required),
-      Clie_Nombre: new FormControl("",Validators.required),
-      Clie_Apellido: new FormControl("", Validators.required),
-      Clie_Sexo: new FormControl("", Validators.required),
-      Clie_FechaNac: new FormControl("", Validators.required),
-      Esta_Id: new FormControl("", Validators.required),
-      Depa_Codigo: new FormControl("0", [Validators.required]),
-      Muni_Codigo: new FormControl("0", [Validators.required]),
+      Cli_DNI: new FormControl("",Validators.required),
+      Cli_Nombre: new FormControl("",Validators.required),
+      Cli_Apellido: new FormControl("", Validators.required),
+      Cli_Sexo: new FormControl("", Validators.required),
+      Cli_FechaNac: new FormControl("", Validators.required),
+      Est_ID: new FormControl("", Validators.required),
+      Dep_Id: new FormControl("0", [Validators.required]),
+      Ciu_Id: new FormControl("0", [Validators.required]),
     });
     this.service.getDropDownsDepartamentos().subscribe((data: dropDepartamento[]) => {
     console.log(data);
     this.departamentos = data;
     });
 
-    /*this.service.getDropDownsEstado().subscribe((data: dropEstadoCivil[]) => {
+    this.service.getDropDownsEstado().subscribe((data: dropEstadoCivil[]) => {
       console.log(data);
       this.estadocivil = data;
-      });*/
+      });
 
 
       this.service.getDropDownCargo().subscribe((data: dropCargo[]) => {
@@ -103,12 +103,21 @@ export class ListClienteComponent implements OnInit{
         console.log(error);
       });
    }
+
+   clear(table: Table, filter: ElementRef) {
+    table.clear();
+    filter.nativeElement.value = '';
+  }
+
+  onGlobalFilter(table: Table, event: Event) {
+    table.filterGlobal((event.target as HTMLInputElement).value, 'contains');
+  }
    onDepartmentChange(departmentId) {
     if (departmentId !== '0') {
       this.service.getMunicipios(departmentId).subscribe(
         (data: any) => {
           this.municipios = data; 
-          this.clienteForm.get('Muni_Codigo').setValue('0'); 
+          this.clienteForm.get('Ciu_Id').setValue('0'); 
         },
         error => {
           console.error('Error fetching municipios:', error);
@@ -135,14 +144,14 @@ detalles(codigo){
         this.Detalle_DNI = data.cli_DNI,
          this.Detalle_Codigo = data.cli_Id,
          this.Detalle_Nombre = data.cli_Nombre,
-         //this.Detalle_Apellido = data.clie_Apellido,
-         //this.Detalle_Sexo = data.clie_Sexo,
-         //this.Detalle_Estado = data.esta_EstadoCivil,
-         this.Detalle_DNI = data.cli_DNI;
+         this.Detalle_Apellido = data.cli_Apellido,
+         this.Detalle_Sexo = data.cli_Sexo,
+         this.Detalle_Estado = data.est_ID,
+         //this.Detalle_DNI = data.cli_DNI;
         //  this.Detalle_Cargo = data.carg_Cargo,
-         //this.Detalle_FechaNac = data.clie_FechaNac,
-         //this.Detalle_Departamento = data.depa_Departamento,
-         this.Detalle_Municipio = data.ciu_Id,
+         this.Detalle_FechaNac = data.cli_FechaNac,
+         this.Detalle_Departamento = data.dep_Descripcion,
+         this.Detalle_Municipio = data.ciu_Descripcion,
          this.UsuarioCreacion = data.usuarioCreacion,
          this.UsuarioModificacion = data.usuarioModificacion
          this.FechaCreacion = data.fechaCreacion,
@@ -178,8 +187,9 @@ ValidarNumero(event: KeyboardEvent) {
   }
 }
 onSubmit() {
-  if (this.clienteForm.valid && this.clienteForm.get('Depa_Codigo').value !== '0' && this.clienteForm.get('Muni_Codigo').value !== '0'&& this.clienteForm.get('Esta_Id').value !== '0' ) {
+  if (this.clienteForm.valid && this.clienteForm.get('Dep_Id').value !== '0' && this.clienteForm.get('Ciu_Id').value !== '0'&& this.clienteForm.get('Est_ID').value !== '0' ) {
      this.viewModel = this.clienteForm.value;
+     this.viewModel.Usu_ID = this.Usua_Id;
      if (this.Valor == "Agregar") {
       this.service.EnviarCliente(this.viewModel).subscribe((data: MensajeViewModel[]) => {
           if(data["message"] == "Operación completada exitosamente."){
@@ -250,24 +260,24 @@ Fill(codigo) {
         next: (data: Fill) => {
 
           this.clienteForm = new FormGroup({
-            Clie_DNI: new FormControl(data.cli_DNI,Validators.required),
-            Clie_Nombre: new FormControl(data.cli_Nombre,Validators.required),
-            //Clie_Apellido: new FormControl(data.clie_Apellido, Validators.required),
-            //Clie_Sexo: new FormControl(data.clie_Sexo, Validators.required),
-            //Clie_FechaNac: new FormControl(data.clie_FechaNac, Validators.required),
-            //Esta_Id: new FormControl(data.esta_Id, Validators.required),
-            //Depa_Codigo: new FormControl(data.depa_Codigo, [Validators.required]),
-            Muni_Codigo: new FormControl(data.ciu_Id, [Validators.required]),
+            Cli_DNI: new FormControl(data.cli_DNI,Validators.required),
+            Cli_Nombre: new FormControl(data.cli_Nombre,Validators.required),
+            Cli_Apellido: new FormControl(data.cli_Apellido, Validators.required),
+            Cli_Sexo: new FormControl(data.cli_Sexo, Validators.required),
+            Cli_FechaNac: new FormControl(data.cli_FechaNac, Validators.required),
+            Est_ID: new FormControl(data.est_ID, Validators.required),
+            Dep_Id: new FormControl(data.dep_Id, [Validators.required]),
+            Ciu_Id: new FormControl(data.ciu_Id, [Validators.required]),
           });
 
-          this.MunicipioCodigo = data.cli_Id;
+          this.MunicipioCodigo = data.ciu_Id;
           console.log(this.MunicipioCodigo);
-          /*this.service.getMunicipios(data.depa_Codigo).subscribe(
+          this.service.getMunicipios(data.dep_Id).subscribe(
             (data: any) => {
               this.municipios = data; 
               this.clienteForm.get('Muni_Codigo').setValue(this.MunicipioCodigo); 
             }
-          );*/
+          );
             this.ID = data.cli_Id;
             this.Collapse= true;
             this.DataTable = false;

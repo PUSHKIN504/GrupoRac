@@ -33,6 +33,22 @@ namespace Grupo_Rac.API.Controllers
                 this.environment = webHostEnvironment;
 
             }
+
+
+        [HttpGet("Popularidad/{sucursal}/{inicio}/{fin}")]
+        public IActionResult Popularidad(int sucursal, string inicio, string fin)
+        {
+            var estado = _generalService.Popularidad(sucursal, inicio, fin);
+            return Ok(estado);
+
+        }
+        [HttpGet("Todas/{inicio}/{fin}")]
+        public IActionResult Todassss(string inicio, string fin)
+        {
+            var estado = _generalService.Todassss(inicio, fin);
+            return Ok(estado);
+
+        }
         //    [HttpDelete("Delete/{id}")]
         //    public IActionResult Delete(int id)
         //    {
@@ -49,13 +65,13 @@ namespace Grupo_Rac.API.Controllers
         //        var model = _mapper.Map<tbModelos>(item);
         //        var modelo = new tbModelos()
         //        {
-                    
+
         //            Mar_Descripcion = item.Mar_Descripcion,
         //            Mod_Descripcion = item.Mod_Descripcion,
         //            Mod_Año = item.Mod_Año,
         //            Mod_Modifica = item.Mod_Modifica,
         //            Mod_Fecha_Modifica = item.Mod_Fecha_Modifica,
-                   
+
 
         //        };
         //        var listado = _generalService.ActualizarModelo(modelo);
@@ -71,7 +87,7 @@ namespace Grupo_Rac.API.Controllers
         //    var model = _mapper.Map<tbModelos>(item);
         //    var modelo = new tbModelos()
         //    {
-               
+
         //        Mar_Descripcion = item.Mar_Descripcion,
         //        Mod_Descripcion = item.Mod_Descripcion,
         //        Mod_Año = item.Mod_Año,

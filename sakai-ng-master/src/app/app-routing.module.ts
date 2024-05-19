@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { LoginComponent } from './demo/components/auth/login/login.component';
+import { ReestablecerComponent } from './demo/components/auth/reestablecer/reestablecer.component';
 
 const routes: Routes = [
     { 
@@ -13,6 +14,10 @@ const routes: Routes = [
     { 
         path: 'login', 
         component: LoginComponent  // Ruta para el componente de Login
+    },
+    { 
+        path: 'reestablecer', 
+        component: ReestablecerComponent  // Ruta para el componente de Login
     },
     {
         path: 'app',

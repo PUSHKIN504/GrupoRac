@@ -36,6 +36,12 @@ export class UsuarioEnviar {
 
 }
 
+export class Reestb{
+    Usu_Codigo: string;
+  Usu_Contra: string;
+  Usu_ID?: string; 
+}
+
 export class Fill {
     usu_ID: string;
     usu_Usua: string;

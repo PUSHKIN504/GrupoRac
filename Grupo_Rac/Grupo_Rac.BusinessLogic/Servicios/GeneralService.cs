@@ -57,6 +57,36 @@ namespace Grupo_Rac.BusinessLogic.Servicios
                 return result.Error(ex.Message);
             }
         }
+
+        public ServiceResult Empledept(int sucursal, string inicio, string fin)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _departamentoRepositorio.Empledept(sucursal, inicio, fin);
+
+                return result.Ok(lost);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        } 
+        
+        public ServiceResult Todas(string inicio, string fin)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _departamentoRepositorio.Todas(inicio, fin);
+
+                return result.Ok(lost);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
         public ServiceResult EditarDepto(tbDepartamento item)
         {
             var result = new ServiceResult();
@@ -261,6 +291,36 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             catch (Exception ex)
             {
 
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult Totalcompras(int sucursal, string inicio, string fin)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _clienteRepository.Totalcompras(sucursal, inicio, fin);
+
+                return result.Ok(lost);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult Todasss(string inicio, string fin)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _clienteRepository.Todasss(inicio, fin);
+
+                return result.Ok(lost);
+            }
+            catch (Exception ex)
+            {
                 return result.Error(ex.Message);
             }
         }
@@ -565,6 +625,36 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             }
         }
 
+        public ServiceResult Popularidad(int sucursal, string inicio, string fin)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _modeloRepository.Popularidad(sucursal, inicio, fin);
+
+                return result.Ok(lost);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult Todassss(string inicio, string fin)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _modeloRepository.Todassss(inicio, fin);
+
+                return result.Ok(lost);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
         #endregion
 
         #region Sede
@@ -824,6 +914,36 @@ namespace Grupo_Rac.BusinessLogic.Servicios
             catch (Exception ex)
             {
 
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult Emplecargo(int sucursal, string inicio, string fin)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _cargoRepository.Emplecargo(sucursal, inicio, fin);
+
+                return result.Ok(lost);
+            }
+            catch (Exception ex)
+            {
+                return result.Error(ex.Message);
+            }
+        }
+
+        public ServiceResult Todass(string inicio, string fin)
+        {
+            var result = new ServiceResult();
+            try
+            {
+                var lost = _cargoRepository.Todass(inicio, fin);
+
+                return result.Ok(lost);
+            }
+            catch (Exception ex)
+            {
                 return result.Error(ex.Message);
             }
         }

@@ -22,6 +22,7 @@ namespace Grupo_Rac.API.Extensiones
             CreateMap<PantallaRolViewModel, tbPantallas_PorRoles>().ReverseMap();
             CreateMap<MarcaViewModel, tbMarcas>().ReverseMap();
             CreateMap<EmpleadoViewModel, tbEmpleados>().ReverseMap();
+            CreateMap<ClientesViewModel, tbClientes>().ReverseMap();
         }
     }
 }

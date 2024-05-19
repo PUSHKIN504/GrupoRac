@@ -42,6 +42,21 @@ namespace Grupo_Rac.API.Controllers
             return Ok(list.Data);
         }
 
+        [HttpGet("Empledept/{sucursal}/{inicio}/{fin}")]
+        public IActionResult Empledept(int sucursal, string inicio, string fin)
+        {
+            var estado = _generalService.Empledept(sucursal, inicio, fin);
+            return Ok(estado);
+
+        }
+        [HttpGet("Todas/{inicio}/{fin}")]
+        public IActionResult Todas(string inicio, string fin)
+        {
+            var estado = _generalService.Todas(inicio, fin);
+            return Ok(estado);
+
+        }
+
         [HttpGet("DropDown")]
         public IActionResult List()
         {

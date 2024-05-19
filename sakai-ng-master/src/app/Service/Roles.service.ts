@@ -4,7 +4,21 @@ import { HttpClient } from '@angular/common/http';
 import { BASE_URL } from './ulrsettings';
 import { Rol,Fill } from '../Models/RolViewModel';
 import { Observable } from 'rxjs/internal/Observable';
+//import { Pantalla } from '../Models/PantallaViewModel';
 import { map } from 'rxjs';
+
+interface ApiResponse {
+  code: number;
+  success: boolean;
+  message: string;
+  data: Pantalla[];
+}
+
+interface Pantalla {
+  ptl_Id: number;
+  ptl_Descripcion: string;
+  // Incluye otras propiedades según necesites
+}
 
 
 
@@ -31,6 +45,12 @@ export class ServiceService {
       }),
     );
   }
+
+  getPantallasDeRol(idRoll: number): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${BASE_URL + 'API/PantallaporRol/PantdelRol/' + idRoll}`);
+}
+
+
   getFill(codigo: string): Observable<Fill> {
     return this.http.get<Fill>(`${BASE_URL + 'API/Rol/Fill/' + codigo}`);
   }

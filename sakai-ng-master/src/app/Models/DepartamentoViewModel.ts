@@ -10,6 +10,11 @@ export class dropDepartamento{
     text?:String;
 }
 
+export class dshbord{
+    dep_Descripcion:string;
+    totalEmpleados:string;
+}
+
 
 export class DepartamentoEnviar {
     Dep_Id: string;

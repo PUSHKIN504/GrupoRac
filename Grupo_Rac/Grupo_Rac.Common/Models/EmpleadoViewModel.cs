@@ -33,11 +33,9 @@ namespace Grupo_Rac.Common.Models
         public string UsuarioModificacion { get; set; }
 
         [NotMapped]
-        public string Muni_Municipio { get; set; }
+        public string Ciu_Descripcion { get; set; }
         [NotMapped]
-        public string Esta_EstadoCivil { get; set; }
+        public string Est_Descripcion { get; set; }
 
-        [NotMapped]
-        public string Empl_Correo { get; set; }
     }
 }

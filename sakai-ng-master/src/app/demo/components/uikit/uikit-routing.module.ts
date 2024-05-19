@@ -40,10 +40,10 @@ import { Breadcrumb } from 'primeng/breadcrumb';
         //Veh
         { path: 'veh', data: { breadcrumb: 'veh' }, loadChildren: () => import('./Vehiculo/Vehiculodemo.module').then(m => m.VehiculoDemoModule) },
         //Usuario
-        { path: 'usuario', data: { breadcrumb: 'usuario' }, loadChildren: () => import('./Usuario/Usuariodemo.module').then(m => m.UsuarioDemoModule) },
+        { path: 'usuario', data: { breadcrumb: 'Usuarios' }, loadChildren: () => import('./Usuario/Usuariodemo.module').then(m => m.UsuarioDemoModule) },
 
         //rol
-        { path: 'rol', data: {Breadcrumb: 'rol'}, loadChildren: () => import('./rol/rol.module').then(m => m.RolModule)},
+        { path: 'Roles', data: {Breadcrumb: 'Roles'}, loadChildren: () => import('./rol/rol.module').then(m => m.RolModule)},
         //Compras
         { path: 'comp', data: { breadcrumb: 'comp' }, loadChildren: () => import('./Facturas/Compras/compras.module').then(m => m.CompDemoModule) },
 

@@ -12,9 +12,16 @@ namespace Grupo_Rac.Common.Models
         public int PaR_Id { get; set; }
         public int? Ptl_Id { get; set; }
         public int? Rol_Id { get; set; }
+        [NotMapped]
+        public string Rol_Descripcion { get; set; }
+        public int? PaR_Creacion { get; set; }
+        public DateTime? PaR_FechaCreacion { get; set; }
+        public int? PaR_Modifica { get; set; }
+        public DateTime? PaR_FechaModificacion { get; set; }
+        public bool? PaR_Estado { get; set; }
 
         [NotMapped]
-        public int? Pantalla { get; set; }
+        public string Ptl_Descripcion { get; set; }
 
         [NotMapped]
         public string UsuarioCreacion { get; set; }

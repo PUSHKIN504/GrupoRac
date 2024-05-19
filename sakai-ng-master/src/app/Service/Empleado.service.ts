@@ -5,7 +5,7 @@ import { BASE_URL } from './ulrsettings';
 
 import { Empleado,Fill } from '../Models/EmpleadoViewModel';
 import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 import { dropDepartamento } from '../Models/DepartamentoViewModel';
 import { dropMunicipio } from '../Models/CiudadViewModel';
 import { dropEstadoCivil } from '../Models/EstadoCivilViewModel';
@@ -50,10 +50,14 @@ export class ServiceService {
   }
 
   EnviarEmpleado(formData: any): Observable<any> {
-    return this.http.post<any>(BASE_URL + 'API/Empleado/Create/', formData).pipe(
+    return this.http.post<any>(BASE_URL + 'API/Empleado/Create', formData).pipe(
       map(response => {
         return response;
       }),
+      catchError(error => {
+        console.error('Error al enviar empleado:', error);
+        return throwError(error); // Importa throwError desde 'rxjs'
+      })
     );
   }
 

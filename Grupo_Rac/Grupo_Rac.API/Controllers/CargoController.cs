@@ -25,6 +25,21 @@ namespace Grupo_Rac.API.Controllers
             _mapper = mapper;
             this.environment = webHostEnvironment;
         }
+
+        [HttpGet("Emplecargo/{sucursal}/{inicio}/{fin}")]
+        public IActionResult Emplecargo(int sucursal, string inicio, string fin)
+        {
+            var estado = _GeneralService.Emplecargo(sucursal, inicio, fin);
+            return Ok(estado);
+
+        }
+        [HttpGet("Todas/{inicio}/{fin}")]
+        public IActionResult Todas(string inicio, string fin)
+        {
+            var estado = _GeneralService.Todass(inicio, fin);
+            return Ok(estado);
+
+        }
         [HttpGet("DropDown")]
         public IActionResult List()
         {

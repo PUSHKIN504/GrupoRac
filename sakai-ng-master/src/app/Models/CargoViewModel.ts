@@ -5,6 +5,11 @@ export class Cargo{
 
 }
 
+export class dcrgo{
+    crg_Descripcion:string;
+    totalEmpleados:string;
+}
+
 export class CargoEnviar {
     Crg_ID: string;
     Crg_Descripcion: string;
