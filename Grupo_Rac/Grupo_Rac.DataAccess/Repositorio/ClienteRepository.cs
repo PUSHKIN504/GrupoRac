@@ -20,15 +20,15 @@ namespace Grupo_Rac.DataAccess.Repositorio
             {
                 var parametro = new DynamicParameters();
 
-                parametro.Add("@Cli_Nombre", item.Cli_Nombre);
-                //parametro.Add("@Clie_Apellido", item.Clie_Apellido);
-                //parametro.Add("@Clie_FechaNac", item.Clie_FechaNac);
-                //parametro.Add("@Clie_Sexo", item.Clie_Sexo);
-                parametro.Add("@Ciu_Id", item.Ciu_Id);
-                //parametro.Add("@Esta_Id", item.Esta_Id);
-                parametro.Add("@Cli_Creacion", 1);
-                parametro.Add("@Cli_Fecha_Creacion", item.Cli_Fecha_Creacion);
-                parametro.Add("@Cli_DNI", item.Cli_DNI);
+                parametro.Add("@Clie_Nombre", item.Cli_Nombre);
+                parametro.Add("@Clie_Apellido", item.Cli_Apellido);
+                parametro.Add("@Clie_FechaNac", item.Cli_FechaNac);
+                parametro.Add("@Clie_Sexo", item.Cli_Sexo);
+                parametro.Add("@Muni_Codigo", item.Ciu_Id);
+                parametro.Add("@Esta_Id", item.Est_ID);
+                parametro.Add("@Clie_UsuarioCreacion", 1);
+                parametro.Add("@Clie_FechaCreacion", item.Cli_Fecha_Creacion);
+                parametro.Add("@Clie_DNI", item.Cli_DNI);
 
 
                 var result = db.Execute(sql, parametro, commandType: CommandType.StoredProcedure);
@@ -39,7 +39,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
 
         public IEnumerable<tbClientes> List()
         {
-            const string sql = "Gral.sp_Clientes_listar";
+            const string sql = "[Gral].[sp_Clientes_listar]";
 
             List<tbClientes> result = new List<tbClientes>();
 
@@ -79,7 +79,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
             using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
             {
                 var parameter = new DynamicParameters();
-                parameter.Add("Cli_Id", id);
+                parameter.Add("Clie_Id", id);
                 result = db.QueryFirst<tbClientes>(ScriptBaseDatos.Clientesllenar, parameter, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -93,16 +93,16 @@ namespace Grupo_Rac.DataAccess.Repositorio
             using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
             {
                 var parameter = new DynamicParameters();
-                parameter.Add("@Cli_Id", item.Cli_Id);
-                parameter.Add("@Cli_Nombre", item.Cli_Nombre);
-                //parameter.Add("@Clie_Apellido", item.Clie_Apellido);
-                //parameter.Add("@Clie_FechaNac", item.Clie_FechaNac);
-                //parameter.Add("@Clie_Sexo", item.Clie_Sexo);
-                parameter.Add("@Ciu_Id", item.Ciu_Id);
-                //parameter.Add("@Esta_Id", item.Esta_Id);
+                parameter.Add("@Clie_Id", item.Cli_Id);
+                parameter.Add("@Clie_Nombre", item.Cli_Nombre);
+                parameter.Add("@Clie_Apellido", item.Cli_Apellido);
+                parameter.Add("@Clie_FechaNac", item.Cli_FechaNac);
+                parameter.Add("@Clie_Sexo", item.Cli_Sexo);
+                parameter.Add("@Muni_Codigo", item.Ciu_Id);
+                parameter.Add("@Esta_Id", item.Est_ID);
                 parameter.Add("@Clie_DNI", item.Cli_DNI);
-                parameter.Add("@Cli_Modifica", 1);
-                parameter.Add("@Cli_Fecha_Modifica", item.Cli_Fecha_Modifica);
+                parameter.Add("@Clie_UsuarioModificacion", 1);
+                parameter.Add("@Clie_FechaModificacion", item.Cli_Fecha_Modifica);
                 var result = db.Execute(sql, parameter, commandType: CommandType.StoredProcedure);
                 string mensaje = (result == 1) ? "exito" : "error";
                 return new RequestStatus { CodeStatus = result, MessageStatus = mensaje };
@@ -117,7 +117,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
             using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
             {
                 var parameter = new DynamicParameters();
-                parameter.Add("Cli_Id", Clie_Id);
+                parameter.Add("Clie_Id", Clie_Id);
 
                 var result = db.QueryFirst(ScriptBaseDatos.ClientesEliminar, parameter, commandType: CommandType.StoredProcedure);
                 return new RequestStatus { CodeStatus = result.Resultado, MessageStatus = (result.Resultado == 1) ? "Exito" : "Error" };

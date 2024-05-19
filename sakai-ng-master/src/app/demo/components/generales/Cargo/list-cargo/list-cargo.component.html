@@ -74,9 +74,9 @@
                         {{carg.crg_Descripcion}}
                     </td>
                     <td style="display: flex; justify-content: space-around;">
-                        <button pButton pRipple type="button" label="Editar" class="p-button-raised p-button-success"  (click)="Fill(carg.crg_ID)"></button>
-                        <button pButton pRipple type="button" label="Detalles" class="p-button-raised p-button-secondary" (click)="detalles(carg.crg_ID)"></button>
-                        <button pButton pRipple type="button" label="Eliminar" class="p-button-raised p-button-danger"  (click)="deleteSelectedProducts(carg.crg_ID)"></button>
+                        <p-button  label="Editar"   icon="pi pi-user-edit" size="small" (click)="Fill(carg.crg_ID)" severity="primary" [raised]="true" [plain]="true"></p-button>
+                        <p-button  label="Detalles"   icon="pi pi-book" size="small" (click)="detalles(carg.crg_ID)" severity="secondary" [raised]="true" [plain]="true"></p-button>
+                        <p-button  label="Eliminar" icon="pi pi-trash" size="small" (click)="deleteSelectedProducts(carg.crg_ID)" severity="danger" [raised]="true" [plain]="true"></p-button>
                       
                     </td>
                 </tr>

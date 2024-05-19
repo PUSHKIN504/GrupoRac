@@ -34,6 +34,15 @@ namespace Grupo_Rac.Entities.Entity
         public DateTime? Cli_Fecha_Modifica { get; set; }
         public bool? Cli_Estado { get; set; }
 
+        [NotMapped]
+        public string Clie_Sexo { get; set; }
+
+        [NotMapped]
+        public string Ciu_Descripcion { get; set; }
+
+        [NotMapped]
+        public string Est_Descripcion { get; set; }
+
         public virtual tbCiudades Ciu { get; set; }
         public virtual tbUsuarios Cli_CreacionNavigation { get; set; }
         public virtual tbUsuarios Cli_ModificaNavigation { get; set; }

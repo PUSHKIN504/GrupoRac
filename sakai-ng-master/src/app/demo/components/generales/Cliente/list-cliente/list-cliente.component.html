@@ -1,12 +1,10 @@
 <p-toast ></p-toast>
 
 <div class="main-card mb-3 card"> 
-    <div class="card-header">
-        <h1 class="card-title">Cliente</h1>
-    </div>
+
     <div class="card-body">
 
-        <button (click)="collapse()" pButton icon="pi pi-plus" style="margin-bottom: 10px;" [class.hidden]="!Agregar">Agregar</button>
+        <button (click)="collapse()" pButton icon="pi pi-plus" style="margin-bottom: 10px;  margin-top: 10px;" [class.hidden]="!Agregar">Agregar</button>
           
         <div [class.hidden]="!Collapse" style="margin-top: 20px;">
 
@@ -14,31 +12,31 @@
               <div class="p-fluid p-formgrid grid">
                 <div class="field col-12 md:col-6">
                     <label for="Cliente">DNI</label>
-                    <input pInputText id="Clie_DNI" formControlName="Clie_DNI" type="text" required autofocus 
-                           [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.controls['Clie_DNI'].invalid}"
+                    <input pInputText id="Clie_DNI" formControlName="Cli_DNI" type="text" required autofocus 
+                           [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.controls['Cli_DNI'].invalid}"
                            (keydown)="ValidarNumeros($event)" maxlength="13"/>
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && clienteForm.controls['Clie_DNI'].invalid" style="color: red !important;">DNI Requerido</small>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && clienteForm.controls['Cli_DNI'].invalid" style="color: red !important;">DNI Requerido</small>
                  </div>
                   <div class="field col-12 md:col-6">
                       <label for="Cliente">Nombre</label>
-                      <input pInputText id="Clie_Nombre" formControlName="Clie_Nombre" type="text" required autofocus 
-                             [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.controls['Clie_Nombre'].invalid}"
+                      <input pInputText id="Clie_Nombre" formControlName="Cli_Nombre" type="text" required autofocus 
+                             [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.controls['Cli_Nombre'].invalid}"
                              (keydown)="validarTexto($event)" />
-                      <small class="ng-dirty ng-invalid" *ngIf="submitted && clienteForm.controls['Clie_Nombre'].invalid" style="color: red !important;">Nombre Requerido</small>
+                      <small class="ng-dirty ng-invalid" *ngIf="submitted && clienteForm.controls['Cli_Nombre'].invalid" style="color: red !important;">Nombre Requerido</small>
                    </div>
 
                   <div class="field col-12 md:col-6">
                       <label for="Cliente">Apellido</label>
-                      <input pInputText id="Cliente" formControlName="Clie_Apellido" type="text" required autofocus 
-                             [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.controls['Clie_Apellido'].invalid}"
+                      <input pInputText id="Cliente" formControlName="Cli_Apellido" type="text" required autofocus 
+                             [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.controls['Cli_Apellido'].invalid}"
                              (keydown)="validarTexto($event)" />
-                      <small class="ng-dirty ng-invalid" *ngIf="submitted && clienteForm.controls['Clie_Apellido'].invalid" style="color: red !important;">Apellido Requerido</small>
+                      <small class="ng-dirty ng-invalid" *ngIf="submitted && clienteForm.controls['Cli_Apellido'].invalid" style="color: red !important;">Apellido Requerido</small>
                    </div>
 
                    <div class="field col-12 md:col-6">
                         <label for="Clie_FechaNac" class="form-label">Fecha de Nacimiento</label>
-                        <input pInputText id="Clie_FechaNac" class="form-control" formControlName="Clie_FechaNac" type="datetime-local" required autofocus />
-                        <small class="ng-dirty ng-invalid" *ngIf="submitted && clienteForm.controls['Clie_FechaNac'].invalid" style="color: red !important;">Apellido Requerido</small>
+                        <input pInputText id="Clie_FechaNac" class="form-control" formControlName="Cli_FechaNac" type="datetime-local" required autofocus />
+                        <small class="ng-dirty ng-invalid" *ngIf="submitted && clienteForm.controls['Cli_FechaNac'].invalid" style="color: red !important;">Apellido Requerido</small>
 
                     </div>
 
@@ -46,42 +44,42 @@
                         <label for="Clie_Sexo" class="form-label">Sexo</label>
                         <div class="col-md-3">
                             <label>
-                                <input type="radio" class="form-check-input" name="sexo" value="M" checked formControlName="Clie_Sexo"> Masculino
+                                <input type="radio" class="form-check-input" name="sexo" value="M" checked formControlName="Cli_Sexo"> Masculino
                               </label>
                             </div>
 
                             <div class="col-md-3">
                                 <label>
-                                    <input type="radio" class="form-check-input" name="sexo" value="F" formControlName="Clie_Sexo"> Femenino
+                                    <input type="radio" class="form-check-input" name="sexo" value="F" formControlName="Cli_Sexo"> Femenino
                                   </label>
                                 </div>
                             </div>
 
                             <div class="field col-12 md:col-6">
                                 <label for="state">Estado Civil</label>
-                                <select formControlName="Esta_Id" pInputText id="estado" required autofocus [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.get('Esta_Id').value === '0'}" >
+                                <select formControlName="Est_ID" pInputText id="estado" required autofocus [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.get('Est_ID').value === '0'}" >
                                   <option *ngFor="let estadocivil of estadocivil" [value]="estadocivil.value">{{ estadocivil.text }}</option>
                                 </select>
-                                <small *ngIf="submitted && clienteForm.get('Esta_Id').value === '0'" style="color: red;">Estado Civil Requerido</small>
+                                <small *ngIf="submitted && clienteForm.get('Est_ID').value === '0'" style="color: red;">Estado Civil Requerido</small>
                               </div>
                   
 
                   
                       <div class="field col-12 md:col-6">
                         <label for="Departamento">Departamento</label>
-                        <select formControlName="Depa_Codigo" pInputText id="Departamento" required autofocus [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.get('Depa_Codigo').value === '0'}"
-                          (change)="onDepartmentChange(clienteForm.get('Depa_Codigo').value)">
+                        <select formControlName="Dep_Id" pInputText id="Departamento" required autofocus [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.get('Dep_Id').value === '0'}"
+                          (change)="onDepartmentChange(clienteForm.get('Dep_Id').value)">
                           <option *ngFor="let depa of departamentos" [value]="depa.value">{{ depa.text }}</option>
                          </select>      
-                          <small *ngIf="submitted && clienteForm.get('Depa_Codigo').value === '0'" style="color: red;">Departamento Requerido</small>
+                          <small *ngIf="submitted && clienteForm.get('Dep_Id').value === '0'" style="color: red;">Departamento Requerido</small>
                       </div>
 
                       <div class="field col-12 md:col-6">
                           <label for="Municipio">Municipio</label>
-                          <select formControlName="Muni_Codigo" pInputText id="Municipio" required autofocus [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.get('Muni_Codigo').value === '0'}" >
+                          <select formControlName="Ciu_Id" pInputText id="Municipio" required autofocus [ngClass]="{'ng-invalid ng-dirty': submitted && clienteForm.get('Ciu_Id').value === '0'}" >
                             <option *ngFor="let muni of municipios" [value]="muni.value">{{ muni.text }}</option>
                           </select>
-                          <small *ngIf="submitted && clienteForm.get('Muni_Codigo').value === '0'" style="color: red;">Municipio Requerido</small>
+                          <small *ngIf="submitted && clienteForm.get('Ciu_Id').value === '0'" style="color: red;">Municipio Requerido</small>
                         </div>
 
 
@@ -103,50 +101,58 @@
 
 
 
-        <p-table #dt1 [value]="Cliente" dataKey="cli_Id" [rows]="10" [loading]="loading" [rowHover]="true" [class.hidden]="!DataTable" styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['Cli_Id,Cli_Nombre,Clie_Apellido, Clie_Sexo,Clie_FechaNaciminto,Esta_Id,Muni_Municipio']" responsiveLayout="scroll">
-
+        <p-table #dt1 [value]="Cliente" dataKey="cli_Id" [rows]="10" [loading]="loading" [rowHover]="true"  styleClass="p-datatable-gridlines" [paginator]="true" [globalFilterFields]="['cli_Id','cli_Nombre','cli_Apellido', 'cli_Sexo','cli_FechaNaciminto','est_ID','ciu_Descripcion']" responsiveLayout="scroll" [class.hidden]="!DataTable">
+            <ng-template pTemplate="caption">
+                <div class="flex justify-content-between flex-column sm:flex-row">
+                    <button pButton label="Clear" class="p-button-outlined mb-2" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+                    <span class="p-input-icon-left mb-2">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" #filter (input)="onGlobalFilter(dt1, $event)" placeholder="Search Keyword" class="w-full"/>
+                    </span>
+                </div>
+            </ng-template>
             <ng-template pTemplate="header">
                 <tr>
                     <th style="min-width: 12rem">
                         <div class="flex justify-content-between align-items-center">
                              DNI
-                            <p-columnFilter type="text" field="clie_Id" display="menu" placeholder="Search by name"></p-columnFilter>
+
                         </div>
                     </th>
                     <th style="min-width: 12rem">
                         <div class="flex justify-content-between align-items-center">
                             Nombre
-                            <p-columnFilter type="text" field="clie_Nombre" display="menu" placeholder="Search by country"></p-columnFilter>
+                         
                         </div>
                     </th>
                     <th style="min-width: 12rem">
                         <div class="flex justify-content-between align-items-center">
                             Apellido
-                            <p-columnFilter type="text" field="clie_Apellido" display="menu" placeholder="Search by country"></p-columnFilter>
+                           
                         </div>
                     </th>
                     <th style="min-width: 12rem">
                         <div class="flex justify-content-between align-items-center">
                             Fecha
-                            <p-columnFilter type="text" field="clie_FechaNac" display="menu" placeholder="Search by country"></p-columnFilter>
+                           
                         </div>
                     </th>
                     <th style="min-width: 12rem">
                         <div class="flex justify-content-between align-items-center">
                             Sexo
-                            <p-columnFilter type="text" field="clie_Sexo" display="menu" placeholder="Search by country"></p-columnFilter>
+                        
                         </div>
                     </th>
                     <th style="min-width: 12rem">
                         <div class="flex justify-content-between align-items-center">
                             Estado Civil
-                            <p-columnFilter type="text" field="estado_Civil" display="menu" placeholder="Search by country"></p-columnFilter>
+                        
                         </div>
                     </th>
                     <th style="min-width: 12rem">
                         <div class="flex justify-content-between align-items-center">
                             Municipio
-                            <p-columnFilter type="text" field="municipio" display="menu" placeholder="Search by country"></p-columnFilter>
+                           
                         </div>
                     </th>
                     <th style="min-width: 14rem">
@@ -169,18 +175,19 @@
                         {{clie.cli_FechaNac}}
                     </td>
                     <td>
-                        {{clie.cli_Sexo}}
+                        {{clie.clie_Sexo}}
                     </td>
                     <td>
-                        {{clie.estado_Civil}}
+                        {{clie.est_Descripcion}}
                     </td>
                     <td>
-                        {{clie.municipio}}
+                        {{clie.ciu_Descripcion}}
                     </td>
-                    <td style="display: flex; justify-content: space-around;">
-                        <button pButton pRipple type="button" label="Editar" class="p-button-raised p-button-success"  (click)="Fill(clie.cli_Id)"></button>
-                        <button pButton pRipple type="button" label="Detalles" class="p-button-raised p-button-secondary" (click)="detalles(clie.cli_Id)"></button>
-                        <button pButton pRipple type="button" label="Eliminar" class="p-button-raised p-button-danger"  (click)="deleteSelectedProducts(clie.cli_Id)"></button>
+                 
+                    <td style="display: flex; justify-content: space-around; ;grid-gap: 5px;">
+                        <p-button  label="Editar"   icon="pi pi-user-edit" size="small" (click)="Fill(clie.cli_Id)" severity="primary" [raised]="true" [plain]="true"></p-button>
+                        <p-button  label="Detalles"   icon="pi pi-book" size="small" (click)="detalles(clie.cli_Id)" severity="secondary" [raised]="true" [plain]="true"></p-button>
+                        <p-button  label="Eliminar" icon="pi pi-trash" size="small" (click)="deleteSelectedProducts(clie.cli_Id)" severity="danger" [raised]="true" [plain]="true"></p-button>
                     </td>
                 </tr>
             </ng-template>
@@ -293,14 +300,15 @@
               <button pButton icon="pi pi-stop" type="button" (click)="cancelar()" label="Volver" class="p-button-outlined"></button>
             </div>
         </div>
-        <p-dialog [(visible)]="deleteProductDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+        <p-dialog [(visible)]="deleteProductDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
             <div class="flex align-items-center justify-content-center">
                 <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
                 <span>Esta seguro de eliminarlo?</span>
             </div>
             <ng-template pTemplate="footer">
-                <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
-                <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Yes" (click)="confirmDelete()"></button>
+                <button pButton pRipple icon="pi pi-times" class="p-button-outlined p-button-primary" label="No" (click)="deleteProductDialog = false"></button>
+                <button pButton pRipple icon="pi pi-check" class="p-button-outlined p-button-primary" label="Si" (click)="confirmDelete()"></button>
+
             </ng-template>
         </p-dialog>
     </div>

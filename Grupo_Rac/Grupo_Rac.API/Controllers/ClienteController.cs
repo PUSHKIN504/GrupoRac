@@ -52,12 +52,14 @@ namespace Grupo_Rac.API.Controllers
             var modelo = new tbClientes()
             {
                 Cli_Nombre = item.Cli_Nombre,
+                Cli_Apellido = item.Cli_Apellido,
                 Cli_DNI = item.Cli_DNI,
                 Cli_Direccion = item.Cli_Direccion,
                 Ciu_Id = item.Ciu_Id,
-                //Clie_FechaNac = item.Clie_FechaNac,
-                //Clie_Sexo = item.Clie_Sexo,
-                //Esta_Id = item.Esta_Id,
+                Cli_FechaNac = item.Cli_FechaNac,
+                Cli_Id = item.Cli_Id,
+                Cli_Sexo = item.Cli_Sexo,
+                Est_ID = item.Est_ID,
                 Cli_Creacion = 1,
                 Cli_Fecha_Creacion = DateTime.Now
 
@@ -82,12 +84,12 @@ namespace Grupo_Rac.API.Controllers
             {
                 Cli_Id = item.Cli_Id,
                 Cli_Nombre = item.Cli_Nombre,
-                //Clie_Apellido = item.Clie_Apellido,
-                //Clie_FechaNac = item.Clie_FechaNac,
+                Cli_Apellido = item.Cli_Apellido,
+                Cli_FechaNac = item.Cli_FechaNac,
                 Cli_DNI = item.Cli_DNI,
-                //Clie_Sexo = item.Clie_Sexo,
+                Cli_Sexo = item.Cli_Sexo,
                 Ciu_Id = item.Ciu_Id,
-                //Esta_Id = item.Esta_Id,
+                Est_ID = item.Est_ID,
                 Cli_Modifica = 1,
                 Cli_Fecha_Modifica = DateTime.Now
             };
