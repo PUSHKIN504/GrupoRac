@@ -5,24 +5,29 @@ export interface UsuarioD {
 }
 
 export class Usuario{
-    Usu_ID?:Number;
-    Usu_Nombre?:String;
-    Usu_Apellido?:String;
-    Usu_Sexo?:String;
+    usu_ID?:String;
+    usu_Usua?:String;
+    usu_Contra?:String;
+    rol_Descripcion?:string;
+    empl_Nombre?:String;
+
+    usu_Nombre?:String;
+    usu_Apellido?:String;
+    usu_Sexo?:String;
     
-    Usu_FechaNacimiento?:String;
-    Usu_Telefono?:String;
-    Usu_Usua?:String;
-    Usu_Contra?:String;
-    Est_Id?:Number;
-    Sed_Id?:Number;
-    Crg_Id?:Number;
-    Rol_Id?:Number;
+    usu_FechaNacimiento?:String;
+    usu_Telefono?:String;
+
+    
+    est_Id?:Number;
+    sed_Id?:Number;
+    crg_Id?:Number;
+    rol_Id?:Number;
     Admin?:string;
-    Ptl_Descripcion?:string;
-    Rol_Descripcion?:string;
-    Crg_Descripcion?:string;
-    Sed_Descripcion?:String;
+    ptl_Descripcion?:string;
+
+    crg_Descripcion?:string;
+    sed_Descripcion?:String;
     
 }
 
@@ -51,6 +56,7 @@ export class Fill {
     empl_Nombre:String;
     empl_Id:String;
     rol_Id:String;
+    
     usuarioCreacion: string;
     usuarioModificacion: string;
     fechaCreacion : string;

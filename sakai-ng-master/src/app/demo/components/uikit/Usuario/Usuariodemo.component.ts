@@ -51,11 +51,11 @@ export class UsuarioDemoComponent {
 
   ngOnInit(): void {
     this.usuarioForm = new FormGroup({
-      Usua_Usuario: new FormControl("",Validators.required),
-      Usua_Contraseña: new FormControl("", Validators.required),
-      Usua_Administrador: new FormControl(false, [Validators.required]),
+      Usu_Usua: new FormControl("",Validators.required),
+      Usu_Contra: new FormControl("", Validators.required),
+      Usu_Admin: new FormControl(false, [Validators.required]),
       Empl_Id: new FormControl('0', [Validators.required]),
-      Role_Id: new FormControl('0', [Validators.required]),
+      Rol_Id: new FormControl('0', [Validators.required]),
     });
 
     this.service.getDropDownEmpleado().subscribe((data: dropEmpleado[]) => {
@@ -89,7 +89,7 @@ detalles(codigo){
   this.service.getFill(codigo).subscribe({
       next: (data: Fill) => {
          this.Detalle_Usuario = data.usu_Usua,
-         this.Detalle_Administrador = data.admin,
+         this.Detalle_Administrador = data.usu_Admin,
          this.Detalle_Rol = data.rol_Descripcion,
          this.Detalle_Empleado = data.empl_Nombre,
          this.UsuarioCreacion = data.usuarioCreacion,
@@ -128,7 +128,7 @@ validarTextoNumeros(event: KeyboardEvent) {
   }
 }
 onSubmit() {
-  if (this.usuarioForm.valid && this.usuarioForm.get('Rol_Id').value !== '0') {
+  if (this.usuarioForm.valid && this.usuarioForm.get('Empl_Id').value !== '0' && this.usuarioForm.get('Rol_Id').value !== '0') {
      this.viewModel = this.usuarioForm.value;
      if (this.Valor == "Agregar") {
       this.service.EnviarUsuario(this.viewModel).subscribe((data: MensajeViewModel[]) => {
@@ -145,10 +145,12 @@ onSubmit() {
           }
           
        })
-     } else {
+     } else if (this.Valor == "Editar") {
+      console.log('Actualizar Usuario:', this.viewModel);  // Debug
           this.viewModel.Usu_ID = this.ID;
           this.service.ActualizarUsuario(this.viewModel).subscribe((data: MensajeViewModel[]) => {
-          if(data["message"] == "Operación completada exitosamente."){
+            console.log('Respuesta de ActualizarUsuario:', data);  // Debug
+            if(data["message"] == "Operación completada exitosamente."){
             this.ngOnInit();
            this.messageService.add({ severity: 'success', summary: 'Exito', detail: 'Actualizado con Exito', life: 3000 });
            this.Collapse= false;
@@ -198,11 +200,11 @@ Fill(codigo) {
     this.service.getFill(codigo).subscribe({
         next: (data: Fill) => {
           this.usuarioForm = new FormGroup({
-            Usua_Usuario: new FormControl(data.usu_Usua,Validators.required),
+            Usu_Usua: new FormControl(data.usu_Usua,Validators.required),
             Usua_Contraseña: new FormControl("x", Validators.required),
-            Usua_Administrador: new FormControl(data.usu_Admin, [Validators.required]),
+            Usu_Admin: new FormControl(data.usu_Admin, [Validators.required]),
             Empl_Id: new FormControl(data.empl_Id, [Validators.required]),
-            Role_Id: new FormControl(data.rol_Id, [Validators.required]),
+            Rol_Id: new FormControl(data.rol_Id, [Validators.required]),
           });
             this.ID = data.usu_ID;
             this.Collapse= true;

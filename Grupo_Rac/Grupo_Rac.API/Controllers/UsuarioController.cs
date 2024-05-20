@@ -41,7 +41,7 @@ namespace Grupo_Rac.API.Controllers
         public IActionResult Detalles(int userId)
         {
             var list = _AccesoService.Detalles(userId);
-            return Ok(list.Data);
+            return Json(list.Data);
         }
 
 
@@ -122,24 +122,24 @@ namespace Grupo_Rac.API.Controllers
         }
 
 
-        [HttpPut("Actualizar/{id}")]
+        [HttpPut("Actualizar")]
         public IActionResult Actualizar(int id, UsuarioViewModel item)
         {
 
             var model = _mapper.Map<tbUsuarios>(item);
             var modelo = new tbUsuarios()
             {
-                Usu_ID = id,
+                Usu_ID = item.Usu_ID,
                 Usu_Usua = item.Usu_Usua,
                 Usu_Admin = item.Usu_Admin,
                 Rol_Id = item.Rol_Id,
                 Empl_Id = item.Empl_Id,
-                Usu_UsuModi = item.Usu_UsuModi,
+                Usu_UsuModi = 1,
                 Usu_FechaModifica = DateTime.Now
             };
 
             var list = _AccesoService.ActualizarUsua(modelo);
-            return Ok(list.Message);
+            return Ok(new { success = true, message = list.Message });
         }
         [HttpDelete("Eliminar/{id}")]
         public IActionResult Eliminar(int id)
