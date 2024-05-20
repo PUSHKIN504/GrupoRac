@@ -23,7 +23,7 @@ import { BASE_URL } from './ulrsettings';
   providedIn: 'root'
 })
 export class ServiceService {
-  private baseUrl = 'https://localhost:44320/API/Departamento';
+  private baseUrl = 'https://gruporac.somee.com/API/Departamento';
 
   constructor(private http: HttpClient) {}
 
@@ -61,16 +61,16 @@ export class ServiceCiu {
 
   constructor(private http:HttpClient) { }
 
-  baseURL = 'https://localhost:44320/API/Municipio'; // Base URL
+  baseURL = 'https://gruporac.somee.com/API/Municipio'; // Base URL
   
-  urlC = 'https://localhost:44320/API/Departamento/ListCiu'
+  urlC = 'https://gruporac.somee.com/API/Departamento/ListCiu'
 
   getCiudad(){
     return this.http.get<Ciudad[]>(this.urlC)
   }
   
   GenerateInvoicePDF(invoiceno:any){
-    return this.http.get('https://localhost:44320/API/Departamento/generatepdf?InvoiceNo='+invoiceno,{observe:'response',responseType:'blob'});
+    return this.http.get('https://gruporac.somee.com/API/Departamento/generatepdf?InvoiceNo='+invoiceno,{observe:'response',responseType:'blob'});
     
   }
 
@@ -112,8 +112,8 @@ export class ServiceCargo {
 
   constructor(private http:HttpClient) { }
 
-  baseURL = 'https://localhost:44320/API/Cargo';
-  urlC = 'https://localhost:44320/API/Departamento/ListCargo'
+  baseURL = 'https://gruporac.somee.com/API/Cargo';
+  urlC = 'https://gruporac.somee.com/API/Departamento/ListCargo'
 
   getCargo(){
     return this.http.get<Cargo[]>(this.urlC)
@@ -162,7 +162,7 @@ export class ServiceCliente {
   constructor(private http:HttpClient) { }
 
 
-  urlC = 'https://localhost:44320/API/Departamento/ListCli'
+  urlC = 'https://gruporac.somee.com/API/Departamento/ListCli'
 
   getCliente(){
     return this.http.get<Cliente[]>(this.urlC)
@@ -179,8 +179,8 @@ export class ServiceEstadoCivil {
 
   constructor(private http:HttpClient) { }
 
-  baseURL = 'https://localhost:44320/API/EstadoCivil'
-  urlC = 'https://localhost:44320/API/Departamento/ListEstC'
+  baseURL = 'https://gruporac.somee.com/API/EstadoCivil'
+  urlC = 'https://gruporac.somee.com/API/Departamento/ListEstC'
 
   getEstadoCivil(){
     return this.http.get<EstadoCivil[]>(this.urlC)
@@ -227,10 +227,10 @@ export class ServiceMarca {
 
   constructor(private http:HttpClient) { }
 
-  private baseUrl = 'https://localhost:44320/API/Departamento';
+  private baseUrl = 'https://gruporac.somee.com/API/Departamento';
 
-  urlC = 'https://localhost:44320/API/Departamento/ListMarca'
-  private urlcoso= "https://localhost:44320/API/Marca/";
+  urlC = 'https://gruporac.somee.com/API/Departamento/ListMarca'
+  private urlcoso= "https://gruporac.somee.com/API/Marca/";
   getMarca(){
     return this.http.get<Marca[]>(this.urlC)
   }
@@ -252,9 +252,9 @@ export class ServiceModelo {
 
   constructor(private http:HttpClient) { }
 
-  private urlcoso= "https://localhost:44320/API/Modelo/";
+  private urlcoso= "https://gruporac.somee.com/API/Modelo/";
 
-  urlC = 'https://localhost:44320/API/Departamento/ListModelo'
+  urlC = 'https://gruporac.somee.com/API/Departamento/ListModelo'
 
   getModelo(){
     return this.http.get<Modelo[]>(this.urlC)
@@ -278,7 +278,7 @@ export class ServiceSede {
   constructor(private http:HttpClient) { }
 
 
-  urlC = 'https://localhost:44320/API/Departamento/ListSede'
+  urlC = 'https://gruporac.somee.com/API/Departamento/ListSede'
 
   getSede(){
     return this.http.get<Sede[]>(this.urlC)
@@ -293,7 +293,7 @@ export class ServiceVeh {
   constructor(private http:HttpClient) { }
 
 
-  urlC = 'https://localhost:44320/API/Departamento/ListVehiculo'
+  urlC = 'https://gruporac.somee.com/API/Departamento/ListVehiculo'
 
   getVeh(){
     return this.http.get<Vehiculo[]>(this.urlC)
@@ -305,7 +305,7 @@ export class ServiceVeh {
   providedIn: 'root'
 })
 export class ServiceUsuario {
-  private baseUrl = 'https://localhost:44320/api/Usuario'; // Ajusta la base URL si es necesario
+  private baseUrl = 'https://gruporac.somee.com/api/Usuario'; // Ajusta la base URL si es necesario
 
   constructor(private http: HttpClient) {}
 
@@ -346,7 +346,7 @@ export class ServiceComp {
   constructor(private http:HttpClient) { }
 
 
-  urlC = 'https://localhost:44320/API/Compra/'
+  urlC = 'https://gruporac.somee.com/API/Compra/'
 
   getCompras(){
     return this.http.get<Compra[]>(this.urlC+'List')
