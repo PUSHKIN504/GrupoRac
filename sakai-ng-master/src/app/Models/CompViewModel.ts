@@ -3,6 +3,7 @@ export class Compra{
     cli_Id?:number;
     cli_DNI?:string;
     cli_Nombre?:string;
+    cli_NombreCompleto?:string;
     com_Cant?:number;
     com_Precio?:number;
     com_Fecha?:Date;

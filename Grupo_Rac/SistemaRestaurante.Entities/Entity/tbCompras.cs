@@ -28,6 +28,8 @@ namespace Grupo_Rac.Entities.Entity
         public string? Cli_DNI { get; set; }
         [NotMapped]
         public string? Cli_Nombre { get; set; }
+        [NotMapped]
+        public string? Cli_NombreCompleto { get; set; }
         public virtual tbClientes Cli { get; set; }
         public virtual tbUsuarios Com_CreacionNavigation { get; set; }
         public virtual tbUsuarios Com_ModificaNavigation { get; set; }

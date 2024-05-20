@@ -71,6 +71,45 @@ export class AppMenuComponent implements OnInit {
                                     { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/app/dashboard'] }
                                 ]
                             },
+                {
+                    items: [
+                        {
+                            label: 'Reportes',
+                            icon: 'pi pi-fw pi-book',
+                            items: [
+                                {
+                                    label: 'Compras',
+                                    icon: 'pi pi-fw pi-money',
+                                    routerLink: ['/app/reporte/reporteCompra']
+                                },
+                                
+                                {
+                                    label: 'Ventas',
+                                    icon: 'pi pi-fw pi-money',
+                                    routerLink: ['/app/reporte/reporteVenta']
+                                },
+                                
+                                {
+                                    label: 'Clientes',
+                                    icon: 'pi pi-fw pi-user',
+                                    routerLink: ['/app/reporte/reporteCliente']
+                                },
+                                
+                                {
+                                    label: 'Empleados',
+                                    icon: 'pi pi-fw pi-user',
+                                    routerLink: ['/app/reporte/reporteEmpleado']
+                                },
+                                {
+                                    label: 'Vehiculos',
+                                    icon: 'pi pi-fw pi-car',
+                                    routerLink: ['/app/reporte/reporteVehiculo']
+                                },
+                            ]
+                        },
+                        
+                    ]
+                },
                             {
                                 items: [
                                     {
@@ -144,11 +183,11 @@ export class AppMenuComponent implements OnInit {
                                                 icon: 'pi pi-fw pi-inbox',
                                                 routerLink: ['/app/generales/Sede']
                                             },
-                                            {
-                                                label: 'Vehiculos',
-                                                icon: 'pi pi-fw pi-inbox',
-                                                routerLink: ['/app/uikit/veh']
-                                            },
+                                            // {
+                                            //     label: 'Vehiculos',
+                                            //     icon: 'pi pi-fw pi-inbox',
+                                            //     routerLink: ['/app/uikit/veh']
+                                            // },
                                             {
                                                 label: 'Graficos',
                                                 icon: 'pi pi-fw pi-inbox',
@@ -172,11 +211,6 @@ export class AppMenuComponent implements OnInit {
                                                 icon: 'pi pi-fw pi-sign-in',
                                                 routerLink: ['/app/uikit/comp']
                 
-                                            },
-                                            {
-                                                label: 'Facturas Cambios',
-                                                icon: 'pi pi-fw pi-folder',
-                                                routerLink: ['/auth/error']
                                             },
                                             
                                         ]

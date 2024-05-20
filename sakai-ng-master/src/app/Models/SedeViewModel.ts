@@ -1,7 +1,7 @@
 export class Sede{
-    sed_Id?:Number;
-    sed_Descripcion?:String;
-    ciu_Id?:String;
+    sed_Id?:number;
+    sed_Descripcion?:string;
+    ciu_Id?:string;
 
 }
 

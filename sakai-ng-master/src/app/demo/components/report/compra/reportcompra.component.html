@@ -1,0 +1,43 @@
+<div class="main-card mb-3 card"> 
+  <div class="card-header">
+      <h3 class="card-title">Reporte de Compras</h3>
+
+          <div class="p-fluid p-formgrid grid">
+ 
+              <div class="field col-12 md:col-6">
+                <p-dropdown [(ngModel)]="selectedYear" inputId="selectedYear" optionValue="value" [options]="year" placeholder="Selecciona un Año">
+                    <!-- <ng-template pTemplate="selectedItem">
+                        <span *ngIf="vehiculo && vehiculo.mod_Descripcion" [class]="'product-badge status-' + vehiculo.mod_Id">{{vehiculo.mod_Descripcion}}</span>
+                    </ng-template> -->
+                    <ng-template let-option pTemplate="item">
+                        <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
+                    </ng-template>
+                </p-dropdown>             
+              </div>
+              <div class="field col-12 md:col-6">
+                <p-dropdown [(ngModel)]="selectedMonth" inputId="selectedMonth" optionValue="value" [options]="month" placeholder="Selecciona un Mes">
+                    <!-- <ng-template pTemplate="selectedItem">
+                        <span *ngIf="vehiculo && vehiculo.mod_Descripcion" [class]="'product-badge status-' + vehiculo.mod_Id">{{vehiculo.mod_Descripcion}}</span>
+                    </ng-template> -->
+                    <ng-template let-option pTemplate="item">
+                        <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
+                    </ng-template>
+                </p-dropdown>  
+              </div>
+          </div>
+          <div class="flex flex-row justify-content-end">
+            <button pButton label="Recargar" (click)="cargarPdf()">
+
+            </button>
+          </div>
+
+  </div>
+
+</div>
+
+<div class="card-body" >
+  <iframe  [src]="pdfSrc" type="application/pdf" width="100%" height="600px">
+      PDF Preview
+  </iframe>
+</div>
+

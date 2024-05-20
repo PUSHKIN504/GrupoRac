@@ -18,7 +18,11 @@ namespace Grupo_Rac.Entities.Entity
         public int? Mod_Id { get; set; }
         [NotMapped]
         public string Mod_Descripcion { get; set; }
+        [NotMapped]
+        public string Mar_Descripcion { get; set; }
         public int? Sed_Id { get; set; }
+        [NotMapped]
+        public string Sed_Descripcion { get; set; }
         public int? Com_Id { get; set; }
         public decimal? Com_Precio { get; set; }
         public int? Veh_Creacion { get; set; }

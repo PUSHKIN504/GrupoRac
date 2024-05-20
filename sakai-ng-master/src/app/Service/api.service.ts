@@ -9,6 +9,29 @@ export class ApiService {
 
   constructor() {}
 }
+export class ReporteEndPoint{
+    public api = new ApiService();
+
+    public reporteCompras(month?: string, year?: string):string{
+        return `${this.api.baseUrl}/Reporte/reporteCompras/${month}/${year}`;
+    }
+
+    public reporteVentas(month?: string, year?: string, sede?: number):string{
+        return `${this.api.baseUrl}/Reporte/reporteVentas/${month}/${year}/${sede}`;
+    }
+
+    public reporteClientes(ciudad?: string):string{
+        return `${this.api.baseUrl}/Reporte/reporteClientes/${ciudad}`;
+    }
+
+    public reporteEmpleados():string{
+        return `${this.api.baseUrl}/Reporte/reporteEmpleados`;
+    }
+
+    public reporteVehiculos():string{
+        return `${this.api.baseUrl}/Reporte/reporteVehiculos`;
+    }
+}
 
 export class CompraEndPoint{
     public api = new ApiService();

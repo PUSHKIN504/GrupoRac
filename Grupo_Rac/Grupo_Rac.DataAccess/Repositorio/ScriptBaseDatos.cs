@@ -125,8 +125,12 @@ namespace Grupo_Rac.DataAccess.Repositorio
         public static string EmpleadosEliminar = "Gral.sp_Empleados_eliminar";
         #endregion
 
-
-
-
+        #region Reporte
+        public static string ReporteComprasPorMes = "[Repo].[SP_Reporte_ComprasPorMes]";
+        public static string ReporteVentasPorMes= "[Repo].[SP_Reporte_VentasPorMes]";
+        public static string ReporteClientesInfo = "[Repo].[SP_Reporte_ClientesInfo]";
+        public static string ReporteEmpleadosInfo = "[Repo].[SP_Reporte_EmpleadoInfo]";
+        public static string ReporteVehiculosInventario = "[Repo].[SP_Reporte_VehiculoInventario]";
+        #endregion
     }
 }

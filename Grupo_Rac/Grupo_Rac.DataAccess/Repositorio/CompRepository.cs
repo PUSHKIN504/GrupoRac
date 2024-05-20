@@ -139,7 +139,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
             List<tbCompras> result = new List<tbCompras>();
             using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
             {
-                result = db.Query<tbCompras>(ScriptBaseDatos.Compra_Listar, commandType: CommandType.StoredProcedure).ToList();
+                result = db.Query<tbCompras>(ScriptBaseDatos.ReporteComprasPorMes, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }

@@ -31,6 +31,8 @@ namespace Grupo_Rac.BusinessLogic
             service.AddScoped<EmpleadoRepository>();
             service.AddScoped<CompRepository>();
 
+            service.AddScoped<ReporteRepository>();
+
             GrupoRacContext.BuildConnectionString(conn);
 
         }
@@ -39,6 +41,8 @@ namespace Grupo_Rac.BusinessLogic
             service.AddScoped<GeneralService>();
             service.AddScoped<AccesoService>();
             service.AddScoped<VentaService>();
+            service.AddScoped<ReporteService>();
+
         }
     }
 }

@@ -1,0 +1,30 @@
+import { NgModule } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { ReporteCompraRoutingModule } from './reportcompra-routing.module';
+import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
+import { FormsModule } from '@angular/forms';
+import { PasswordModule } from 'primeng/password';
+import { InputTextModule } from 'primeng/inputtext';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { DialogModule } from 'primeng/dialog';
+import { ReporteCompraComponent } from './reportcompra.component';
+import { DropdownModule } from 'primeng/dropdown';
+
+@NgModule({
+    imports: [
+        CommonModule,
+        ReporteCompraRoutingModule,
+        ButtonModule,
+        CheckboxModule,
+        InputTextModule,
+        FormsModule,
+        PasswordModule,
+        TabMenuModule,
+        DialogModule,
+        DropdownModule
+    ],
+    providers: [DatePipe],
+    declarations: [ReporteCompraComponent]
+})
+export class ReporteCompraModule { }

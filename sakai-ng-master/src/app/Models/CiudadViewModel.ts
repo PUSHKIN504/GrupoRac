@@ -1,7 +1,7 @@
 
 export class Municipio{
-    ciu_Id?:String;
-    ciu_Descripcion?:String;
+    ciu_Id?:string;
+    ciu_Descripcion?:string;
     departamento?:String;
 }
 
