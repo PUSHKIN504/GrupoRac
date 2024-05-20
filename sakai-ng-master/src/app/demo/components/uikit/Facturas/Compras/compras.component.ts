@@ -12,7 +12,7 @@ import { Cliente } from 'src/app/Models/ClienteViewModel';
 import { Modelo } from 'src/app/Models/ModeloViewModel';
 import { CompraService } from 'src/app/Service/compra.service';
 import { VehiculoService } from 'src/app/Service/vehiculo.service';
-import { ClienteService } from 'src/app/Service/Cliente.service';
+import { ServiceService } from 'src/app/Service/Cliente.service';
 import { ServiceModelo } from 'src/app/Service/service.service';
 
 @Component({
@@ -61,7 +61,7 @@ export class CompraDemoComponent implements OnInit {
     fin:any;
 
     constructor(private CompraService: CompraService,private VehiculoService: VehiculoService,
-        private clienteService: ClienteService, private modeloService: ServiceModelo,
+        private clienteService: ServiceService, private modeloService: ServiceModelo,
         private router: Router, private messageService: MessageService,
         private fb:FormBuilder, private renderer: Renderer2
     

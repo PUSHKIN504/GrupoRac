@@ -1,5 +1,5 @@
 export class Modelo{
-    mod_Id?:Number;
+    mod_Id?:number;
     mod_Descripcion?:String;
     mod_Ano?:Date;
     mar_Id?:Number;
