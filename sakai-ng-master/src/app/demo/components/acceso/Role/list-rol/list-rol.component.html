@@ -4,7 +4,7 @@
         <h1 class="card-title">Roles</h1>
     </div>
     <div class="card-body">
-        <button (click)="collapse()" pButton class="p-button-warning" icon="pi pi-plus" style="margin-bottom: 10px ;" [class.hidden]="!Agregar">Agregar</button>
+        <button (click)="collapse()" pButton class="p-button-danger" icon="pi pi-plus" style="margin-bottom: 10px ;" [class.hidden]="!Agregar">Agregar</button>
      
 
         <div [class.hidden]="!Collapse" style="margin-top: 20px;">
@@ -74,7 +74,7 @@
                         {{rol.rol_Descripcion}}
                     </td>
                     <td style="display: flex; grid-gap: 20px;">
-                        <p-button  label="Editar"   icon="pi pi-user-edit" size="small" (click)="llenar(rol.rol_Id)" severity="warning" [raised]="true" [plain]="true"></p-button>
+                        <p-button  label="Editar"   icon="pi pi-user-edit" size="small" (click)="llenar(rol.rol_Id)" severity="primary" [raised]="true" [plain]="true"></p-button>
                         <p-button  label="Detalles"   icon="pi pi-book" size="small" (click)="detalles(rol.rol_Id)" severity="secondary" [raised]="true" [plain]="true"></p-button>
                         <p-button  label="Eliminar" icon="pi pi-trash" size="small" (click)="deleteSelectedProducts(rol.rol_Id)" severity="danger" [raised]="true" [plain]="true"></p-button>
                     </td>

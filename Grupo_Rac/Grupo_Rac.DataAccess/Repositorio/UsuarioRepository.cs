@@ -144,15 +144,16 @@ namespace Grupo_Rac.DataAccess.Repositorio
                 return result;
             }
         }
-        public IEnumerable<tbUsuarios> Detalles(int UsuaID)
+        public tbUsuarios Detalles(int UsuaID)
         {
 
 
-            List<tbUsuarios> result = new List<tbUsuarios>();
+            tbUsuarios result = new tbUsuarios();
             using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
             {
-                var parameters = new { Usua_Id = UsuaID };
-                result = db.Query<tbUsuarios>(ScriptBaseDatos.Usuario_Detalles, parameters, commandType: CommandType.StoredProcedure).ToList();
+                var parameter = new DynamicParameters();
+                parameter.Add("Usua_Id", UsuaID);
+                result = db.QueryFirst<tbUsuarios>(ScriptBaseDatos.Usuario_Detalles, parameter, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
