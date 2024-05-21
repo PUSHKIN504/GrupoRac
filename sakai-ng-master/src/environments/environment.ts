@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://gruporac.somee.com/API'
+  apiBaseUrl: 'http://gruporac.somee.com/API'
 };
 
 /*

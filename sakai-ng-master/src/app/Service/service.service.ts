@@ -23,7 +23,7 @@ import { BASE_URL } from './ulrsettings';
   providedIn: 'root'
 })
 export class ServiceService {
-  private baseUrl = 'https://gruporac.somee.com/API/Departamento';
+  private baseUrl = 'http://gruporac.somee.com/API/Departamento';
 
   constructor(private http: HttpClient) {}
 
@@ -112,8 +112,8 @@ export class ServiceCargo {
 
   constructor(private http:HttpClient) { }
 
-  baseURL = 'https://gruporac.somee.com/API/Cargo';
-  urlC = 'https://gruporac.somee.com/API/Departamento/ListCargo'
+  baseURL = 'http://gruporac.somee.com/API/Cargo';
+  urlC = 'http://gruporac.somee.com/API/Departamento/ListCargo'
 
   getCargo(){
     return this.http.get<Cargo[]>(this.urlC)
@@ -162,7 +162,7 @@ export class ServiceCliente {
   constructor(private http:HttpClient) { }
 
 
-  urlC = 'https://gruporac.somee.com/API/Departamento/ListCli'
+  urlC = 'http://gruporac.somee.com/API/Departamento/ListCli'
 
   getCliente(){
     return this.http.get<Cliente[]>(this.urlC)
@@ -227,10 +227,10 @@ export class ServiceMarca {
 
   constructor(private http:HttpClient) { }
 
-  private baseUrl = 'https://gruporac.somee.com/API/Departamento';
+  private baseUrl = 'http://gruporac.somee.com/API/Departamento';
 
-  urlC = 'https://gruporac.somee.com/API/Departamento/ListMarca'
-  private urlcoso= "https://gruporac.somee.com/API/Marca/";
+  urlC = 'http://gruporac.somee.com/API/Departamento/ListMarca'
+  private urlcoso= "http://gruporac.somee.com/API/Marca/";
   getMarca(){
     return this.http.get<Marca[]>(this.urlC)
   }
@@ -252,9 +252,9 @@ export class ServiceModelo {
 
   constructor(private http:HttpClient) { }
 
-  private urlcoso= "https://gruporac.somee.com/API/Modelo/";
+  private urlcoso= "http://gruporac.somee.com/API/Modelo/";
 
-  urlC = 'https://gruporac.somee.com/API/Departamento/ListModelo'
+  urlC = 'http://gruporac.somee.com/API/Departamento/ListModelo'
 
   getModelo(){
     return this.http.get<Modelo[]>(this.urlC)
@@ -278,7 +278,7 @@ export class ServiceSede {
   constructor(private http:HttpClient) { }
 
 
-  urlC = 'https://gruporac.somee.com/API/Departamento/ListSede'
+  urlC = 'http://gruporac.somee.com/API/Departamento/ListSede'
 
   getSede(){
     return this.http.get<Sede[]>(this.urlC)
@@ -293,7 +293,7 @@ export class ServiceVeh {
   constructor(private http:HttpClient) { }
 
 
-  urlC = 'https://gruporac.somee.com/API/Departamento/ListVehiculo'
+  urlC = 'http://gruporac.somee.com/API/Departamento/ListVehiculo'
 
   getVeh(){
     return this.http.get<Vehiculo[]>(this.urlC)
@@ -305,7 +305,7 @@ export class ServiceVeh {
   providedIn: 'root'
 })
 export class ServiceUsuario {
-  private baseUrl = 'https://gruporac.somee.com/api/Usuario'; // Ajusta la base URL si es necesario
+  private baseUrl = 'http://gruporac.somee.com/api/Usuario'; // Ajusta la base URL si es necesario
 
   constructor(private http: HttpClient) {}
 
@@ -346,7 +346,7 @@ export class ServiceComp {
   constructor(private http:HttpClient) { }
 
 
-  urlC = 'https://gruporac.somee.com/API/Compra/'
+  urlC = 'http://gruporac.somee.com/API/Compra/'
 
   getCompras(){
     return this.http.get<Compra[]>(this.urlC+'List')
