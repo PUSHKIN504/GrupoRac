@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Importa ReactiveFormsModule
 import { ListSedeComponent } from './list-sede.component';
 import { ListSedeRoutingModule } from './sededemo-routing.module';
 import { ToastModule } from 'primeng/toast';
@@ -15,24 +15,26 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from "primeng/dropdown";
+
 @NgModule({
-	imports: [
-		CommonModule,
-		ListSedeRoutingModule,
-		ToastModule,
-		DialogModule,
-		FormsModule,
-		TooltipModule,
-		InputTextModule,
-		DropdownModule,
-		ButtonModule,
-		OverlayPanelModule,
-		TableModule,
-		ConfirmDialogModule,
-		SidebarModule,
-		RippleModule,
-		ConfirmPopupModule
-	],
-	declarations: [ListSedeComponent]
+    imports: [
+        CommonModule,
+        ListSedeRoutingModule,
+        ToastModule,
+        DialogModule,
+        FormsModule,
+        ReactiveFormsModule, // Añade ReactiveFormsModule aquí
+        TooltipModule,
+        InputTextModule,
+        DropdownModule,
+        ButtonModule,
+        OverlayPanelModule,
+        TableModule,
+        ConfirmDialogModule,
+        SidebarModule,
+        RippleModule,
+        ConfirmPopupModule
+    ],
+    declarations: [ListSedeComponent]
 })
 export class SedeDemoModule { }
