@@ -22,7 +22,7 @@ export class CompraService {
   Find(id: number){
     return this.http.get<any>(this.endpoint.Find(id)) 
       .toPromise()  
-      .then(res => res.data as Compra[])
+      .then(res => res.data as Compra)
       .then(data => data);
   }
 

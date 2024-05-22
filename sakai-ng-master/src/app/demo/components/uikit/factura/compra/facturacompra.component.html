@@ -1,0 +1,307 @@
+
+        <div class="card px-6 py-6">
+            <p-toast></p-toast>
+            <p-toolbar styleClass="mb-4" id="toolbar">
+                <ng-template pTemplate="left">
+                    <div class="my-2">
+                        <button pButton icon="pi pi-plus" id="btnCrear" label="Crear" (click)="nuevaFactura()"></button>
+                        <!-- <button pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedProducts()" [disabled]="!selectedProducts || !selectedProducts.length"></button> -->
+                    </div>
+                </ng-template>
+
+                <ng-template pTemplate="right">
+                    <!-- <p-fileUpload mode="basic" accept="image/*" [maxFileSize]="1000000" label="Import" chooseLabel="Import" class="mr-2 inline-block"></p-fileUpload> -->
+                    <button pButton pRipple label="Imprimir" icon="pi pi-upload" class="p-button-help" (click)="dt.exportCSV()"></button>
+                </ng-template>
+            </p-toolbar>
+
+            <p-table #dt id="table" [value]="compras" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['com_Id','cli_DNI','com_Fecha','com_Estado']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} resultados" [(selection)]="selectedCompras" selectionMode="multiple" [rowHover]="true" dataKey="id">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+                        <h5 class="m-0">Manage de Compras</h5>
+                        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Buscar..."  class="w-full sm:w-auto"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <!-- <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th> -->
+                        <th pSortableColumn="com_Id">Factura No <p-sortIcon field="com_Id"></p-sortIcon></th>
+                        <th pSortableColumn="cli_DNI">Cliente DNI <p-sortIcon field="cli_DNI"></p-sortIcon></th>
+                        <th pSortableColumn="com_Fecha">Fecha Compra <p-sortIcon field="com_Fecha"></p-sortIcon></th>
+                        <th pSortableColumn="com_Estado">Estado <p-sortIcon field="com_Estado"></p-sortIcon></th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-compra>
+                    <tr>
+                        <!-- <td>
+                            <p-tableCheckbox [value]="product"></p-tableCheckbox>
+                        </td> -->
+                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Factura No </span>
+                            {{compra.com_Id}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">DNI Cliente</span>
+                            {{compra.cli_DNI}}
+                        </td>                
+                        <td style="width:14%; min-width:8rem;">
+                            <span class="p-column-title">Fecha Compra</span>
+                            {{compra.com_Fecha}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Estado</span>
+                            {{compra.com_Estado}}
+                        </td>
+                        <td>
+                            <div class="flex">
+                                <p-button severity="primary"  type="button" icon="pi pi-eye" class="mr-2" label="Ver" (click)="editFactura(compra)"></p-button>
+                                <p-button severity="secondary"  type="button" icon="pi pi-arrow-up" class="mr-2" label="Emitir" *ngIf="compra.com_Estado != 'Emitida'" (click)="openEmitirDialog(compra)"></p-button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+            <div class="p-card d-none" style="background-color: #f9fafb;" id="factura">
+                <div class="p-card-body ">
+                    <div class="p-card-title mb-4">
+                        Factura Compra
+                    </div>
+                    <div class="card" style="box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;">
+                        <div class=" flex flex-column justify-content-center align-items-center ">
+                            <div class="flex flex-row mb-4 justify-content-around" style="width: 100%;">
+                                <div class="flex flex-column text-center" *ngIf="encabezado && compra.com_Id">
+                                    <div class="p-card-subtitle">
+                                        No. Factura
+                                    </div>
+                                    <div>
+                                        {{compra.com_Id}}
+                                    </div>
+                                </div>
+                                <div class="flex flex-column text-center" *ngIf="encabezado">
+                                    <div class="p-card-subtitle">
+                                        DNI. Cliente
+                                    </div>
+                                    <div>
+                                        {{compra.cli_DNI}}
+                                    </div>
+                                </div>
+                                <!-- <div class="flex flex-column text-center" *ngIf="encabezado">
+                                    <div class="p-card-subtitle"> 
+                                        Nombre del Cliente
+                                    </div>
+                                    <div>
+                                        {{compra.cli_Nombre}}
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="acciones">
+                                <button pButton  icon="pi pi-pencil" class="p-button mr-2" label="Editar" *ngIf="encabezado && (insertarFactura || compra.com_Estado != 'Emitida')" (click)="openDialogEncabezado()"></button>
+                                <button pButton  icon="pi pi-plus" class="p-button mr-2" label="Nuevo" *ngIf="!encabezado && (insertarFactura || compra.com_Estado != 'Emitida')" (click)="openDialogEncabezado()"></button>
+                            </div>
+                        </div>
+                        <hr *ngIf="encabezado">
+                        <div class="p-card-body flex flex-column justify-content-center align-items-center" *ngIf="encabezado">
+                            <div style="width: 100%;" *ngFor="let vehiculo of vehiculos">
+                                    <div [id]="'vehiculoInput-' + vehiculo.veh_Placa" class="d-none p-card p-card-body flex-row flex-wrap justify-content-around align-items-center mb-3"  style="width: 100%; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;"> 
+                                            <div class="flex flex-column">
+                                                <label class="p-card-subtitle" for="cargo_Descripcion">Placa</label>
+                                                <input *ngIf="insertarVehiculo" type="text" pInputText [(ngModel)]="vehiculo.veh_Placa" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !vehiculo.veh_Placa}"/>
+                                                <span *ngIf="!insertarVehiculo">{{vehiculo.veh_Placa}}</span>
+                                            </div>
+                                            <div class="flex flex-column">
+                                                <label class="p-card-subtitle" for="cargo_Descripcion">Modelo</label>
+                                                <p-dropdown [(ngModel)]="vehiculo.mod_Descripcion" optionValue="mod_Descripcion" [options]="modelos" placeholder="Selecciona">
+                                                    <ng-template pTemplate="selectedItem">
+                                                        <span *ngIf="vehiculo && vehiculo.mod_Descripcion" [class]="'product-badge status-' + vehiculo.mod_Id">{{vehiculo.mod_Descripcion}}</span>
+                                                    </ng-template>
+                                                    <ng-template let-option pTemplate="item">
+                                                        <span [class]="'product-badge status-' + option.mod_Id">{{option.mod_Descripcion}}</span>
+                                                    </ng-template>
+                                                </p-dropdown>
+                                            </div>
+                                            <div class="flex flex-column">
+                                                <label class="p-card-subtitle" for="cargo_Descripcion">Precio</label>
+                                                <p-inputNumber  type="text" mode="currency" currency="LPS" [(ngModel)]="vehiculo.com_Precio" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !vehiculo.com_Precio}"></p-inputNumber>
+                                            </div>
+
+                                        
+                                        <div class="acciones flex flex-row" style="height: 25%;">
+                                            <!-- <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button> -->
+                                            <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveModalVehiculo()"></button>
+                                        </div>
+                                    </div>
+                                
+                                <div [id]="'vehiculoShow-' + vehiculo.veh_Placa" class="p-card p-card-body flex flex-row flex-wrap justify-content-around align-items-center mb-3" style="width: 100%; box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+                                    <div class="flex flex-column">
+                                        <label class="p-card-subtitle" for="cargo_Descripcion">Placa</label>
+                                        <div>{{vehiculo.veh_Placa}}</div>
+                                    </div>
+                                    <div class="flex flex-column">
+                                        <label class="p-card-subtitle" for="cargo_Descripcion">Modelo</label>
+                                        <div>{{vehiculo.mod_Descripcion}}</div>
+                                    </div>
+                                    <div class="flex flex-column">
+                                        <label class="p-card-subtitle" for="cargo_Descripcion">Precio</label>
+                                        <div>{{vehiculo.com_Precio | currency:'LPS ':'symbol'}}</div>
+                                    </div>
+                                    <div class="acciones flex flex-row" style="height: 25%;">
+                                        <p-button severity="primary" icon="pi pi-pencil" class="mr-2" label="Editar" *ngIf="insertarFactura || compra.com_Estado != 'Emitida'" (click)="editDetalle(vehiculo)"></p-button>
+                                        <p-button severity="danger" icon="pi pi-trash" class="mr-2" label="Eliminar" *ngIf="insertarFactura || compra.com_Estado != 'Emitida'"  (click)="openDeleteDialog(vehiculo)"></p-button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button pButton color="warn" icon="pi pi-plus" label="Agregar Vehículo"   class="p-button mr-2" *ngIf="insertarFactura || compra.com_Estado != 'Emitida'" (click)="newDetalle()"></button>
+                        </div>
+                        <hr *ngIf="encabezado">
+                        <div class="p-card-body flex flex-column justify-content-center align-items-end" *ngIf="encabezado">
+                            <div style="width: 30%;">
+                                <div class="flex flex-row justify-content-between">
+                                    <label for="cargo_Descripcion" class=" p-card-subtitle">Subtotal: </label>
+                                    <div>{{compra.com_Precio | currency:'LPS ':'symbol'}}</div>
+                                </div>
+                                <div class="flex flex-row justify-content-between">
+                                    <label for="cargo_Descripcion"class=" p-card-subtitle">Descuento: </label>
+                                    <div>{{0 | currency:'LPS ':'symbol'}}</div>
+                                </div>
+                                <div class="flex flex-row justify-content-between">
+                                    <label for="cargo_Descripcion" class=" p-card-subtitle">Impuesto: </label>
+                                    <div>{{0 | currency:'LPS ':'symbol'}}</div>
+                                </div>
+                                <div class="flex flex-row justify-content-between">
+                                    <label for="cargo_Descripcion" class=" p-card-subtitle">Total a Pagar: </label>
+                                    <div>{{compra.com_Precio | currency:'LPS ':'symbol'}}</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="p-card-footer flex flex-row justify-content-end">
+                        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text mr-2" (click)="cancelarFactura()"></button>
+                        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text mr-2" *ngIf="insertarFactura || compra.com_Estado != 'Emitida'" (click)="saveFactura()"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+<p-dialog [(visible)]="encabezadoDialog" [style]="{width: '450px'}" [modal]="true">
+    <ng-template pTemplate="content">
+        <div class="flex flex-row flex-wrap justify-content-around align-items-center">
+            <div class="flex flex-column justify-content-center" style="width: 40%;" *ngIf="encabezado && compra.com_Id">
+                <label for="cargo_Descripcion">No. Factura</label>
+                <div>{{compra.com_Id}}</div>
+            </div>
+            <div class="flex flex-column" style="width: 40%;">
+                <label for="cargo_Descripcion">Cliente</label>
+                <p-autoComplete id="cli_DNI" [(ngModel)]="compra.cli_DNI" [suggestions]="filtered" (completeMethod)="filter($event)" [dropdown]="true"></p-autoComplete>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !compra.cli_DNI">Cliente es requerido.</small>
+            </div>
+            <!-- <div class="flex flex-column" style="width: 40%;">
+                <label for="calendar">Fecha</label>
+                 <p-calendar
+                    inputId="calendar"
+                    [(ngModel)]="compra.com_Fecha"
+                ></p-calendar> 
+                <input type="text" pInputText id="cargo_Descripcion" [(ngModel)]="compra.com_Fecha" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !compra.com_Fecha}"/>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !compra.com_Fecha">Fecha es requerida.</small>
+            </div> -->
+        </div>
+        
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text mr-2" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text mr-2" (click)="saveModalCompra()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="detalleDialog" [style]="{width: '450px'}" [modal]="true" >
+    <ng-template pTemplate="content" >
+        <div class="flex flex-row flex-wrap justify-content-around align-items-center" >
+            <div class="flex flex-column justify-content-center" style="width: 40%;" >
+                <label for="cargo_Descripcion">Placa</label>
+                <input *ngIf="insertarVehiculo" type="text" pInputText id="cargo_Descripcion" [(ngModel)]="vehiculo.veh_Placa" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !vehiculo.veh_Placa}"/>
+                <span *ngIf="!insertarVehiculo">{{vehiculo.veh_Placa}}</span>
+            </div>
+            <div class="flex flex-column" style="width: 40%;">
+                <h5>Modelo</h5>
+                <p-dropdown [(ngModel)]="vehiculo.mod_Descripcion" inputId="mod_Descripcion" optionValue="mod_Descripcion" [options]="modelos" placeholder="Selecciona">
+                    <ng-template pTemplate="selectedItem">
+                        <span *ngIf="vehiculo && vehiculo.mod_Descripcion" [class]="'product-badge status-' + vehiculo.mod_Id">{{vehiculo.mod_Descripcion}}</span>
+                    </ng-template>
+                    <ng-template let-option pTemplate="item">
+                        <span [class]="'product-badge status-' + option.mod_Id">{{option.mod_Descripcion}}</span>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="flex flex-column" style="width: 40%;">
+                <label for="calendar">Precio</label>
+               
+                <p-inputNumber type="text" mode="currency" currency="LPS" id="cargo_Descripcion" [(ngModel)]="vehiculo.com_Precio" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !vehiculo.com_Precio}"></p-inputNumber>
+                <small class="ng-dirty ng-invalid" *ngIf="submitted && !vehiculo.com_Precio">Precio es requerido.</small>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveModalVehiculo()"></button>
+    </ng-template>
+</p-dialog>
+<p-dialog [(visible)]="deleteDialog" header="Confirmar" [modal]="true" [style]="{width:'450px'}">
+    <div class="flex align-items-center justify-content-center">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+        <span *ngIf="vehiculo">¿Seguro que desea eliminar <b>{{vehiculo.veh_Placa}}</b>?</span>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
+        <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Si" (click)="confirmDelete()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="emitirDialog" header="Emición" [modal]="true" [style]="{width:'450px'}">
+    <div class="flex align-items-center justify-content-center">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+        <span *ngIf="compra">¿Seguro que desea emitir la factura <b>{{compra.com_Id}}</b>?</span>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="emitirDialog = false"></button>
+        <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Si" (click)="emitirFactura()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="cambiosDialog" header="¡Cambios sin Guardar!" [modal]="true" [style]="{width:'450px'}">
+    <div class="flex align-items-center justify-content-center">
+        <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+        <div class="flex flex-column">
+            <span>Tiene cambios <b>sin guardar</b>.</span>
+            <span>¿Está seguro que desea <b>salir sin guardar</b>?</span>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="cambiosDialog = false"></button>
+        <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Si" (click)="confirmCancelar()"></button>
+    </ng-template>
+</p-dialog>
+
+<ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Preview Invoice : <b>{{invoiceno}}</b></h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<ngx-extended-pdf-viewer [src]="pdfurl"></ngx-extended-pdf-viewer>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-danger" (click)="d('Cross click')">Close</button>
+	</div>
+</ng-template>
+

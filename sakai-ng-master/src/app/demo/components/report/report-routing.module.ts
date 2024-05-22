@@ -8,7 +8,7 @@ const routes: Routes = [
     { path: 'reporteVenta', data: { breadcrumb: 'reporteVenta' }, loadChildren: () => import('./venta/reportventa.module').then(m => m.ReporteVentaModule), canActivate: [AuthGuard, RoleGuard] },
     { path: 'reporteCliente', data: { breadcrumb: 'reporteCliente' }, loadChildren: () => import('./cliente/reportcliente.module').then(m => m.ReporteClienteModule), canActivate: [AuthGuard, RoleGuard] },
     { path: 'reporteEmpleado', data: { breadcrumb: 'reporteEmpleado' }, loadChildren: () => import('./empleado/reportempleado.module').then(m => m.ReporteEmpleadoModule), canActivate: [AuthGuard, RoleGuard] },
-    { path: 'reporteVehiculo', data: { breadcrumb: 'DreporteVehiculo' }, loadChildren: () => import('./vehiculo/reportvehiculo.module').then(m => m.ReporteVehiculoModule), canActivate: [AuthGuard, RoleGuard] },
+    { path: 'reporteVehiculo', data: { breadcrumb: 'reporteVehiculo' }, loadChildren: () => import('./vehiculo/reportvehiculo.module').then(m => m.ReporteVehiculoModule), canActivate: [AuthGuard, RoleGuard] },
 
     { path: '**', redirectTo: '/notfound' }
 ];
