@@ -19,7 +19,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
             {
                 var parametro = new DynamicParameters();
                 parametro.Add("@Sed_Descripcion", item.Sed_Descripcion);
-                parametro.Add("@Muni_Codigo", item.Ciu_Id);
+                parametro.Add("@Ciu_Id", item.Ciu_Id);
 
                 parametro.Add("@Sed_Creacion", item.Sed_Creacion);
                 parametro.Add("@Sed_Fecha_Creacion", item.Sed_Fecha_Creacion);
@@ -52,7 +52,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
             using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
             {
                 var parameter = new DynamicParameters();
-                parameter.Add("Sucu_Id", id);
+                parameter.Add("@Sed_Id", id);
                 result = db.QueryFirst<tbSedes>(ScriptBaseDatos.Sucursalesllenar, parameter, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -87,7 +87,7 @@ namespace Grupo_Rac.DataAccess.Repositorio
             using (var db = new SqlConnection(GrupoRacContext.ConnectionString))
             {
                 var parameter = new DynamicParameters();
-                parameter.Add("Sed_Id", Carg_Id);
+                parameter.Add("@Sed_Id", Carg_Id);
 
                 var result = db.QueryFirst(ScriptBaseDatos.SucursalesEliminar, parameter, commandType: CommandType.StoredProcedure);
                 return new RequestStatus { CodeStatus = result.Resultado, MessageStatus = (result.Resultado == 1) ? "Exito" : "Error" };

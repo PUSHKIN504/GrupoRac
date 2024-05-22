@@ -38,7 +38,7 @@ namespace Grupo_Rac.API.Controllers
                 Sed_Descripcion = item.Sed_Descripcion,
                 Ciu_Id = item.Ciu_Id,
                 Sed_Creacion = 1,
-                Sed_Fecha_Creacion = item.Sed_Fecha_Creacion,
+                Sed_Fecha_Creacion = DateTime.Now,
             };
             var list = _generalServices.InsertarSucursal(modelo);
             return Ok(list.Data);
