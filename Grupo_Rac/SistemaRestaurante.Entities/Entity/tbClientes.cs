@@ -43,6 +43,15 @@ namespace Grupo_Rac.Entities.Entity
         [NotMapped]
         public string Est_Descripcion { get; set; }
 
+        [NotMapped]
+        public string FechaModificacion { get; set; }
+        [NotMapped]
+        public string FechaCreacion { get; set; }
+        [NotMapped]
+        public string UsuarioCreacion { get; set; }
+
+        [NotMapped]
+        public string UsuarioModificacion { get; set; }
         public virtual tbCiudades Ciu { get; set; }
         public virtual tbUsuarios Cli_CreacionNavigation { get; set; }
         public virtual tbUsuarios Cli_ModificaNavigation { get; set; }

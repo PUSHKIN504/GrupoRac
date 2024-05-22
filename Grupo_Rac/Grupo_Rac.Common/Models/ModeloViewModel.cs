@@ -22,6 +22,15 @@ namespace Grupo_Rac.Common.Models
         public string? Mar_Descripcion { get; set; }
         [NotMapped]
         public string CantidadVehiculos { get; set; }
+        [NotMapped]
+        public string FechaModificacion { get; set; }
+        [NotMapped]
+        public string FechaCreacion { get; set; }
+        [NotMapped]
+        public string UsuarioCreacion { get; set; }
+
+        [NotMapped]
+        public string UsuarioModificacion { get; set; }
 
     }
 }

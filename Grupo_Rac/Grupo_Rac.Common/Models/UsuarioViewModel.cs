@@ -27,5 +27,14 @@ namespace Grupo_Rac.Common.Models
         public DateTime? Usu_FechaCreacion { get; set; }
         public DateTime? Usu_FechaModifica { get; set; }
         public int? Usu_Estado { get; set; }
+        [NotMapped]
+        public string FechaModificacion { get; set; }
+        [NotMapped]
+        public string FechaCreacion { get; set; }
+        [NotMapped]
+        public string UsuarioCreacion { get; set; }
+
+        [NotMapped]
+        public string UsuarioModificacion { get; set; }
     }
 }

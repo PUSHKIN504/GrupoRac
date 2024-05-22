@@ -22,5 +22,14 @@ namespace Grupo_Rac.Common.Models
         public DateTime? Veh_Fecha_Creacion { get; set; }
         public DateTime? Veh_Fecha_Modifica { get; set; }
         public bool? Veh_Estado { get; set; }
+        [NotMapped]
+        public string FechaModificacion { get; set; }
+        [NotMapped]
+        public string FechaCreacion { get; set; }
+        [NotMapped]
+        public string UsuarioCreacion { get; set; }
+
+        [NotMapped]
+        public string UsuarioModificacion { get; set; }
     }
 }

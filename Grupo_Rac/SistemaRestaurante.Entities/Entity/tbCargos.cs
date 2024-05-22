@@ -23,6 +23,15 @@ namespace Grupo_Rac.Entities.Entity
         public DateTime? Crg_Fecha_Creacion { get; set; }
         public DateTime? Crg_Fecha_Modifica { get; set; }
         public bool? Crg_Estado { get; set; }
+        [NotMapped]
+        public string FechaModificacion { get; set; }
+        [NotMapped]
+        public string FechaCreacion { get; set; }
+        [NotMapped]
+        public string UsuarioCreacion { get; set; }
+
+        [NotMapped]
+        public string UsuarioModificacion { get; set; }
 
         public virtual tbUsuarios Crg_CreacionNavigation { get; set; }
         public virtual tbUsuarios Crg_ModificaNavigation { get; set; }

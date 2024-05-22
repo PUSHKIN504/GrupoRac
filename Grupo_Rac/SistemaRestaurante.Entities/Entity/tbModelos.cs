@@ -32,5 +32,15 @@ namespace Grupo_Rac.Entities.Entity
         public virtual tbUsuarios Mod_CreacionNavigation { get; set; }
         public virtual tbUsuarios Mod_ModificaNavigation { get; set; }
         public virtual ICollection<tbVehiculos> tbVehiculos { get; set; }
+
+        [NotMapped]
+        public string FechaModificacion { get; set; }
+        [NotMapped]
+        public string FechaCreacion { get; set; }
+        [NotMapped]
+        public string UsuarioCreacion { get; set; }
+
+        [NotMapped]
+        public string UsuarioModificacion { get; set; }
     }
 }
