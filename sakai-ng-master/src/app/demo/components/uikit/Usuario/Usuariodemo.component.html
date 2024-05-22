@@ -18,6 +18,13 @@
                              (keydown)="validarTextoNumeros($event)" />
                       <small class="ng-dirty ng-invalid" *ngIf="submitted && usuarioForm.controls['Usu_Usua'].invalid" style="color: red !important;">Usuario Requerido</small>
                   </div>
+                  <div class="field col-12 md:col-6">
+                    <label for="Correo">Correo</label>
+                    <input pInputText id="Correo" formControlName="Usu_Correo" type="text" required autofocus 
+                           [ngClass]="{'ng-invalid ng-dirty': submitted && usuarioForm.controls['Usu_Correo'].invalid}"
+                           (keydown)="validarTextoNumeros($event)" />
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && usuarioForm.controls['Usu_Correo'].invalid" style="color: red !important;">Correo Requerido</small>
+                </div>
                 <div class="field col-12 md:col-6" [class.hidden]="!Contrasenas" >
                   <label for="Contraseña">Contraseña</label>
                   <input pInputText id="Contraseña" formControlName="Usu_Contra" type="text" required autofocus  [ngClass]="{'ng-invalid ng-dirty': submitted && usuarioForm.get('Usu_Contra').value === ''}"
@@ -80,6 +87,12 @@
                     </th>
                     <th style="min-width: 12rem">
                         <div class="flex justify-content-between align-items-center">
+                            Correo
+                           
+                        </div>
+                    </th>
+                    <th style="min-width: 12rem">
+                        <div class="flex justify-content-between align-items-center">
                             Administrador
                           
                         </div>
@@ -106,6 +119,9 @@
                     </td>
                     <td>
                         {{empl.usu_Usua}}
+                    </td>
+                    <td>
+                        {{empl.usu_Correo}}
                     </td>
                     <td>
                         {{empl.admin}}
@@ -140,6 +156,14 @@
                     </div>
                     <div class="field rows">
                         <label for="Codigo">{{ Detalle_Usuario }}</label>
+                    </div>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <div class="field rows">
+                        <label for="Codigo" style="font-weight: 800;">Correo:</label>
+                    </div>
+                    <div class="field rows">
+                        <label for="Codigo">{{ Detalle_Correo }}</label>
                     </div>
                 </div>
                 
