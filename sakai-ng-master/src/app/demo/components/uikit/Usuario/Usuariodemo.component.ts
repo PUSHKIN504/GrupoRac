@@ -38,6 +38,7 @@ export class UsuarioDemoComponent {
   deleteProductDialog: boolean = false;
   //Detalle
   Detalle_Usuario: String = "";
+  Detalle_Correo: String = "";
   Detalle_Administrador: String = "";
   Detalle_Empleado: String = "";
   Detalle_Rol: String = "";
@@ -52,6 +53,7 @@ export class UsuarioDemoComponent {
   ngOnInit(): void {
     this.usuarioForm = new FormGroup({
       Usu_Usua: new FormControl("",Validators.required),
+      Usu_Correo: new FormControl("",Validators.required),
       Usu_Contra: new FormControl("", Validators.required),
       Usu_Admin: new FormControl(false, [Validators.required]),
       Empl_Id: new FormControl('0', [Validators.required]),
@@ -89,6 +91,7 @@ detalles(codigo){
   this.service.getFill(codigo).subscribe({
       next: (data: Fill) => {
          this.Detalle_Usuario = data.usu_Usua,
+         this.Detalle_Correo = data.usu_Correo,
          this.Detalle_Administrador = data.usu_Admin,
          this.Detalle_Rol = data.rol_Descripcion,
          this.Detalle_Empleado = data.empl_Nombre,
@@ -201,6 +204,7 @@ Fill(codigo) {
         next: (data: Fill) => {
           this.usuarioForm = new FormGroup({
             Usu_Usua: new FormControl(data.usu_Usua,Validators.required),
+            Usu_Correo: new FormControl(data.usu_Correo,Validators.required),
             Usua_Contraseña: new FormControl("x", Validators.required),
             Usu_Admin: new FormControl(data.usu_Admin, [Validators.required]),
             Empl_Id: new FormControl(data.empl_Id, [Validators.required]),

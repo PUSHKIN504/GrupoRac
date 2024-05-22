@@ -34,6 +34,7 @@ export class Usuario{
 export class UsuarioEnviar {
     Usu_ID?:String;
     Usu_Usua: string;
+    Usu_Correo?:string;
     Usu_Contra: string;  
     Usu_Admin: string;  
     Empl_Id: string;  
@@ -50,6 +51,7 @@ export class Reestb{
 export class Fill {
     usu_ID: string;
     usu_Usua: string;
+    usu_Correo: string;
     admin?:String;
     usu_Admin?:String;
     rol_Descripcion:String;
