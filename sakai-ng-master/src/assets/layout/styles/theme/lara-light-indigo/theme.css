@@ -4,6 +4,9 @@
 .flex-wrap{
   flex-wrap:wrap;
 }
+.mat-h5, .mat-typography .mat-h5, .mat-typography h5 {
+  font-size: 1.25rem;  margin: 0 0 12px;
+}
 :root {
   font-family: "Inter var", sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";

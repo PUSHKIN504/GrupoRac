@@ -17,11 +17,11 @@ import { ServiceModelo } from 'src/app/Service/service.service';
 
 @Component({
 
-    templateUrl: './compras.component.html',
+    templateUrl: './facturaventa.component.html',
     providers: [ConfirmationService, MessageService]
 
 })
-export class CompraDemoComponent implements OnInit {
+export class FacturaVentaComponent implements OnInit {
     compras:Compra[];
     compra:Compra;
     com_Fecha: string;

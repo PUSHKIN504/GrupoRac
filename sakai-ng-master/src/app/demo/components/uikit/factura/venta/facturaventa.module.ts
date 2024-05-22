@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CompraDemoComponent } from './compras.component';
-import { CompRoutingModule } from './compras-routing.module';
+import { FacturaVentaComponent } from './facturaventa.component';
+import { FacturaVentaRoutingModule } from './facturaventa-routing.module';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -32,7 +32,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 		ReactiveFormsModule,
 
     CommonModule,
-    CompRoutingModule,
+    FacturaVentaRoutingModule,
     ToastModule,
     DialogModule,
     DropdownModule,
@@ -55,6 +55,6 @@ import { InputNumberModule } from 'primeng/inputnumber';
     AutoCompleteModule,
     // NgxExtendedPdfViewerModule
   ],
-  declarations: [CompraDemoComponent],
+  declarations: [FacturaVentaComponent],
 })
-export class CompDemoModule { }
+export class FacturaVentaModule { }

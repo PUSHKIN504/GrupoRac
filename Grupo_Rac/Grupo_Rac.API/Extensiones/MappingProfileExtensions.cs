@@ -23,6 +23,7 @@ namespace Grupo_Rac.API.Extensiones
             CreateMap<MarcaViewModel, tbMarcas>().ReverseMap();
             CreateMap<EmpleadoViewModel, tbEmpleados>().ReverseMap();
             CreateMap<ClientesViewModel, tbClientes>().ReverseMap();
+            CreateMap<SedeViewModel, tbSedes>().ReverseMap();
         }
     }
 }

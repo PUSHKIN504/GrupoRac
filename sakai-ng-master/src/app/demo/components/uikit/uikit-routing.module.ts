@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'vehiculos', data: { breadcrumb: 'Veh' }, loadChildren: () => import('./Vehiculo/Vehiculodemo.module').then(m => m.VehiculoDemoModule), canActivate: [AuthGuard, RoleGuard] },
   { path: 'usuarios', data: { breadcrumb: 'Usuarios' }, loadChildren: () => import('./Usuario/Usuariodemo.module').then(m => m.UsuarioDemoModule), canActivate: [AuthGuard, RoleGuard] },
   { path: 'roles', data: { breadcrumb: 'Roles' }, loadChildren: () => import('./rol/rol.module').then(m => m.RolModule), canActivate: [AuthGuard, RoleGuard] },
-  { path: 'comp', data: { breadcrumb: 'Comp' }, loadChildren: () => import('./Facturas/Compras/compras.module').then(m => m.CompDemoModule), canActivate: [AuthGuard, RoleGuard] },
+  { path: 'factura', data: { breadcrumb: 'factura' }, loadChildren: () => import('./factura/factura.module').then(m => m.FacturaModule), canActivate: [AuthGuard, RoleGuard] },
   { path: '**', redirectTo: '/notfound' }
 ];
 

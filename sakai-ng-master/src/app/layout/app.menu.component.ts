@@ -283,12 +283,17 @@ export class AppMenuComponent implements OnInit {
                     icon: 'pi pi-fw pi-car',
                     items: [
                         {
-                            label: 'Facturas Compras',
+                            label: 'Factura Compra',
                             icon: 'pi pi-fw pi-file',
-                            routerLink: '/app/uikit/comp',
-                            command: (event) => this.onMenuItemClick('/app/uikit/comp')
+                            routerLink: '/app/uikit/factura/facturaCompra',
+                            command: (event) => this.onMenuItemClick('/app/uikit/factura/facturaCompra')
                         },
-                        
+                        // {
+                        //     label: 'Factura Venta',
+                        //     icon: 'pi pi-fw pi-file',
+                        //     routerLink: '/app/uikit/factura/facturaVenta',
+                        //     command: (event) => this.onMenuItemClick('/app/uikit/factura/facturaVenta')
+                        // },
                     ]
                 },
             ]

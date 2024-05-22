@@ -15,6 +15,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextModule } from 'primeng/inputtext';
 import { MatButtonModule } from '@angular/material/button';
+import { ToolbarModule } from 'primeng/toolbar';
 @NgModule({
 	imports: [
 		CommonModule,
@@ -30,6 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
 		ConfirmDialogModule,
 		SidebarModule,
 		RippleModule,
+		ToolbarModule,
 		ConfirmPopupModule,
 		MatButtonModule
 	],
