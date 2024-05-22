@@ -95,6 +95,7 @@ namespace Grupo_Rac.API.Controllers
                 Usu_Usua = item.Usu_Usua,
                 Usu_Contra = item.Usu_Contra,
                 Usu_Admin = item.Usu_Admin,
+                Usu_Correo = item.Usu_Correo,
                 Rol_Id = item.Rol_Id,
                 Empl_Id = item.Empl_Id,
                 Usu_UsuCre = 1
@@ -131,6 +132,7 @@ namespace Grupo_Rac.API.Controllers
                 Usu_ID = item.Usu_ID,
                 Usu_Usua = item.Usu_Usua,
                 Usu_Admin = item.Usu_Admin,
+                Usu_Correo = item.Usu_Correo,
                 Rol_Id = item.Rol_Id,
                 Empl_Id = item.Empl_Id,
                 Usu_UsuModi = 1,
